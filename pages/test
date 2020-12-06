@@ -1,0 +1,55 @@
+import { GetServerSideProps, NextPage } from "next";
+import { gql, useQuery } from "@apollo/client";
+
+const test = gql`
+  query ProfileChannels {
+    identity(id: "tyler-deitz") {
+      identifiable {
+        ... on User {
+          id
+          name
+          counts {
+            channels
+            followers
+            following
+          }
+          channels(page: 1, per: 10, sort_by: UPDATED_AT) {
+            id
+            href
+            truncatedTitle: title(truncate: 80)
+            visibility
+            updated_at(relative: true)
+            counts {
+              contents
+            }
+            owner {
+              ... on Group {
+                id
+                name
+                visibility
+              }
+              ... on User {
+                id
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  return {
+    props: {},
+  };
+};
+
+const Page: NextPage = () => {
+  // const q = useQuery(test);
+  // console.log(q);
+  return <div>hi</div>;
+};
+
+export default Page;
