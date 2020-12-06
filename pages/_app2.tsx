@@ -18,7 +18,7 @@ function MyApp({
   Component,
   pageProps,
   backendApolloClientSerialization,
-}: AppProps & AppCustomProps) {
+}: AppProps & AppCustomProps): JSX.Element {
   const apolloClientRef = useRef<ApolloClient<NormalizedCacheObject>>();
 
   if (!apolloClientRef.current) {
