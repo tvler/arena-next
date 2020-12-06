@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 module.exports = {
-  purge: [],
+  purge: ["./**/*.tsx"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
