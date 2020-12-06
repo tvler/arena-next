@@ -14,7 +14,7 @@ const test = gql`
             followers
             following
           }
-          channels(page: 1, per: 10, sort_by: UPDATED_AT) {
+          channels(page: 1, per: 1, sort_by: UPDATED_AT) {
             id
             href
             truncatedTitle: title(truncate: 80)
@@ -82,7 +82,8 @@ const test2 = gql`
 
 const Page: NextPage = (props) => {
   const router = useRouter();
-  // const { slug } = router.query;
+  const { slug } = router.query;
+  console.log(slug);
 
   const q = useQuery(test, {
     ssr: true,
@@ -91,14 +92,16 @@ const Page: NextPage = (props) => {
     // },
   });
 
-  console.log(q.data);
-  console.log(Object.keys(q.client.extract()));
+  const r = useQuery(test2, { ssr: false });
+
+  // console.log(q.data);
+  // console.log(Object.keys(q.client.extract()));
   // console.log(q.loading);
-  // const r = useQuery(test2, { ssr: false });
+
   return (
     <div>
       {JSON.stringify(q.data)}
-      {/* {r.loading ? "LOADING" : "LOADED"} */}
+      {r.loading ? "LOADING" : "LOADED"}
     </div>
   );
 };
