@@ -1,7 +1,8 @@
-import { gql } from "@apollo/client";
+import { gql, TypedDocumentNode } from "@apollo/client";
+import { ProfileSsr, ProfileSsrVariables } from "../gen/ProfileSsr";
 
-const profileSsr = gql`
-  query ProfileChannels($id: ID!) {
+const profileSsr: TypedDocumentNode<ProfileSsr, ProfileSsrVariables> = gql`
+  query ProfileSsr($id: ID!) {
     identity(id: $id) {
       identifiable {
         ... on User {

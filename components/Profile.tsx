@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
-import profileSsr from "../queries/profileSsr";
+import profileSsr from "../graphql/queries/profileSsr";
 
 const Profile: React.FC = () => {
   const router = useRouter();

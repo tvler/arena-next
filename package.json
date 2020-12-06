@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "download-schema": "bash download-schema.sh",
-    "generate-types": "apollo-codegen generate **/*.ts --schema schema.json --target typescript --output graphql"
+    "generate-types": "apollo-codegen generate **/*.ts --schema schema.json --target typescript --output graphql/gen"
   },
   "dependencies": {
     "@apollo/client": "^3.3.3",
