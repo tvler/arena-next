@@ -7,7 +7,7 @@ import {
 import { getDataFromTree } from "@apollo/client/react/ssr";
 import App, { AppInitialProps } from "next/app";
 import type { AppProps, AppContext } from "next/app";
-import { initializeApollo, useApollo } from "../apolloClient2";
+import { initializeApollo, useApollo } from "../apolloClient";
 import Head from "next/head";
 
 type AppCustomProps = {
