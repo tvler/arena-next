@@ -1,7 +1,3 @@
-https://www.apollographql.com/blog/building-a-next-js-app-with-apollo-client-slash-graphql/
-
-https://github.com/vercel/next.js/issues/9350#issuecomment-552214936
-
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
