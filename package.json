@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "download-schema": "bash download-schema.sh",
+    "generate-types": "apollo-codegen generate **/*.ts --schema schema.json --target typescript --output graphql"
   },
   "dependencies": {
     "@apollo/client": "^3.3.3",

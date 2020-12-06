@@ -38,3 +38,6 @@ yarn-error.log*
 
 # vscode
 /.vscode
+
+# bash script with key in it
+download-schema.sh
