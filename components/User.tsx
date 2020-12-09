@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import profileSsr from "../graphql/queries/profileSsr";
 import Logo from "./icons/logo.svg";
 import Link from "next/link";
+import Header from "./Header";
 
 const Profile: React.FC = () => {
   const router = useRouter();
@@ -20,10 +21,7 @@ const Profile: React.FC = () => {
 
   return (
     <div className="flex flex-col">
-      <div className="p-4 flex flex-row">
-        <Logo className="w-6 h-6" fill="currentColor"></Logo>
-        <span className="font-serif italic text-xl">&nbsp;/ {user.name}</span>
-      </div>
+      <Header taxonomy={[user.name ?? "user"]} />
 
       <div className="flex flex-row space-x-4 items-start pl-4 pr-4">
         <button
@@ -39,11 +37,11 @@ const Profile: React.FC = () => {
             {user.counts?.channels} channels, {user.counts?.blocks} blocks
           </span>
           <div className="flex flex-row space-x-3">
-            <Link href="followers">
+            <Link href={`/user/${id}/followers`}>
               <a>Followers</a>
             </Link>
 
-            <Link href="following">
+            <Link href={`/user/${id}/following`}>
               <a>Following</a>
             </Link>
           </div>
