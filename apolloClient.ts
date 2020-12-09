@@ -46,7 +46,7 @@ export function initializeApollo(
 }
 
 export function useApollo(
-  initialState: NormalizedCacheObject
+  initialState?: NormalizedCacheObject
 ): ApolloClient<NormalizedCacheObject> {
   const store = useMemo(() => initializeApollo(initialState), [initialState]);
   return store;

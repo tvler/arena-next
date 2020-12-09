@@ -7,12 +7,20 @@
     cursor: default;
     -webkit-font-smoothing: antialiased;
     font-size: 19px;
-    font-family: Helvetica, Arial, sans-serif;
-    line-height: 1.5;
     background-color: #f9fbff;
+    color: #333;
   }
 
   :focus:not(:focus-visible) {
     outline: none;
+  }
+
+  a {
+    @apply underline;
+  }
+
+  button,
+  [role="button"] {
+    cursor: default;
   }
 }

@@ -8,10 +8,10 @@ const profileSsr: TypedDocumentNode<ProfileSsr, ProfileSsrVariables> = gql`
         ... on User {
           id
           name
+          bio(format: HTML)
           counts {
             channels
-            followers
-            following
+            blocks
           }
           channels(page: 1, per: 1, sort_by: UPDATED_AT) {
             id

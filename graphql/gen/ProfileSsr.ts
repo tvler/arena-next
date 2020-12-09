@@ -7,25 +7,30 @@
 // GraphQL query operation: ProfileSsr
 // ====================================================
 
-export interface ProfileSsr_identity_identifiable_Group {}
+export interface ProfileSsr_identity_identifiable_Group {
+  __typename: "Group";
+}
 
 export interface ProfileSsr_identity_identifiable_User_counts {
+  __typename: "UserCounts";
   channels: number | null;
-  followers: number | null;
-  following: number | null;
+  blocks: number | null;
 }
 
 export interface ProfileSsr_identity_identifiable_User_channels_counts {
+  __typename: "ChannelCounts";
   contents: number | null;
 }
 
 export interface ProfileSsr_identity_identifiable_User_channels_owner_Group {
+  __typename: "Group";
   id: number | null;
   name: string | null;
   visibility: string | null;
 }
 
 export interface ProfileSsr_identity_identifiable_User_channels_owner_User {
+  __typename: "User";
   id: number | null;
   name: string | null;
 }
@@ -33,6 +38,7 @@ export interface ProfileSsr_identity_identifiable_User_channels_owner_User {
 export type ProfileSsr_identity_identifiable_User_channels_owner = ProfileSsr_identity_identifiable_User_channels_owner_Group | ProfileSsr_identity_identifiable_User_channels_owner_User;
 
 export interface ProfileSsr_identity_identifiable_User_channels {
+  __typename: "Channel";
   id: number | null;
   href: string | null;
   truncatedTitle: string | null;
@@ -43,8 +49,10 @@ export interface ProfileSsr_identity_identifiable_User_channels {
 }
 
 export interface ProfileSsr_identity_identifiable_User {
+  __typename: "User";
   id: number | null;
   name: string | null;
+  bio: string | null;
   counts: ProfileSsr_identity_identifiable_User_counts | null;
   channels: (ProfileSsr_identity_identifiable_User_channels | null)[] | null;
 }
@@ -52,6 +60,7 @@ export interface ProfileSsr_identity_identifiable_User {
 export type ProfileSsr_identity_identifiable = ProfileSsr_identity_identifiable_Group | ProfileSsr_identity_identifiable_User;
 
 export interface ProfileSsr_identity {
+  __typename: "Identity";
   identifiable: ProfileSsr_identity_identifiable;
 }
 

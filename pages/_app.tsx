@@ -11,7 +11,7 @@ import { initializeApollo, useApollo } from "../apolloClient";
 import Head from "next/head";
 
 type AppCustomProps = {
-  initialApolloState: NormalizedCacheObject;
+  initialApolloState?: NormalizedCacheObject;
   backendApolloClient?: ApolloClient<NormalizedCacheObject>;
 };
 
@@ -40,11 +40,7 @@ MyApp.getInitialProps = async (
 
   if (typeof window === "undefined") {
     await getDataFromTree(
-      <appContext.AppTree
-        {...appProps}
-        Component={appContext.Component}
-        backendApolloClient={apolloClient}
-      />
+      <appContext.AppTree {...appProps} backendApolloClient={apolloClient} />
     );
 
     Head.rewind();
