@@ -1,7 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import profileSsr from "../graphql/queries/profileSsr";
-import Logo from "./icons/logo.svg";
 import Link from "next/link";
 import Header from "./Header";
 
@@ -34,7 +33,8 @@ const Profile: React.FC = () => {
         <div className="flex flex-col text-sm leading-relaxed">
           <div dangerouslySetInnerHTML={{ __html: user.bio || "" }} />
           <span>
-            {user.counts?.channels} channels, {user.counts?.blocks} blocks
+            {user.counts?.channels ?? "0"} channels,{" "}
+            {user.counts?.blocks ?? "0"} blocks
           </span>
           <div className="flex flex-row space-x-3">
             <Link href={`/user/${id}/followers`}>
