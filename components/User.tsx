@@ -5,6 +5,10 @@ import Link from "next/link";
 import Header from "./Header";
 
 const Profile: React.FC = () => {
+  /*
+   * Queries
+   */
+
   const router = useRouter();
   const { id } = router.query;
 
@@ -13,9 +17,37 @@ const Profile: React.FC = () => {
     variables: { id },
   });
 
+  /*
+   * Early exits
+   */
+
+  //  Loading
+  if (q.loading) {
+    return (
+      <div className="flex flex-col">
+        <Header
+          taxonomy={[
+            {
+              key: "loading",
+              display: (
+                <span className="animate-ellipses-loader not-italic">…</span>
+              ),
+            },
+          ]}
+        />
+      </div>
+    );
+  }
+
+  //  Not a user
   if (q.data?.identity?.identifiable?.__typename !== "User") {
     return null;
   }
+
+  /*
+   * Default
+   */
+
   const user = q.data.identity.identifiable;
 
   return (

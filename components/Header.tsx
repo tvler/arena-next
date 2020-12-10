@@ -2,7 +2,7 @@ import Logo from "./icons/logo.svg";
 import Link from "next/link";
 
 type HeaderProps = {
-  taxonomy?: ReadonlyArray<string>;
+  taxonomy?: ReadonlyArray<string | { key: string; display: JSX.Element }>;
 };
 
 const Header: React.FC<HeaderProps> = ({ taxonomy }) => {
@@ -13,12 +13,20 @@ const Header: React.FC<HeaderProps> = ({ taxonomy }) => {
           <Logo className="w-6 h-6" fill="currentColor"></Logo>
         </a>
       </Link>
-      {taxonomy &&
-        taxonomy.map((str) => (
-          <span key={str} className="font-serif italic text-xl">
-            &nbsp;/ {str}
-          </span>
-        ))}
+      {taxonomy ? (
+        taxonomy.map((el) => {
+          const key: string = typeof el === "string" ? el : el.key;
+          const display = typeof el === "string" ? el : el.display;
+
+          return (
+            <span key={key} className="font-serif italic text-xl">
+              &nbsp;/ {display}
+            </span>
+          );
+        })
+      ) : (
+        <span className="font-serif italic text-xl">&nbsp;</span>
+      )}
     </div>
   );
 };
