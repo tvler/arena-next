@@ -4,7 +4,7 @@ import userSsr from "../graphql/queries/userSsr";
 import Link from "next/link";
 import Header from "./Header";
 
-const User: React.FC = () => {
+const Following: React.FC = () => {
   /*
    * Queries
    */
@@ -49,10 +49,16 @@ const User: React.FC = () => {
    */
 
   const user = serversideQuery.data.identity.identifiable;
+  const followingCount: number = user.counts?.following ?? 0;
 
   return (
     <div className="flex flex-col pb-4">
-      <Header taxonomy={[user.name ?? "user"]} />
+      <Header
+        taxonomy={[
+          { display: user.name ?? "User", href: `/user/${id}` },
+          "Following",
+        ]}
+      />
 
       <div className="flex flex-row space-x-4 items-start pl-4 pr-4">
         <button
@@ -80,9 +86,19 @@ const User: React.FC = () => {
         </div>
       </div>
 
-      {/* {JSON.stringify(user)} */}
+      <div className="mt-6 pl-4 pr-4 grid grid-cols-auto-fit-block auto-rows-block gap-4">
+        {Array.from({ length: followingCount }, (_, i) => {
+          return (
+            <div
+              key={i}
+              className="bg-white rounded-sm"
+              style={{ border: "1px solid rgb(204, 204, 204)" }}
+            ></div>
+          );
+        })}
+      </div>
     </div>
   );
 };
 
-export default User;
+export default Following;

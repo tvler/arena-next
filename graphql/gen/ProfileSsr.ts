@@ -15,6 +15,8 @@ export interface ProfileSsr_identity_identifiable_User_counts {
   __typename: "UserCounts";
   channels: number | null;
   blocks: number | null;
+  followers: number | null;
+  following: number | null;
 }
 
 export interface ProfileSsr_identity_identifiable_User_channels_counts {

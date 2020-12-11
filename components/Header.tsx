@@ -2,8 +2,14 @@ import Logo from "./icons/logo.svg";
 import Link from "next/link";
 
 type HeaderProps = {
-  taxonomy?: ReadonlyArray<string | { key: string; display: JSX.Element }>;
+  taxonomy?: ReadonlyArray<
+    | string
+    | { key: string; display: JSX.Element; href?: string }
+    | { display: string; href?: string }
+  >;
 };
+
+const spacer = <>&nbsp;/&nbsp;</>;
 
 const Header: React.FC<HeaderProps> = ({ taxonomy }) => {
   return (
@@ -15,12 +21,28 @@ const Header: React.FC<HeaderProps> = ({ taxonomy }) => {
       </Link>
       {taxonomy ? (
         taxonomy.map((el) => {
-          const key: string = typeof el === "string" ? el : el.key;
-          const display = typeof el === "string" ? el : el.display;
+          const key: string =
+            typeof el === "string" ? el : "key" in el ? el.key : el.display;
+          const display: string | JSX.Element =
+            typeof el === "string" ? el : el.display;
+          const href: string | null =
+            typeof el === "string" ? null : el.href ?? null;
+
+          if (href === null) {
+            return (
+              <span key={key} className="font-serif italic text-xl">
+                {spacer}
+                {display}
+              </span>
+            );
+          }
 
           return (
             <span key={key} className="font-serif italic text-xl">
-              &nbsp;/ {display}
+              {spacer}
+              <Link href={href}>
+                <a className="no-underline">{display}</a>
+              </Link>
             </span>
           );
         })

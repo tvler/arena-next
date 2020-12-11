@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Home: React.FC = () => {
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col pb-4">
       <Header taxonomy={["Explore"]} />
       <div className="flex flex-col pl-4 pr-4 items-start">
         <span className="text-xl">User pages</span>

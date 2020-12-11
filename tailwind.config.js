@@ -41,6 +41,12 @@ module.exports = {
       animation: {
         "ellipses-loader": "ellipses-loader linear 0.9s infinite",
       },
+      gridTemplateColumns: {
+        "auto-fit-block": "repeat(auto-fit, var(--block-size))",
+      },
+      gridAutoRows: {
+        block: "var(--block-size)",
+      },
     },
   },
   variants: {

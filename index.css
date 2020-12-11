@@ -2,17 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
 @layer base {
   :root {
+    --block-size: 15rem;
+
     cursor: default;
     -webkit-font-smoothing: antialiased;
     font-size: 19px;
     background-color: #f9fbff;
     color: #333;
-  }
-
-  :focus:not(:focus-visible) {
-    outline: none;
   }
 
   a {
