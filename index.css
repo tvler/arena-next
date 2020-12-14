@@ -10,11 +10,11 @@
   :root {
     --block-size: 15rem;
 
+    @apply bg-blue-lightest text-cool-black;
+
     cursor: default;
     -webkit-font-smoothing: antialiased;
     font-size: 19px;
-    background-color: #f9fbff;
-    color: #333;
   }
 
   a {

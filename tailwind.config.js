@@ -3,6 +3,15 @@ module.exports = {
   purge: ["./pages/**/*.tsx", "./components/**/*.tsx"],
   darkMode: false, // or 'media' or 'class'
   theme: {
+    colors: {
+      white: "#fff",
+      blue: {
+        lightest: "#f9fbff",
+        light: "#E2ECFF",
+        DEFAULT: "#3B5998",
+      },
+      "cool-black": "#333",
+    },
     fontFamily: {
       sans: "Helvetica, Arial, sans-serif",
       serif: "Palatino, serif",

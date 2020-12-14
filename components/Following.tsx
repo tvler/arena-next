@@ -61,10 +61,7 @@ const Following: React.FC = () => {
       />
 
       <div className="flex flex-row space-x-4 items-start pl-4 pr-4">
-        <button
-          style={{ backgroundColor: "#E2ECFF", color: "#3B5998" }}
-          className="pl-2.5 pr-2.5 pt-1 pb-1 rounded-md"
-        >
+        <button className="pl-2.5 pr-2.5 pt-1 pb-1 rounded-md text-blue bg-blue-light">
           Follow
         </button>
 
