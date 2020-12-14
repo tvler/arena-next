@@ -88,8 +88,7 @@ const Followers: React.FC = () => {
           return (
             <div
               key={i}
-              className="bg-white rounded-sm"
-              style={{ border: "1px solid rgb(204, 204, 204)" }}
+              className="bg-white rounded-sm border border-gray"
             ></div>
           );
         })}

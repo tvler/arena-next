@@ -11,6 +11,7 @@ module.exports = {
         DEFAULT: "#3B5998",
       },
       "cool-black": "#333",
+      gray: "#ccc",
     },
     fontFamily: {
       sans: "Helvetica, Arial, sans-serif",
