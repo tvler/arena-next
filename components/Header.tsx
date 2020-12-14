@@ -1,17 +1,37 @@
 import Logo from "./icons/logo.svg";
 import Link from "next/link";
 
+type Taxonomy = ReadonlyArray<
+  | string
+  | { key: string; display: JSX.Element; href?: string }
+  | { display: string; href?: string }
+>;
+
 type HeaderProps = {
-  taxonomy?: ReadonlyArray<
-    | string
-    | { key: string; display: JSX.Element; href?: string }
-    | { display: string; href?: string }
-  >;
+  loading?: boolean;
+  taxonomy?: Taxonomy;
 };
+
+const loadingTaxonomy: Taxonomy = [
+  {
+    key: "loading",
+    display: <span className="animate-ellipses-loader not-italic">…</span>,
+  },
+];
 
 const spacer = <>&nbsp;/&nbsp;</>;
 
-const Header: React.FC<HeaderProps> = ({ taxonomy }) => {
+const Header: React.FC<HeaderProps> = ({
+  taxonomy: possibleTaxonomy,
+  loading,
+}) => {
+  let taxonomy: Taxonomy | undefined;
+  if (loading === true) {
+    taxonomy = loadingTaxonomy;
+  } else if (possibleTaxonomy) {
+    taxonomy = possibleTaxonomy;
+  }
+
   return (
     <div className="p-4 flex flex-row">
       <Link href="/">

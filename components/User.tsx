@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import userSsr from "../graphql/queries/userSsr";
 import Link from "next/link";
 import Header from "./Header";
+import UserDetails from "./UserDetails";
 
 const User: React.FC = () => {
   /*
@@ -25,16 +26,7 @@ const User: React.FC = () => {
   if (serversideQuery.loading) {
     return (
       <div className="flex flex-col">
-        <Header
-          taxonomy={[
-            {
-              key: "loading",
-              display: (
-                <span className="animate-ellipses-loader not-italic">…</span>
-              ),
-            },
-          ]}
-        />
+        <Header loading />
       </div>
     );
   }
@@ -54,28 +46,7 @@ const User: React.FC = () => {
     <div className="flex flex-col pb-4">
       <Header taxonomy={[user.name ?? "user"]} />
 
-      <div className="flex flex-row space-x-4 items-start pl-4 pr-4">
-        <button className="pl-2.5 pr-2.5 pt-1 pb-1 rounded-md text-blue bg-blue-light">
-          Follow
-        </button>
-
-        <div className="flex flex-col text-sm leading-relaxed">
-          <div dangerouslySetInnerHTML={{ __html: user.bio || "" }} />
-          <span>
-            {user.counts?.channels ?? "0"} channels,{" "}
-            {user.counts?.blocks ?? "0"} blocks
-          </span>
-          <div className="flex flex-row space-x-3">
-            <Link href={`/user/${id}/followers`}>
-              <a>Followers</a>
-            </Link>
-
-            <Link href={`/user/${id}/following`}>
-              <a>Following</a>
-            </Link>
-          </div>
-        </div>
-      </div>
+      <UserDetails id={id} />
 
       {/* {JSON.stringify(user)} */}
     </div>
