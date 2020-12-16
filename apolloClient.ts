@@ -17,7 +17,46 @@ function createApolloClient(): ApolloClient<NormalizedCacheObject> {
         "x-app-token": process.env.NEXT_PUBLIC_ARENA_TOKEN,
       },
     }),
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      typePolicies: {
+        User: {
+          fields: {
+            followers: {
+              keyArgs: ["id"],
+              merge(existing, incoming, { args }) {
+                if (!args) {
+                  throw new Error("args not given");
+                }
+
+                // Fix a mistake where page is 0 instead of 1
+                let page = args.page;
+                if (page === 0) {
+                  page = 1;
+                }
+
+                if (typeof page !== "number") {
+                  throw new Error("page isn't a number");
+                }
+
+                const per = args.per;
+
+                if (typeof per !== "number") {
+                  throw new Error("per isn't a number");
+                }
+
+                const offset = (page - 1) * per;
+                const merged = existing ? existing.slice(0) : [];
+                for (let i = 0; i < incoming.length; ++i) {
+                  merged[offset + i] = incoming[i];
+                }
+
+                return merged;
+              },
+            },
+          },
+        },
+      },
+    }),
   });
 }
 

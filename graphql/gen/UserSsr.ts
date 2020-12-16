@@ -4,14 +4,14 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: ProfileSsr
+// GraphQL query operation: UserSsr
 // ====================================================
 
-export interface ProfileSsr_identity_identifiable_Group {
+export interface UserSsr_identity_identifiable_Group {
   __typename: "Group";
 }
 
-export interface ProfileSsr_identity_identifiable_User_counts {
+export interface UserSsr_identity_identifiable_User_counts {
   __typename: "UserCounts";
   channels: number | null;
   blocks: number | null;
@@ -19,58 +19,58 @@ export interface ProfileSsr_identity_identifiable_User_counts {
   following: number | null;
 }
 
-export interface ProfileSsr_identity_identifiable_User_channels_counts {
+export interface UserSsr_identity_identifiable_User_channels_counts {
   __typename: "ChannelCounts";
   contents: number | null;
 }
 
-export interface ProfileSsr_identity_identifiable_User_channels_owner_Group {
+export interface UserSsr_identity_identifiable_User_channels_owner_Group {
   __typename: "Group";
   id: number | null;
   name: string | null;
   visibility: string | null;
 }
 
-export interface ProfileSsr_identity_identifiable_User_channels_owner_User {
+export interface UserSsr_identity_identifiable_User_channels_owner_User {
   __typename: "User";
   id: number | null;
   name: string | null;
 }
 
-export type ProfileSsr_identity_identifiable_User_channels_owner = ProfileSsr_identity_identifiable_User_channels_owner_Group | ProfileSsr_identity_identifiable_User_channels_owner_User;
+export type UserSsr_identity_identifiable_User_channels_owner = UserSsr_identity_identifiable_User_channels_owner_Group | UserSsr_identity_identifiable_User_channels_owner_User;
 
-export interface ProfileSsr_identity_identifiable_User_channels {
+export interface UserSsr_identity_identifiable_User_channels {
   __typename: "Channel";
   id: number | null;
   href: string | null;
   truncatedTitle: string | null;
   visibility: string | null;
   updated_at: string | null;
-  counts: ProfileSsr_identity_identifiable_User_channels_counts | null;
-  owner: ProfileSsr_identity_identifiable_User_channels_owner | null;
+  counts: UserSsr_identity_identifiable_User_channels_counts | null;
+  owner: UserSsr_identity_identifiable_User_channels_owner | null;
 }
 
-export interface ProfileSsr_identity_identifiable_User {
+export interface UserSsr_identity_identifiable_User {
   __typename: "User";
   id: number | null;
   name: string | null;
   bio: string | null;
-  counts: ProfileSsr_identity_identifiable_User_counts | null;
-  channels: (ProfileSsr_identity_identifiable_User_channels | null)[] | null;
+  counts: UserSsr_identity_identifiable_User_counts | null;
+  channels: (UserSsr_identity_identifiable_User_channels | null)[] | null;
 }
 
-export type ProfileSsr_identity_identifiable = ProfileSsr_identity_identifiable_Group | ProfileSsr_identity_identifiable_User;
+export type UserSsr_identity_identifiable = UserSsr_identity_identifiable_Group | UserSsr_identity_identifiable_User;
 
-export interface ProfileSsr_identity {
+export interface UserSsr_identity {
   __typename: "Identity";
-  identifiable: ProfileSsr_identity_identifiable;
+  identifiable: UserSsr_identity_identifiable;
 }
 
-export interface ProfileSsr {
-  identity: ProfileSsr_identity | null;
+export interface UserSsr {
+  identity: UserSsr_identity | null;
 }
 
-export interface ProfileSsrVariables {
+export interface UserSsrVariables {
   id: string;
 }
 

@@ -1,8 +1,8 @@
 import { NextPage } from "next";
-import UserFollowing from "../../../components/UserFollowing";
+import UserFollowingPage from "../../../components/UserFollowingPage";
 
 const Page: NextPage = () => {
-  return <UserFollowing />;
+  return <UserFollowingPage />;
 };
 
 export default Page;

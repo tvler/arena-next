@@ -1,18 +1,20 @@
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
+import { UserSsr, UserSsrVariables } from "../graphql/gen/UserSsr";
 import userSsr from "../graphql/queries/userSsr";
 import Header from "./Header";
 import UserDetails from "./UserDetails";
 
-const UserFollowing: React.FC = () => {
+const UserFollowingPage: React.FC = () => {
   /*
    * Queries
    */
 
   const router = useRouter();
-  const { id } = router.query;
+  const nonStringId = router.query.id;
+  const id: string = typeof nonStringId === "string" ? nonStringId : "";
 
-  const serversideQuery = useQuery(userSsr, {
+  const serversideQuery = useQuery<UserSsr, UserSsrVariables>(userSsr, {
     ssr: true,
     variables: { id },
   });
@@ -67,4 +69,4 @@ const UserFollowing: React.FC = () => {
   );
 };
 
-export default UserFollowing;
+export default UserFollowingPage;

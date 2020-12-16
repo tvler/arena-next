@@ -1,13 +1,14 @@
 import { useQuery } from "@apollo/client";
 import userSsr from "../graphql/queries/userSsr";
 import Link from "next/link";
+import { UserSsr, UserSsrVariables } from "../graphql/gen/UserSsr";
 
 type Props = {
-  id: string | string[] | undefined;
+  id: string;
 };
 
 const UserDetails: React.FC<Props> = ({ id }) => {
-  const serversideQuery = useQuery(userSsr, {
+  const serversideQuery = useQuery<UserSsr, UserSsrVariables>(userSsr, {
     ssr: true,
     variables: { id },
   });
