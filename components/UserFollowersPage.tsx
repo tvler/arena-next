@@ -4,6 +4,7 @@ import { UserSsr, UserSsrVariables } from "../graphql/gen/UserSsr";
 import userSsr from "../graphql/queries/userSsr";
 import Header from "./Header";
 import UserDetails from "./UserDetails";
+import UserFollowersGrid from "./UserFollowersGrid";
 
 const UserFollowersPage: React.FC = () => {
   /*
@@ -42,7 +43,6 @@ const UserFollowersPage: React.FC = () => {
    */
 
   const user = serversideQuery.data.identity.identifiable;
-  const followersCount: number = user.counts?.followers ?? 0;
 
   return (
     <div className="flex flex-col pb-4">
@@ -55,16 +55,7 @@ const UserFollowersPage: React.FC = () => {
 
       <UserDetails id={id} />
 
-      <div className="mt-6 pl-4 pr-4 grid grid-cols-auto-fit-block auto-rows-block gap-4">
-        {Array.from({ length: followersCount }, (_, i) => {
-          return (
-            <div
-              key={i}
-              className="bg-white rounded-sm border border-gray"
-            ></div>
-          );
-        })}
-      </div>
+      <UserFollowersGrid id={id} />
     </div>
   );
 };
