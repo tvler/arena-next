@@ -1,16 +1,7 @@
-import { useCallback, useState, useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-function IntersectionObserverBox<
-  RefType extends HTMLElement,
-  IDType extends unknown,
-  Props
->({
-  options,
-  Component,
-  id,
-  callback,
-  props,
-}: {
+type IntersectionObserverBoxProps<RefType extends Element, IDType, Props> = {
+  props: Props;
   options?: IntersectionObserverInit;
   Component: React.ComponentType<
     Props & {
@@ -19,26 +10,25 @@ function IntersectionObserverBox<
   >;
   id: IDType;
   callback: (id: IDType) => IntersectionObserverCallback;
-  props: Props;
-}): JSX.Element {
-  const [componentRef, setComponentRef] = useState<RefType | null>(null);
+  skip?: boolean;
+};
 
-  const refCallback = useCallback<(node: RefType | null) => void>(
-    (node) => {
-      if (node && node !== componentRef) {
-        console.log("setting");
-        setComponentRef(node);
-      }
-    },
-    [componentRef]
-  );
+function IntersectionObserverBox<RefType extends HTMLElement, IDType, Props>({
+  options,
+  Component,
+  id,
+  callback,
+  skip = false,
+  props,
+}: IntersectionObserverBoxProps<RefType, IDType, Props>): JSX.Element {
+  const componentRef = useRef<RefType>(null);
 
   useEffect(() => {
     let observer: IntersectionObserver | undefined;
 
-    if (componentRef) {
+    if (!skip && componentRef.current) {
       observer = new window.IntersectionObserver(callback(id));
-      observer.observe(componentRef);
+      observer.observe(componentRef.current);
     }
 
     return () => {
@@ -46,9 +36,9 @@ function IntersectionObserverBox<
         observer.disconnect();
       }
     };
-  }, [callback, componentRef, id, options]);
+  }, [callback, id, options, skip]);
 
-  return <Component {...props} ref={refCallback} />;
+  return <Component {...props} ref={componentRef} />;
 }
 
 export default IntersectionObserverBox;

@@ -19,6 +19,24 @@ function createApolloClient(): ApolloClient<NormalizedCacheObject> {
     }),
     cache: new InMemoryCache({
       typePolicies: {
+        Query: {
+          fields: {
+            user(existing, { args, toReference }) {
+              if (existing) {
+                return existing;
+              }
+
+              if (args?.id === undefined) {
+                return undefined;
+              }
+
+              return toReference({
+                __typename: "User",
+                id: args.id,
+              });
+            },
+          },
+        },
         User: {
           fields: {
             followers: {
@@ -27,30 +45,36 @@ function createApolloClient(): ApolloClient<NormalizedCacheObject> {
                 if (!args) {
                   throw new Error("args not given");
                 }
-
-                // Fix a mistake where page is 0 instead of 1
-                let page = args.page;
-                if (page === 0) {
-                  page = 1;
+                if (!Array.isArray(incoming)) {
+                  throw new Error("incoming isn't an array");
                 }
-
-                if (typeof page !== "number") {
+                if (typeof args?.page !== "number") {
                   throw new Error("page isn't a number");
                 }
-
-                const per = args.per;
-
-                if (typeof per !== "number") {
+                if (args.page === 0) {
+                  throw new Error("page is 0");
+                }
+                if (typeof args?.per !== "number") {
                   throw new Error("per isn't a number");
                 }
-
-                const offset = (page - 1) * per;
-                const merged = existing ? existing.slice(0) : [];
-                for (let i = 0; i < incoming.length; ++i) {
-                  merged[offset + i] = incoming[i];
+                const incomingStartingIndex = (args.page - 1) * args.per;
+                const length = Math.max(
+                  Array.isArray(existing) ? existing.length : 0,
+                  args.page * args.per
+                );
+                const newData = [];
+                for (let i = 0; i < length; i++) {
+                  const isInIncomingWindow =
+                    i >= incomingStartingIndex && i < args.page * args.per;
+                  if (isInIncomingWindow) {
+                    newData[i] = incoming[i - incomingStartingIndex];
+                  } else if (Array.isArray(existing) && i < existing.length) {
+                    newData[i] = existing[i];
+                  } else {
+                    newData[i] = null;
+                  }
                 }
-
-                return merged;
+                return newData;
               },
             },
           },
