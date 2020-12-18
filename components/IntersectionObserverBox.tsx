@@ -1,5 +1,42 @@
 import { useEffect, useRef } from "react";
 
+/*
+ * A type-safe, polymorphic Box to wrap any forwardRef component
+ * with an Intersection Observer. Designed to be used in an
+ * unknown-length array map setting (infinite feed, etc.).
+ *
+ * The `callback` prop is closed over the passed-in `id` prop.
+ * This allows the `callback` prop to keep reference-equality
+ * between renders using something like `useCallback`, which
+ * greatly improve performance. This would be impossible to
+ * achieve if you were in a variadic array map unless you had
+ * a hacky ref setup otherwise.
+ *
+ * Ex:
+ *   Component to receive the Intersection Observer:
+ *
+ *   const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+ *    (props, ref) => {
+ *      return (
+ *        <button ref={ref} {...props} />
+ *      );
+ *    }
+ *   );
+ *
+ *   // Then, in the parent component's code:
+ *
+ *   const componentProps: ButtonProps = { onClick: () => {} };
+ *   const callback: useCallback((id) => (entries) => {})
+ *
+ *   <IntersectionObserverBox
+ *     component={Button}
+ *     componentProps={componentProps}
+ *     callback={callback}
+ *     skip={false}
+ *     id="Some identifier"
+ *   />
+ */
+
 type IntersectionObserverBoxProps<
   RefType extends Element,
   IDType,
