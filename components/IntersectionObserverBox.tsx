@@ -1,10 +1,14 @@
 import { useEffect, useRef } from "react";
 
-type IntersectionObserverBoxProps<RefType extends Element, IDType, Props> = {
-  props: Props;
+type IntersectionObserverBoxProps<
+  RefType extends Element,
+  IDType,
+  ComponentProps
+> = {
+  componentProps: ComponentProps;
   options?: IntersectionObserverInit;
   Component: React.ComponentType<
-    Props & {
+    ComponentProps & {
       ref: React.Ref<RefType>;
     }
   >;
@@ -13,14 +17,18 @@ type IntersectionObserverBoxProps<RefType extends Element, IDType, Props> = {
   skip?: boolean;
 };
 
-function IntersectionObserverBox<RefType extends HTMLElement, IDType, Props>({
+function IntersectionObserverBox<
+  RefType extends HTMLElement,
+  IDType,
+  ComponentProps
+>({
   options,
   Component,
   id,
   callback,
   skip = false,
-  props,
-}: IntersectionObserverBoxProps<RefType, IDType, Props>): JSX.Element {
+  componentProps,
+}: IntersectionObserverBoxProps<RefType, IDType, ComponentProps>): JSX.Element {
   const componentRef = useRef<RefType>(null);
 
   useEffect(() => {
@@ -38,7 +46,7 @@ function IntersectionObserverBox<RefType extends HTMLElement, IDType, Props>({
     };
   }, [callback, id, options, skip]);
 
-  return <Component {...props} ref={componentRef} />;
+  return <Component {...componentProps} ref={componentRef} />;
 }
 
 export default IntersectionObserverBox;

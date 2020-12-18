@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { useCallback, useMemo, useRef } from "react";
+import { useCallback, useRef } from "react";
 import IntersectionObserverBox from "./IntersectionObserverBox";
 import { UserSsr, UserSsrVariables } from "../graphql/gen/UserSsr";
 import userSsr from "../graphql/queries/userSsr";
@@ -87,9 +87,9 @@ const UserFollowersGrid: React.FC<{ id: string }> = ({ id }) => {
           <IntersectionObserverBox
             key={key}
             Component={UserFollowersCard}
+            componentProps={userFollowersCardProps}
             callback={intersectionObserverCallback}
             id={i}
-            props={userFollowersCardProps}
             skip={followerId !== null}
           />
         );
