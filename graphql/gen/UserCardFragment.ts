@@ -11,7 +11,7 @@ export interface UserCardFragment {
   __typename: "User";
   id: number | null;
   name: string | null;
-  href: string | null;
+  slug: string | null;
   initials: string | null;
   avatar: string | null;
 }

@@ -4,7 +4,7 @@ export const userCardFragment = gql`
   fragment UserCardFragment on User {
     id
     name
-    href
+    slug
     initials
     avatar(size: LARGE)
   }
