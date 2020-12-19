@@ -26,3 +26,9 @@
     cursor: default;
   }
 }
+
+@layer utilities {
+  .contain-strict {
+    contain: strict;
+  }
+}

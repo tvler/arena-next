@@ -48,7 +48,10 @@ const UserFollowersCard = forwardRef<HTMLDivElement, UserFollowersCardProps>(
     }
 
     return (
-      <div ref={ref} className="bg-white rounded-sm border border-gray flex">
+      <div
+        ref={ref}
+        className="bg-white rounded-sm border border-gray flex contain-strict"
+      >
         {content}
       </div>
     );
