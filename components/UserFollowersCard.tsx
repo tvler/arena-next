@@ -36,6 +36,7 @@ const UserFollowersCard = forwardRef<HTMLDivElement, UserFollowersCardProps>(
                 <img
                   className="absolute top-0 left-0 w-full h-full object-contain"
                   src={user.avatar}
+                  alt={`${user.name ?? "User"}'s profile picture`}
                 />
               )}
             </div>
