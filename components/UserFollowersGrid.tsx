@@ -18,7 +18,7 @@ const getPageNumberFromCellIndex = (cellIndex: number): number => {
 };
 
 const UserFollowersGrid: React.FC<{ id: string }> = ({ id }) => {
-  const queriedPagesRef = useRef<Set<number>>(new Set([1]));
+  const queriedPagesRef = useRef<Set<number>>(new Set());
 
   const serversideQuery = useQuery<UserSsr, UserSsrVariables>(userSsr, {
     ssr: true,
@@ -81,11 +81,9 @@ const UserFollowersGrid: React.FC<{ id: string }> = ({ id }) => {
           id: followerId ?? undefined,
         };
 
-        const key = followerId ? `id${followerId}` : `index${i}`;
-
         return (
           <IntersectionObserverBox
-            key={key}
+            key={i}
             Component={UserFollowersCard}
             componentProps={userFollowersCardProps}
             callback={intersectionObserverCallback}
