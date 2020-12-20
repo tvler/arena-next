@@ -10,6 +10,7 @@ let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
 function createApolloClient(): ApolloClient<NormalizedCacheObject> {
   return new ApolloClient({
+    connectToDevTools: true,
     ssrMode: typeof window === "undefined", // set to true for SSR
     link: createHttpLink({
       uri: "https://api.are.na/graphql",
@@ -108,7 +109,7 @@ export function initializeApollo(
   return _apolloClient;
 }
 
-export function useApollo(
+export function useApolloClient(
   initialState?: NormalizedCacheObject
 ): ApolloClient<NormalizedCacheObject> {
   const store = useMemo(() => initializeApollo(initialState), [initialState]);

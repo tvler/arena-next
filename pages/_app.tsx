@@ -7,21 +7,26 @@ import {
 import { getDataFromTree } from "@apollo/client/react/ssr";
 import App, { AppInitialProps } from "next/app";
 import type { AppProps, AppContext } from "next/app";
-import { initializeApollo, useApollo } from "../apolloClient";
+import { initializeApollo, useApolloClient } from "../apolloClient";
 import Head from "next/head";
+import { useRef } from "react";
 
 type AppCustomProps = {
-  initialApolloState?: NormalizedCacheObject;
+  backendApolloState?: NormalizedCacheObject;
   backendApolloClient?: ApolloClient<NormalizedCacheObject>;
 };
 
 function MyApp({
   Component,
   pageProps,
-  initialApolloState,
+  backendApolloState,
   backendApolloClient,
 }: AppProps & AppCustomProps): JSX.Element {
-  const frontendApolloClient = useApollo(initialApolloState);
+  const backendApolloStateRef = useRef<NormalizedCacheObject | undefined>(
+    backendApolloState
+  );
+
+  const frontendApolloClient = useApolloClient(backendApolloStateRef.current);
 
   const apolloClient = backendApolloClient || frontendApolloClient;
 
@@ -49,7 +54,7 @@ MyApp.getInitialProps = async (
 
   return {
     ...appProps,
-    initialApolloState: apolloClient && apolloClient.cache.extract(),
+    backendApolloState: apolloClient && apolloClient.cache.extract(),
   };
 };
 
