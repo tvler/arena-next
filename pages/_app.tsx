@@ -7,9 +7,9 @@ import {
 import { getDataFromTree } from "@apollo/client/react/ssr";
 import App, { AppInitialProps } from "next/app";
 import type { AppProps, AppContext } from "next/app";
-import { initializeApollo, useApolloClient } from "../apolloClient";
+import { initializeApollo } from "../apolloClient";
 import Head from "next/head";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
 
 type AppCustomProps = {
   backendApolloState?: NormalizedCacheObject;
@@ -26,7 +26,10 @@ function MyApp({
     backendApolloState
   );
 
-  const frontendApolloClient = useApolloClient(backendApolloStateRef.current);
+  const frontendApolloClient: ApolloClient<NormalizedCacheObject> = useMemo(
+    () => initializeApollo(backendApolloStateRef.current),
+    []
+  );
 
   const apolloClient = backendApolloClient || frontendApolloClient;
 
