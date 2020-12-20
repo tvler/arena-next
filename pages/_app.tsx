@@ -36,9 +36,10 @@ MyApp.getInitialProps = async (
   appContext: AppContext
 ): Promise<AppInitialProps & AppCustomProps> => {
   const appProps = await App.getInitialProps(appContext);
-  const apolloClient = initializeApollo();
+  let apolloClient;
 
   if (typeof window === "undefined") {
+    apolloClient = initializeApollo();
     await getDataFromTree(
       <appContext.AppTree {...appProps} backendApolloClient={apolloClient} />
     );
@@ -48,7 +49,7 @@ MyApp.getInitialProps = async (
 
   return {
     ...appProps,
-    initialApolloState: apolloClient.cache.extract(),
+    initialApolloState: apolloClient && apolloClient.cache.extract(),
   };
 };
 
