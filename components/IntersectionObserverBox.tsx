@@ -8,7 +8,7 @@ import { useEffect, useRef } from "react";
  * The `callback` prop is closed over the passed-in `id` prop.
  * This allows the `callback` prop to keep reference-equality
  * between renders using something like `useCallback`, which
- * greatly improve performance. This would be impossible to
+ * greatly improves performance. This would be impossible to
  * achieve if you were in a variadic array map unless you had
  * a hacky ref setup otherwise.
  *
