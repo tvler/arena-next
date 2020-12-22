@@ -1,4 +1,4 @@
-import { useQuery, useApolloClient, StoreObject } from "@apollo/client";
+import { useQuery, useApolloClient } from "@apollo/client";
 import { useCallback, useEffect, useRef } from "react";
 import IntersectionObserverBox from "./IntersectionObserverBox";
 import { UserSsr, UserSsrVariables } from "../graphql/gen/UserSsr";
