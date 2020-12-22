@@ -1,5 +1,5 @@
-import { useQuery } from "@apollo/client";
-import { useCallback, useRef } from "react";
+import { useQuery, useApolloClient, StoreObject } from "@apollo/client";
+import { useCallback, useEffect, useRef } from "react";
 import IntersectionObserverBox from "./IntersectionObserverBox";
 import { UserSsr, UserSsrVariables } from "../graphql/gen/UserSsr";
 import userSsr from "../graphql/queries/userSsr";
@@ -24,6 +24,7 @@ const UserFollowersGrid: React.FC<{ id: string }> = ({ id }) => {
     ssr: true,
     variables: { id },
   });
+  const user = serversideQuery.data?.identity?.identifiable;
 
   const { fetchMore, data } = useQuery<UserFollowers, UserFollowersVariables>(
     userFollowers,
@@ -58,11 +59,30 @@ const UserFollowersGrid: React.FC<{ id: string }> = ({ id }) => {
     [fetchMore]
   );
 
-  if (serversideQuery.data?.identity?.identifiable?.__typename !== "User") {
+  const client = useApolloClient();
+
+  useEffect(() => {
+    return () => {
+      if (user?.__typename === "User") {
+        const normalizedIdentity = client.cache.identify({ ...user });
+        if (normalizedIdentity) {
+          queriedPagesRef.current = new Set();
+
+          client.cache.evict({
+            id: normalizedIdentity,
+            fieldName: "followers",
+          });
+
+          client.cache.gc();
+        }
+      }
+    };
+  }, [client, user]);
+
+  if (user?.__typename !== "User") {
     return null;
   }
 
-  const user = serversideQuery.data.identity.identifiable;
   const followsCount: number = user.counts?.followers ?? 0;
   let followers: UserFollowers_identity_identifiable_User["followers"] = null;
   if (data?.identity?.identifiable.__typename === "User") {

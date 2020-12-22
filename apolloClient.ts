@@ -40,8 +40,12 @@ function createApolloClient(): ApolloClient<NormalizedCacheObject> {
         User: {
           fields: {
             followers: {
-              keyArgs: ["id"],
+              keyArgs: false,
               merge(existing, incoming, { args }) {
+                /*
+                 * Ensure args and data is properly set up
+                 */
+
                 if (!args) {
                   throw new Error("args not given");
                 }
@@ -57,15 +61,23 @@ function createApolloClient(): ApolloClient<NormalizedCacheObject> {
                 if (typeof args?.per !== "number") {
                   throw new Error("per isn't a number");
                 }
-                const incomingStartingIndex = (args.page - 1) * args.per;
-                const length = Math.max(
+
+                // New array to be returned
+                const newData = [];
+
+                // Length of the new array
+                const newDataLength = Math.max(
                   Array.isArray(existing) ? existing.length : 0,
                   args.page * args.per
                 );
-                const newData = [];
-                for (let i = 0; i < length; i++) {
+
+                // Index that the incoming data starts at in the newData array
+                const incomingStartingIndex = (args.page - 1) * args.per;
+
+                for (let i = 0; i < newDataLength; i++) {
                   const isInIncomingWindow =
                     i >= incomingStartingIndex && i < args.page * args.per;
+
                   if (isInIncomingWindow) {
                     newData[i] = incoming[i - incomingStartingIndex];
                   } else if (Array.isArray(existing) && i < existing.length) {
