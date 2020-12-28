@@ -57,6 +57,9 @@ module.exports = {
       gridAutoRows: {
         block: "var(--block-size)",
       },
+      spacing: {
+        block: "var(--block-size)",
+      },
     },
   },
   variants: {

@@ -3,8 +3,7 @@ import { useCallback } from "react";
 import IntersectionObserverBox from "./IntersectionObserverBox";
 import { UserSsr, UserSsrVariables } from "../graphql/gen/UserSsr";
 import userSsr from "../graphql/queries/userSsr";
-import UserFollowingCard from "./UserFollowingCard";
-import { UserFollowingCardProps } from "./UserFollowingCard";
+import Block, { BlockProps, BlockVariant } from "./Block";
 
 const UserFollowingGrid: React.FC<{ id: string }> = ({ id }) => {
   const serversideQuery = useQuery<UserSsr, UserSsrVariables>(userSsr, {
@@ -33,15 +32,13 @@ const UserFollowingGrid: React.FC<{ id: string }> = ({ id }) => {
       {Array.from({ length: followingCount }, (_, i) => {
         const followingId: null | number = null;
 
-        const userFollowingCardProps: UserFollowingCardProps = {
-          id: followingId ?? undefined,
-        };
+        const blockProps: BlockProps = {};
 
         return (
           <IntersectionObserverBox
             key={i}
-            Component={UserFollowingCard}
-            componentProps={userFollowingCardProps}
+            Component={Block}
+            componentProps={blockProps}
             callback={intersectionObserverCallback}
             id={i}
             skip={followingId !== null}

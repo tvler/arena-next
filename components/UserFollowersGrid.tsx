@@ -4,12 +4,12 @@ import IntersectionObserverBox from "./IntersectionObserverBox";
 import { UserSsr, UserSsrVariables } from "../graphql/gen/UserSsr";
 import userSsr from "../graphql/queries/userSsr";
 import userFollowers from "../graphql/queries/userFollowers";
-import UserFollowersCard, { UserFollowersCardProps } from "./UserFollowersCard";
 import {
   UserFollowers,
   UserFollowersVariables,
 } from "../graphql/gen/UserFollowers";
 import { UserFollowers_identity_identifiable_User } from "../graphql/gen/UserFollowers";
+import Block, { BlockProps, BlockVariant } from "./Block";
 
 const pageCount = 12;
 
@@ -97,15 +97,18 @@ const UserFollowersGrid: React.FC<{ id: string }> = ({ id }) => {
           followerId = followers[i]?.id ?? null;
         }
 
-        const userFollowersCardProps: UserFollowersCardProps = {
-          id: followerId ?? undefined,
-        };
+        const blockProps: BlockProps = followerId
+          ? {
+              variant: BlockVariant.user,
+              id: followerId,
+            }
+          : {};
 
         return (
           <IntersectionObserverBox
             key={i}
-            Component={UserFollowersCard}
-            componentProps={userFollowersCardProps}
+            Component={Block}
+            componentProps={blockProps}
             callback={intersectionObserverCallback}
             id={i}
             skip={followerId !== null}
