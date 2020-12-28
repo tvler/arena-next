@@ -7,6 +7,57 @@ import {
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
+const paginationPolicy = {
+  keyArgs: false,
+  merge(existing: any, incoming: any, { args }: { args: any }) {
+    /*
+     * Ensure args and data is properly set up
+     */
+
+    if (!args) {
+      throw new Error("args not given");
+    }
+    if (!Array.isArray(incoming)) {
+      throw new Error("incoming isn't an array");
+    }
+    if (typeof args?.page !== "number") {
+      throw new Error("page isn't a number");
+    }
+    if (args.page === 0) {
+      throw new Error("page is 0");
+    }
+    if (typeof args?.per !== "number") {
+      throw new Error("per isn't a number");
+    }
+
+    // New array to be returned
+    const newData = [];
+
+    // Length of the new array
+    const newDataLength = Math.max(
+      Array.isArray(existing) ? existing.length : 0,
+      args.page * args.per
+    );
+
+    // Index that the incoming data starts at in the newData array
+    const incomingStartingIndex = (args.page - 1) * args.per;
+
+    for (let i = 0; i < newDataLength; i++) {
+      const isInIncomingWindow =
+        i >= incomingStartingIndex && i < args.page * args.per;
+
+      if (isInIncomingWindow) {
+        newData[i] = incoming[i - incomingStartingIndex];
+      } else if (Array.isArray(existing) && i < existing.length) {
+        newData[i] = existing[i];
+      } else {
+        newData[i] = null;
+      }
+    }
+    return newData;
+  },
+} as const;
+
 function createApolloClient(): ApolloClient<NormalizedCacheObject> {
   return new ApolloClient({
     connectToDevTools: true,
@@ -39,56 +90,8 @@ function createApolloClient(): ApolloClient<NormalizedCacheObject> {
         },
         User: {
           fields: {
-            followers: {
-              keyArgs: false,
-              merge(existing, incoming, { args }) {
-                /*
-                 * Ensure args and data is properly set up
-                 */
-
-                if (!args) {
-                  throw new Error("args not given");
-                }
-                if (!Array.isArray(incoming)) {
-                  throw new Error("incoming isn't an array");
-                }
-                if (typeof args?.page !== "number") {
-                  throw new Error("page isn't a number");
-                }
-                if (args.page === 0) {
-                  throw new Error("page is 0");
-                }
-                if (typeof args?.per !== "number") {
-                  throw new Error("per isn't a number");
-                }
-
-                // New array to be returned
-                const newData = [];
-
-                // Length of the new array
-                const newDataLength = Math.max(
-                  Array.isArray(existing) ? existing.length : 0,
-                  args.page * args.per
-                );
-
-                // Index that the incoming data starts at in the newData array
-                const incomingStartingIndex = (args.page - 1) * args.per;
-
-                for (let i = 0; i < newDataLength; i++) {
-                  const isInIncomingWindow =
-                    i >= incomingStartingIndex && i < args.page * args.per;
-
-                  if (isInIncomingWindow) {
-                    newData[i] = incoming[i - incomingStartingIndex];
-                  } else if (Array.isArray(existing) && i < existing.length) {
-                    newData[i] = existing[i];
-                  } else {
-                    newData[i] = null;
-                  }
-                }
-                return newData;
-              },
-            },
+            followers: paginationPolicy,
+            following: paginationPolicy,
           },
         },
       },
