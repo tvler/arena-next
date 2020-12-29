@@ -109,8 +109,6 @@ const ChannelBlockVariant: React.FC<{ id: number }> = memo(({ id }) => {
       channelVariants = "border-gray";
   }
 
-  // console.log(channel);
-
   return (
     // <Link href={`/user/${user.slug}`}>
     <a
@@ -124,8 +122,8 @@ const ChannelBlockVariant: React.FC<{ id: number }> = memo(({ id }) => {
 
       <div className="flex flex-col items-center justify-center text-center pl-4 pr-4">
         <span>{channel.title}</span>
-        <span className="text-xs mt-1">by {channel.owner?.name}</span>
-        <span className="text-xs mt-1">
+        <span className="text-xs mt-0.5">by {channel.owner?.name}</span>
+        <span className="text-xs mt-0.5">
           {channel.counts?.contents ?? 0}{" "}
           {channel.counts?.contents === 1 ? "block" : "blocks"}
           {" • "}

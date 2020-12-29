@@ -43,7 +43,10 @@ const UserFollowersGrid: React.FC<{ id: string }> = ({ id }) => {
   >(
     (cellID) => (entries) => {
       for (const entry of entries) {
-        if (entry.isIntersecting) {
+        if (
+          entry.isIntersecting &&
+          fetchMore // sometimes fetchMore is undefined during hot reload
+        ) {
           const page = getPageNumberFromCellIndex(cellID);
           if (!queriedPagesRef.current.has(page)) {
             queriedPagesRef.current.add(page);

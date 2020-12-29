@@ -1,5 +1,5 @@
-import { useQuery } from "@apollo/client";
-import { useCallback, useRef } from "react";
+import { useApolloClient, useQuery } from "@apollo/client";
+import { useCallback, useEffect, useRef } from "react";
 import IntersectionObserverBox from "./IntersectionObserverBox";
 import { UserSsr, UserSsrVariables } from "../graphql/gen/UserSsr";
 import userSsr from "../graphql/queries/userSsr";
@@ -11,7 +11,7 @@ import {
 } from "../graphql/gen/UserFollowing";
 import userFollowing from "../graphql/queries/userFollowing";
 
-const pageCount = 3;
+const pageCount = 12;
 
 const getPageNumberFromCellIndex = (cellIndex: number): number => {
   return Math.floor(cellIndex / pageCount) + 1;
@@ -43,10 +43,12 @@ const UserFollowingGrid: React.FC<{ id: string }> = ({ id }) => {
   >(
     (cellID) => (entries) => {
       for (const entry of entries) {
-        if (entry.isIntersecting) {
+        if (
+          entry.isIntersecting &&
+          fetchMore // sometimes fetchMore is undefined during hot reload
+        ) {
           const page = getPageNumberFromCellIndex(cellID);
           if (!queriedPagesRef.current.has(page)) {
-            console.log(cellID, page);
             queriedPagesRef.current.add(page);
             fetchMore({
               variables: {
@@ -59,6 +61,26 @@ const UserFollowingGrid: React.FC<{ id: string }> = ({ id }) => {
     },
     [fetchMore]
   );
+
+  const client = useApolloClient();
+
+  useEffect(() => {
+    return () => {
+      if (user?.__typename === "User") {
+        const normalizedIdentity = client.cache.identify({ ...user });
+        if (normalizedIdentity) {
+          queriedPagesRef.current = new Set();
+
+          client.cache.evict({
+            id: normalizedIdentity,
+            fieldName: "following",
+          });
+
+          client.cache.gc();
+        }
+      }
+    };
+  }, [client, user]);
 
   if (user?.__typename !== "User") {
     return null;
@@ -78,20 +100,18 @@ const UserFollowingGrid: React.FC<{ id: string }> = ({ id }) => {
 
         if (followingItem && followingItem.id !== null) {
           switch (followingItem?.__typename) {
-            case "User": {
+            case "User":
               blockProps = {
                 id: followingItem.id,
                 variant: BlockVariant.user,
               };
               break;
-            }
-            case "Channel": {
+            case "Channel":
               blockProps = {
                 id: followingItem.id,
                 variant: BlockVariant.chanel,
               };
               break;
-            }
           }
         }
 

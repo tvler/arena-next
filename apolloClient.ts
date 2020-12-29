@@ -1,6 +1,7 @@
 import {
   ApolloClient,
   createHttpLink,
+  FieldPolicy,
   FieldReadFunction,
   InMemoryCache,
   NormalizedCacheObject,
@@ -8,9 +9,9 @@ import {
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
-const paginationPolicy = {
+const paginationPolicy: FieldPolicy = {
   keyArgs: false,
-  merge(existing: any, incoming: any, { args }: { args: any }) {
+  merge(existing, incoming, { args }) {
     /*
      * Ensure args and data is properly set up
      */
@@ -48,16 +49,26 @@ const paginationPolicy = {
         i >= incomingStartingIndex && i < args.page * args.per;
 
       if (isInIncomingWindow) {
-        newData[i] = incoming[i - incomingStartingIndex];
+        const incomingItem = incoming[i - incomingStartingIndex];
+
+        // For some reason, are.na sometimes doesn't return the amount of items
+        // from the per argument. Set to null instead of undefined so that
+        // the undefined item doesn't get squashed.
+        if (incomingItem === undefined) {
+          newData[i] = null;
+        } else {
+          newData[i] = incomingItem;
+        }
       } else if (Array.isArray(existing) && i < existing.length) {
         newData[i] = existing[i];
       } else {
         newData[i] = null;
       }
     }
+
     return newData;
   },
-} as const;
+};
 
 const mapQueryToCache = (typeName: string): FieldReadFunction => {
   return (existing, { args, toReference }) => {
