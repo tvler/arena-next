@@ -10,6 +10,14 @@ module.exports = {
         light: "#E2ECFF",
         DEFAULT: "#3B5998",
       },
+      purple: {
+        light: "#cfcbd6",
+        DEFAULT: "#4b3d67",
+      },
+      green: {
+        light: "#c1e9bf",
+        DEFAULT: "#17ac10",
+      },
       "cool-black": "#333",
       gray: "#ccc",
     },

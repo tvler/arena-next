@@ -1,6 +1,7 @@
 import {
   ApolloClient,
   createHttpLink,
+  FieldReadFunction,
   InMemoryCache,
   NormalizedCacheObject,
 } from "@apollo/client";
@@ -58,6 +59,23 @@ const paginationPolicy = {
   },
 } as const;
 
+const mapQueryToCache = (typeName: string): FieldReadFunction => {
+  return (existing, { args, toReference }) => {
+    if (existing) {
+      return existing;
+    }
+
+    if (args?.id === undefined) {
+      return undefined;
+    }
+
+    return toReference({
+      __typename: typeName,
+      id: args.id,
+    });
+  };
+};
+
 function createApolloClient(): ApolloClient<NormalizedCacheObject> {
   return new ApolloClient({
     connectToDevTools: true,
@@ -72,20 +90,8 @@ function createApolloClient(): ApolloClient<NormalizedCacheObject> {
       typePolicies: {
         Query: {
           fields: {
-            user(existing, { args, toReference }) {
-              if (existing) {
-                return existing;
-              }
-
-              if (args?.id === undefined) {
-                return undefined;
-              }
-
-              return toReference({
-                __typename: "User",
-                id: args.id,
-              });
-            },
+            user: mapQueryToCache("User"),
+            channel: mapQueryToCache("Channel"),
           },
         },
         User: {
