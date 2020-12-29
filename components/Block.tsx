@@ -16,6 +16,7 @@ import channelBlock from "../graphql/queries/channelBlock";
 export enum BlockVariant {
   user,
   chanel,
+  group,
 }
 
 /*
@@ -121,8 +122,8 @@ const ChannelBlockVariant: React.FC<{ id: number }> = memo(({ id }) => {
       <div className="flex-1"></div>
 
       <div className="flex flex-col items-center justify-center text-center pl-4 pr-4">
-        <span>{channel.title}</span>
-        <span className="text-xs mt-0.5">by {channel.owner?.name}</span>
+        <span className="leading-5">{channel.title}</span>
+        <span className="text-xs mt-1">by {channel.owner?.name}</span>
         <span className="text-xs mt-0.5">
           {channel.counts?.contents ?? 0}{" "}
           {channel.counts?.contents === 1 ? "block" : "blocks"}
@@ -138,12 +139,26 @@ const ChannelBlockVariant: React.FC<{ id: number }> = memo(({ id }) => {
 });
 
 /*
+ * Variant: Group
+ */
+
+const GroupBlock: React.FC = memo(() => {
+  return (
+    <div className="rounded-sm border border-gray bg-white flex items-center justify-center flex-1">
+      <span className="transform -rotate-45">
+        Groups not implemented yet!!!
+      </span>
+    </div>
+  );
+});
+
+/*
  * Variant: Null
  */
 
-const NullBlock: React.FC = () => {
+const NullBlock: React.FC = memo(() => {
   return <div className="flex-1 rounded-sm border border-gray bg-white"></div>;
-};
+});
 
 /*
  * The final block component
@@ -158,7 +173,9 @@ const Block = forwardRef<HTMLDivElement, BlockProps>((props, ref) => {
     case BlockVariant.chanel:
       variantContent = <ChannelBlockVariant id={props.id} />;
       break;
-    case undefined:
+    case BlockVariant.group:
+      variantContent = <GroupBlock />;
+      break;
     default:
       variantContent = <NullBlock />;
       break;
@@ -170,6 +187,5 @@ const Block = forwardRef<HTMLDivElement, BlockProps>((props, ref) => {
     </div>
   );
 });
-Block.displayName = "Block";
 
 export default memo(Block);

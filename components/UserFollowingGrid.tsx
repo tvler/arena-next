@@ -112,6 +112,12 @@ const UserFollowingGrid: React.FC<{ id: string }> = ({ id }) => {
                 variant: BlockVariant.chanel,
               };
               break;
+            case "Group":
+              blockProps = {
+                id: followingItem.id,
+                variant: BlockVariant.group,
+              };
+              break;
           }
         }
 
