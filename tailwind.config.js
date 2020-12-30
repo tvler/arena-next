@@ -19,7 +19,10 @@ module.exports = {
         DEFAULT: "#17ac10",
       },
       "cool-black": "#333",
-      gray: "#ccc",
+      gray: {
+        light: "#efefef",
+        DEFAULT: "#ccc",
+      },
     },
     fontFamily: {
       sans: "Helvetica, Arial, sans-serif",

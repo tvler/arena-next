@@ -53,12 +53,12 @@ const UserBlock: React.FC<{ id: number }> = memo(({ id }) => {
 
   return (
     <Link href={`/user/${user.slug}`}>
-      <a className="flex-1 flex flex-col items-center no-underline rounded-sm border border-gray bg-white">
+      <a className="flex-1 flex flex-col items-center no-underline">
         <div className="flex-1 flex items-center text-center">
           <span>{user.name}</span>
         </div>
 
-        <div className="h-1/2 w-1/2 relative flex flex-col items-center justify-center">
+        <div className="h-1/2 w-1/2 relative flex flex-col items-center justify-center bg-gray-light">
           <span className="text-2xl">{user.initials}</span>
 
           {user.avatar && (
@@ -98,25 +98,21 @@ const ChannelBlockVariant: React.FC<{ id: number }> = memo(({ id }) => {
     return null;
   }
 
-  let channelVariants: string;
+  let channelVariants = "";
   switch (channel?.visibility) {
     case "closed":
-      channelVariants = "text-purple border-purple-light";
+      channelVariants = "text-purple";
       break;
     case "public":
-      channelVariants = "text-green border-green-light";
+      channelVariants = "text-green";
       break;
-    default:
-      channelVariants = "border-gray";
   }
 
   return (
     // <Link href={`/user/${user.slug}`}>
     <a
       className={
-        "flex-1 flex flex-col items-center no-underline rounded-sm border bg-white" +
-        " " +
-        channelVariants
+        "flex-1 flex flex-col items-center no-underline" + " " + channelVariants
       }
     >
       <div className="flex-1"></div>
@@ -144,7 +140,7 @@ const ChannelBlockVariant: React.FC<{ id: number }> = memo(({ id }) => {
 
 const GroupBlock: React.FC = memo(() => {
   return (
-    <div className="rounded-sm border border-gray bg-white flex items-center justify-center flex-1">
+    <div className="flex items-center justify-center flex-1">
       <span className="transform -rotate-45">
         Groups not implemented yet!!!
       </span>
@@ -157,7 +153,7 @@ const GroupBlock: React.FC = memo(() => {
  */
 
 const NullBlock: React.FC = memo(() => {
-  return <div className="flex-1 rounded-sm border border-gray bg-white"></div>;
+  return <div className="flex-1"></div>;
 });
 
 /*
@@ -182,7 +178,10 @@ const Block = forwardRef<HTMLDivElement, BlockProps>((props, ref) => {
   }
 
   return (
-    <div ref={ref} className="flex contain-strict">
+    <div
+      ref={ref}
+      className="flex contain-strict rounded-sm border border-gray bg-white"
+    >
       {variantContent}
     </div>
   );
