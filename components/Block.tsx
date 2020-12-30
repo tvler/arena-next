@@ -119,7 +119,7 @@ const ChannelBlockVariant: React.FC<{ id: number }> = memo(({ id }) => {
 
       <div className="flex flex-col items-center justify-center text-center pl-4 pr-4">
         <span className="leading-5">{channel.title}</span>
-        <span className="text-xs mt-1">by {channel.owner?.name}</span>
+        <span className="text-xs mt-2.5">by {channel.owner?.name}</span>
         <span className="text-xs mt-0.5">
           {channel.counts?.contents ?? 0}{" "}
           {channel.counts?.contents === 1 ? "block" : "blocks"}
