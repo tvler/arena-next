@@ -20,7 +20,8 @@ module.exports = {
       },
       "cool-black": "#333",
       gray: {
-        light: "#efefef",
+        lightest: "#efefef",
+        light: "#828385",
         DEFAULT: "#ccc",
       },
     },

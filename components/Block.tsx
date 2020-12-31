@@ -58,8 +58,8 @@ const UserBlock: React.FC<{ id: number }> = memo(({ id }) => {
           <span>{user.name}</span>
         </div>
 
-        <div className="h-1/2 w-1/2 relative flex flex-col items-center justify-center bg-gray-light">
-          <span className="text-2xl">{user.initials}</span>
+        <div className="h-1/2 w-1/2 relative flex flex-col items-center justify-center bg-gray-lightest">
+          <span className="text-2xl text-gray-light">{user.initials}</span>
 
           {user.avatar && (
             <img
