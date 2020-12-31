@@ -79,7 +79,7 @@ const UserDetails: React.FC<Props> = ({ id }) => {
 
         {!readMore && shouldShowReadMore && (
           <button
-            className="text-left opacity-60"
+            className="text-left text-gray-light"
             title="Read more"
             onClick={() => {
               setReadMore(true);
