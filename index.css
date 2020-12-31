@@ -31,4 +31,8 @@
   .contain-strict {
     contain: strict;
   }
+
+  .break-word {
+    word-break: break-word;
+  }
 }

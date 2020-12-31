@@ -40,32 +40,34 @@ const Header: React.FC<HeaderProps> = ({
         </a>
       </Link>
       {taxonomy ? (
-        taxonomy.map((el) => {
-          const key: string =
-            typeof el === "string" ? el : "key" in el ? el.key : el.display;
-          const display: string | JSX.Element =
-            typeof el === "string" ? el : el.display;
-          const href: string | null =
-            typeof el === "string" ? null : el.href ?? null;
+        <div className="flex flex-row flex-wrap font-serif italic text-xl">
+          {taxonomy.map((el) => {
+            const key: string =
+              typeof el === "string" ? el : "key" in el ? el.key : el.display;
+            const display: string | JSX.Element =
+              typeof el === "string" ? el : el.display;
+            const href: string | null =
+              typeof el === "string" ? null : el.href ?? null;
 
-          if (href === null) {
+            if (href === null) {
+              return (
+                <span key={key}>
+                  {spacer}
+                  {display}
+                </span>
+              );
+            }
+
             return (
-              <span key={key} className="font-serif italic text-xl">
+              <span key={key}>
                 {spacer}
-                {display}
+                <Link href={href}>
+                  <a className="no-underline">{display}</a>
+                </Link>
               </span>
             );
-          }
-
-          return (
-            <span key={key} className="font-serif italic text-xl">
-              {spacer}
-              <Link href={href}>
-                <a className="no-underline">{display}</a>
-              </Link>
-            </span>
-          );
-        })
+          })}
+        </div>
       ) : (
         <span className="font-serif italic text-xl">&nbsp;</span>
       )}
