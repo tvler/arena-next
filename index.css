@@ -35,4 +35,8 @@
   .break-word {
     word-break: break-word;
   }
+
+  .animation-iteration-1 {
+    animation-iteration-count: 1;
+  }
 }

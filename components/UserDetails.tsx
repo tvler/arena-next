@@ -2,14 +2,15 @@ import { useQuery } from "@apollo/client";
 import userSsr from "../graphql/queries/userSsr";
 import Link from "next/link";
 import { UserSsr, UserSsrVariables } from "../graphql/gen/UserSsr";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import cx from "classnames";
 
 type Props = {
   id: string;
 };
 
 const lineHeight = 1.8;
-const numberOfLines = 3;
+const numberOfLines = 2;
 
 const UserDetails: React.FC<Props> = ({ id }) => {
   const bigRef = useRef<HTMLDivElement>(null);
@@ -17,7 +18,7 @@ const UserDetails: React.FC<Props> = ({ id }) => {
   const [shouldShowReadMore, setShouldShowReadMore] = useState(false);
   const [readMore, setReadMore] = useState(false);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (bigRef.current && smallRef.current) {
       const smallHeight = smallRef.current.getBoundingClientRect().height;
       const bigHeight = bigRef.current.getBoundingClientRect().height;
@@ -65,45 +66,35 @@ const UserDetails: React.FC<Props> = ({ id }) => {
         blocks
       </span>
 
-      {/* Render the expanded description not visible outside of the flow */}
-      <div
-        ref={bigRef}
-        dangerouslySetInnerHTML={{ __html: user.bio || "" }}
-        className="absolute pointer-events-none opacity-0"
-      />
-
-      {/* Render the minified description not visible outside of the flow */}
       <div
         ref={smallRef}
-        style={{ maxHeight: `${lineHeight * numberOfLines}em` }}
-        dangerouslySetInnerHTML={{ __html: user.bio || "" }}
-        className="absolute pointer-events-none opacity-0 overflow-hidden"
-      />
-
-      {/* The actually rendered description */}
-      <div
         style={
-          !readMore && shouldShowReadMore
-            ? { maxHeight: `${lineHeight * (numberOfLines - 1)}em` }
+          !readMore
+            ? { maxHeight: `${lineHeight * numberOfLines}em` }
             : undefined
         }
-        dangerouslySetInnerHTML={{ __html: user.bio || "" }}
         className="overflow-hidden"
-      />
+      >
+        <div
+          ref={bigRef}
+          dangerouslySetInnerHTML={{ __html: user.bio || "" }}
+        />
+      </div>
 
-      {!readMore && shouldShowReadMore && (
-        <button
-          className="text-left text-gray-light"
-          title="Read more"
-          onClick={() => {
-            setReadMore(true);
-          }}
-        >
-          …
-        </button>
-      )}
+      <button
+        className={cx(
+          "text-left text-gray-light animate-ellipses-loader animation-iteration-1",
+          !readMore && shouldShowReadMore ? "visible" : "invisible"
+        )}
+        title="Read more"
+        onClick={() => {
+          setReadMore(true);
+        }}
+      >
+        <span className="transform rotate-180 inline-block">…</span>
+      </button>
 
-      <button className="pl-3 pr-3 pt-1 pb-1 rounded-md text-blue bg-blue-light text-base mt-5">
+      <button className="pl-3 pr-3 pt-1 pb-1 rounded-md text-blue bg-blue-light text-base">
         Follow
       </button>
     </div>
