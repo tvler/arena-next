@@ -20,8 +20,12 @@ const UserDetails: React.FC<Props> = ({ id }) => {
 
   useEffect(() => {
     if (bigRef.current && smallRef.current) {
-      const smallHeight = smallRef.current.getBoundingClientRect().height;
-      const bigHeight = bigRef.current.getBoundingClientRect().height;
+      const smallHeight = Math.round(
+        smallRef.current.getBoundingClientRect().height
+      );
+      const bigHeight = Math.round(
+        bigRef.current.getBoundingClientRect().height
+      );
 
       if (bigHeight > smallHeight) {
         setShouldShowReadMore(true);
