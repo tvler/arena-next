@@ -1,22 +1,21 @@
 import { useQuery } from "@apollo/client";
-import { useRouter } from "next/router";
 import { UserSsr, UserSsrVariables } from "../graphql/gen/UserSsr";
 import userSsr from "../graphql/queries/userSsr";
 import Header from "./Header";
 import UserDetails from "./UserDetails";
 
-const UserPage: React.FC = () => {
+type Props = {
+  slug: string;
+};
+
+const UserPage: React.FC<Props> = ({ slug }) => {
   /*
    * Queries
    */
 
-  const router = useRouter();
-  const nonStringId = router.query.id;
-  const id: string = typeof nonStringId === "string" ? nonStringId : "";
-
   const serversideQuery = useQuery<UserSsr, UserSsrVariables>(userSsr, {
     ssr: true,
-    variables: { id },
+    variables: { id: slug },
   });
 
   /*
@@ -47,9 +46,7 @@ const UserPage: React.FC = () => {
     <div className="flex flex-col pb-4">
       <Header taxonomy={[user.name ?? "user"]} />
 
-      <UserDetails id={id} />
-
-      {/* {JSON.stringify(user)} */}
+      <UserDetails id={slug} />
     </div>
   );
 };

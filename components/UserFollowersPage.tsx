@@ -1,23 +1,22 @@
 import { useQuery } from "@apollo/client";
-import { useRouter } from "next/router";
 import { UserSsr, UserSsrVariables } from "../graphql/gen/UserSsr";
 import userSsr from "../graphql/queries/userSsr";
 import Header from "./Header";
 import UserDetails from "./UserDetails";
 import UserFollowersGrid from "./UserFollowersGrid";
 
-const UserFollowersPage: React.FC = () => {
+type Props = {
+  slug: string;
+};
+
+const UserFollowersPage: React.FC<Props> = ({ slug }) => {
   /*
    * Queries
    */
 
-  const router = useRouter();
-  const nonStringId = router.query.id;
-  const id: string = typeof nonStringId === "string" ? nonStringId : "";
-
   const serversideQuery = useQuery<UserSsr, UserSsrVariables>(userSsr, {
     ssr: true,
-    variables: { id },
+    variables: { id: slug },
   });
 
   /*
@@ -48,14 +47,14 @@ const UserFollowersPage: React.FC = () => {
     <div className="flex flex-col pb-4">
       <Header
         taxonomy={[
-          { display: user.name ?? "User", href: `/user/${id}` },
+          { display: user.name ?? "User", href: `/user/${slug}` },
           "Followers",
         ]}
       />
 
-      <UserDetails id={id} />
+      <UserDetails id={slug} />
 
-      <UserFollowersGrid id={id} />
+      <UserFollowersGrid id={slug} />
     </div>
   );
 };
