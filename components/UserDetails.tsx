@@ -8,7 +8,7 @@ type Props = {
   id: string;
 };
 
-const lineHeight = 1.625;
+const lineHeight = 1.8;
 const numberOfLines = 3;
 
 const UserDetails: React.FC<Props> = ({ id }) => {
@@ -42,71 +42,70 @@ const UserDetails: React.FC<Props> = ({ id }) => {
   const shouldShowFollowers = !!user.counts?.followers;
 
   return (
-    <div className="flex flex-row space-x-3 items-start pl-4 pr-4">
-      <button className="pl-2.5 pr-2.5 pt-1 pb-1 rounded-md text-blue bg-blue-light">
-        Follow
-      </button>
-
-      <div
-        className="flex flex-col text-sm -mt-0.5 max-w-md break-word relative"
-        style={{ lineHeight }}
-      >
-        {/* Render the expanded description not visible outside of the flow */}
-        <div
-          ref={bigRef}
-          dangerouslySetInnerHTML={{ __html: user.bio || "" }}
-          className="absolute pointer-events-none opacity-0"
-        />
-
-        {/* Render the minified description not visible outside of the flow */}
-        <div
-          ref={smallRef}
-          style={{ maxHeight: `${lineHeight * numberOfLines}em` }}
-          dangerouslySetInnerHTML={{ __html: user.bio || "" }}
-          className="absolute pointer-events-none opacity-0 overflow-hidden"
-        />
-
-        {/* The actually rendered description */}
-        <div
-          style={
-            !readMore && shouldShowReadMore
-              ? { maxHeight: `${lineHeight * (numberOfLines - 1)}em` }
-              : undefined
-          }
-          dangerouslySetInnerHTML={{ __html: user.bio || "" }}
-          className="overflow-hidden"
-        />
-
-        {!readMore && shouldShowReadMore && (
-          <button
-            className="text-left text-gray-light"
-            title="Read more"
-            onClick={() => {
-              setReadMore(true);
-            }}
-          >
-            …
-          </button>
+    <div
+      style={{ lineHeight }}
+      className="flex pl-4 pr-4 text-sm mt-0 flex-col max-w-md break-word relative items-start"
+    >
+      <div className="flex flex-row space-x-3">
+        {shouldShowFollowers && (
+          <Link href={`/user/${id}/followers`}>
+            <a>Followers</a>
+          </Link>
         )}
 
-        <span>
-          {user.counts?.channels ?? "0"} channels, {user.counts?.blocks ?? "0"}{" "}
-          blocks
-        </span>
-        <div className="flex flex-row space-x-3">
-          {shouldShowFollowers && (
-            <Link href={`/user/${id}/followers`}>
-              <a>Followers</a>
-            </Link>
-          )}
-
-          {shouldShowFollowing && (
-            <Link href={`/user/${id}/following`}>
-              <a>Following</a>
-            </Link>
-          )}
-        </div>
+        {shouldShowFollowing && (
+          <Link href={`/user/${id}/following`}>
+            <a>Following</a>
+          </Link>
+        )}
       </div>
+
+      <span>
+        {user.counts?.channels ?? "0"} channels, {user.counts?.blocks ?? "0"}{" "}
+        blocks
+      </span>
+
+      {/* Render the expanded description not visible outside of the flow */}
+      <div
+        ref={bigRef}
+        dangerouslySetInnerHTML={{ __html: user.bio || "" }}
+        className="absolute pointer-events-none opacity-0"
+      />
+
+      {/* Render the minified description not visible outside of the flow */}
+      <div
+        ref={smallRef}
+        style={{ maxHeight: `${lineHeight * numberOfLines}em` }}
+        dangerouslySetInnerHTML={{ __html: user.bio || "" }}
+        className="absolute pointer-events-none opacity-0 overflow-hidden"
+      />
+
+      {/* The actually rendered description */}
+      <div
+        style={
+          !readMore && shouldShowReadMore
+            ? { maxHeight: `${lineHeight * (numberOfLines - 1)}em` }
+            : undefined
+        }
+        dangerouslySetInnerHTML={{ __html: user.bio || "" }}
+        className="overflow-hidden"
+      />
+
+      {!readMore && shouldShowReadMore && (
+        <button
+          className="text-left text-gray-light"
+          title="Read more"
+          onClick={() => {
+            setReadMore(true);
+          }}
+        >
+          …
+        </button>
+      )}
+
+      <button className="pl-3 pr-3 pt-1 pb-1 rounded-md text-blue bg-blue-light text-base mt-5">
+        Follow
+      </button>
     </div>
   );
 };

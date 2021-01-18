@@ -180,7 +180,7 @@ const Block = forwardRef<HTMLDivElement, BlockProps>((props, ref) => {
   return (
     <div
       ref={ref}
-      className="flex contain-strict rounded-sm border border-gray bg-white"
+      className="flex contain-strict rounded-sm border-gray bg-white border"
     >
       {variantContent}
     </div>

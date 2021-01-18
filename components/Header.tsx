@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import Logo from "./icons/logo.svg";
 import Link from "next/link";
 
@@ -51,20 +52,20 @@ const Header: React.FC<HeaderProps> = ({
 
             if (href === null) {
               return (
-                <span key={key}>
+                <Fragment key={key}>
                   {spacer}
                   {display}
-                </span>
+                </Fragment>
               );
             }
 
             return (
-              <span key={key}>
+              <Fragment key={key}>
                 {spacer}
                 <Link href={href}>
                   <a className="no-underline">{display}</a>
                 </Link>
-              </span>
+              </Fragment>
             );
           })}
         </div>

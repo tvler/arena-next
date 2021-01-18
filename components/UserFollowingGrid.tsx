@@ -93,7 +93,7 @@ const UserFollowingGrid: React.FC<{ id: string }> = ({ id }) => {
   }
 
   return (
-    <div className="mt-6 pl-4 pr-4 grid grid-cols-auto-fit-block auto-rows-block gap-4">
+    <div className="mt-8 pl-4 pr-4 grid grid-cols-auto-fit-block auto-rows-block gap-4">
       {Array.from({ length: followingCount }, (_, i) => {
         const followingItem = following && following[i];
         let blockProps: BlockProps = {};
