@@ -1,13 +1,16 @@
 import Link from "next/link";
 import { forwardRef, memo } from "react";
 import { useQuery } from "@apollo/client";
-import { UserCard, UserCardVariables } from "../graphql/gen/UserCard";
-import userCard from "../graphql/queries/userCard";
 import {
-  ChannelBlock,
-  ChannelBlockVariables,
-} from "../graphql/gen/ChannelBlock";
-import channelBlock from "../graphql/queries/channelBlock";
+  UserCardQuery,
+  UserCardQueryVariables,
+} from "../graphql/gen/UserCardQuery";
+import { userCardQueryNode } from "../graphql/queries/userCard";
+import {
+  ChannelBlockQuery,
+  ChannelBlockQueryVariables,
+} from "../graphql/gen/ChannelBlockQuery";
+import { channelBlockQueryNode } from "../graphql/queries/channelBlock";
 
 /*
  * Types of blocks that can be rendered
@@ -38,13 +41,16 @@ export type BlockProps =
  */
 
 const UserBlock: React.FC<{ id: number }> = memo(({ id }) => {
-  const userCardQuery = useQuery<UserCard, UserCardVariables>(userCard, {
-    variables: {
-      id: `${id}`,
-    },
-    ssr: false,
-    fetchPolicy: "cache-only",
-  });
+  const userCardQuery = useQuery<UserCardQuery, UserCardQueryVariables>(
+    userCardQueryNode,
+    {
+      variables: {
+        id: `${id}`,
+      },
+      ssr: false,
+      fetchPolicy: "cache-only",
+    }
+  );
 
   const user = userCardQuery.data?.user;
   if (!(user && user.slug)) {
@@ -82,16 +88,16 @@ const UserBlock: React.FC<{ id: number }> = memo(({ id }) => {
  */
 
 const ChannelBlockVariant: React.FC<{ id: number }> = memo(({ id }) => {
-  const channelBlockQuery = useQuery<ChannelBlock, ChannelBlockVariables>(
-    channelBlock,
-    {
-      variables: {
-        id: `${id}`,
-      },
-      ssr: false,
-      fetchPolicy: "cache-only",
-    }
-  );
+  const channelBlockQuery = useQuery<
+    ChannelBlockQuery,
+    ChannelBlockQueryVariables
+  >(channelBlockQueryNode, {
+    variables: {
+      id: `${id}`,
+    },
+    ssr: false,
+    fetchPolicy: "cache-only",
+  });
 
   const channel = channelBlockQuery.data?.channel;
   if (!(channel && channel.slug)) {

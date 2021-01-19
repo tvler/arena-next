@@ -1,15 +1,18 @@
 import { useApolloClient, useQuery } from "@apollo/client";
 import { useCallback, useEffect, useRef } from "react";
 import IntersectionObserverBox from "./IntersectionObserverBox";
-import { UserSsr, UserSsrVariables } from "../graphql/gen/UserSsr";
-import userSsr from "../graphql/queries/userSsr";
+import {
+  UserSsrQuery,
+  UserSsrQueryVariables,
+} from "../graphql/gen/UserSsrQuery";
+import { userSsrQueryNode } from "../graphql/queries/userSsr";
 import Block, { BlockProps, BlockVariant } from "./Block";
 import {
-  UserFollowing,
-  UserFollowingVariables,
-  UserFollowing_identity_identifiable_User,
-} from "../graphql/gen/UserFollowing";
-import userFollowing from "../graphql/queries/userFollowing";
+  UserFollowingQuery,
+  UserFollowingQueryVariables,
+  UserFollowingQuery_identity_identifiable_User,
+} from "../graphql/gen/UserFollowingQuery";
+import { userFollowingQueryNode } from "../graphql/queries/userFollowing";
 
 const pageCount = 12;
 
@@ -20,23 +23,26 @@ const getPageNumberFromCellIndex = (cellIndex: number): number => {
 const UserFollowingGrid: React.FC<{ id: string }> = ({ id }) => {
   const queriedPagesRef = useRef<Set<number>>(new Set());
 
-  const serversideQuery = useQuery<UserSsr, UserSsrVariables>(userSsr, {
-    ssr: true,
-    variables: { id },
-  });
-  const user = serversideQuery.data?.identity?.identifiable;
-
-  const { fetchMore, data } = useQuery<UserFollowing, UserFollowingVariables>(
-    userFollowing,
+  const serversideQuery = useQuery<UserSsrQuery, UserSsrQueryVariables>(
+    userSsrQueryNode,
     {
-      ssr: false,
-      variables: {
-        id,
-        page: 1,
-        per: pageCount,
-      },
+      ssr: true,
+      variables: { id },
     }
   );
+  const user = serversideQuery.data?.identity?.identifiable;
+
+  const { fetchMore, data } = useQuery<
+    UserFollowingQuery,
+    UserFollowingQueryVariables
+  >(userFollowingQueryNode, {
+    ssr: false,
+    variables: {
+      id,
+      page: 1,
+      per: pageCount,
+    },
+  });
 
   const intersectionObserverCallback = useCallback<
     (cellID: number) => (entries: IntersectionObserverEntry[]) => void
@@ -87,7 +93,7 @@ const UserFollowingGrid: React.FC<{ id: string }> = ({ id }) => {
   }
 
   const followingCount: number = user.counts?.following ?? 0;
-  let following: UserFollowing_identity_identifiable_User["following"] = null;
+  let following: UserFollowingQuery_identity_identifiable_User["following"] = null;
   if (data?.identity?.identifiable.__typename === "User") {
     following = data?.identity?.identifiable.following;
   }

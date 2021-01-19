@@ -1,33 +1,33 @@
+
+
 /* tslint:disable */
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: ChannelBlock
+// GraphQL query operation: ChannelBlockQuery
 // ====================================================
 
-export interface ChannelBlock_channel_counts {
+export interface ChannelBlockQuery_channel_counts {
   __typename: "ChannelCounts";
   contents: number | null;
 }
 
-export interface ChannelBlock_channel_owner_Group {
+export interface ChannelBlockQuery_channel_owner_Group {
   __typename: "Group";
   id: number | null;
   name: string | null;
   visibility: string | null;
 }
 
-export interface ChannelBlock_channel_owner_User {
+export interface ChannelBlockQuery_channel_owner_User {
   __typename: "User";
   id: number | null;
   name: string | null;
 }
 
-export type ChannelBlock_channel_owner =
-  | ChannelBlock_channel_owner_Group
-  | ChannelBlock_channel_owner_User;
+export type ChannelBlockQuery_channel_owner = ChannelBlockQuery_channel_owner_Group | ChannelBlockQuery_channel_owner_User;
 
-export interface ChannelBlock_channel {
+export interface ChannelBlockQuery_channel {
   __typename: "Channel";
   id: number | null;
   title: string | null;
@@ -35,15 +35,15 @@ export interface ChannelBlock_channel {
   updated_at: string | null;
   slug: string | null;
   visibility: string | null;
-  counts: ChannelBlock_channel_counts | null;
-  owner: ChannelBlock_channel_owner | null;
+  counts: ChannelBlockQuery_channel_counts | null;
+  owner: ChannelBlockQuery_channel_owner | null;
 }
 
-export interface ChannelBlock {
-  channel: ChannelBlock_channel | null; // A single channel
+export interface ChannelBlockQuery {
+  channel: ChannelBlockQuery_channel | null;  // A single channel
 }
 
-export interface ChannelBlockVariables {
+export interface ChannelBlockQueryVariables {
   id: string;
 }
 

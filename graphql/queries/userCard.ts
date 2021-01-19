@@ -1,13 +1,11 @@
 import { gql } from "@apollo/client";
-import userCardFragment from "../fragments/UserCardFragment";
+import { userCardFragmentNode } from "../fragments/UserCardFragment";
 
-const userCard = gql`
-  query UserCard($id: ID!) {
+export const userCardQueryNode = gql`
+  query UserCardQuery($id: ID!) {
     user(id: $id) {
       ...UserCardFragment
     }
   }
-  ${userCardFragment}
+  ${userCardFragmentNode}
 `;
-
-export default userCard;

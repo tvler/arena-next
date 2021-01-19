@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
-import userCardFragment from "../fragments/UserCardFragment";
+import { userCardFragmentNode } from "../fragments/UserCardFragment";
 
-const userFollowers = gql`
-  query UserFollowers($id: ID!, $page: Int!, $per: Int!) {
+export const userFollowersQueryNode = gql`
+  query UserFollowersQuery($id: ID!, $page: Int!, $per: Int!) {
     identity(id: $id) {
       identifiable {
         ... on User {
@@ -14,7 +14,5 @@ const userFollowers = gql`
       }
     }
   }
-  ${userCardFragment}
+  ${userCardFragmentNode}
 `;
-
-export default userFollowers;

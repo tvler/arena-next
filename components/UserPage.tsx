@@ -1,6 +1,9 @@
 import { useQuery } from "@apollo/client";
-import { UserSsr, UserSsrVariables } from "../graphql/gen/UserSsr";
-import userSsr from "../graphql/queries/userSsr";
+import {
+  UserSsrQuery,
+  UserSsrQueryVariables,
+} from "../graphql/gen/UserSsrQuery";
+import { userSsrQueryNode } from "../graphql/queries/userSsr";
 import Header from "./Header";
 import UserDetails from "./UserDetails";
 
@@ -13,10 +16,13 @@ const UserPage: React.FC<Props> = ({ slug }) => {
    * Queries
    */
 
-  const serversideQuery = useQuery<UserSsr, UserSsrVariables>(userSsr, {
-    ssr: true,
-    variables: { id: slug },
-  });
+  const serversideQuery = useQuery<UserSsrQuery, UserSsrQueryVariables>(
+    userSsrQueryNode,
+    {
+      ssr: true,
+      variables: { id: slug },
+    }
+  );
 
   /*
    * Early exits

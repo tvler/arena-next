@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const groupBlockFragment = gql`
+export const groupBlockFragmentNode = gql`
   fragment GroupBlockFragment on Group {
     id
     name
@@ -8,5 +8,3 @@ export const groupBlockFragment = gql`
     visibility
   }
 `;
-
-export default groupBlockFragment;

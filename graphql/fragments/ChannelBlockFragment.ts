@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const channelBlockFragment = gql`
+export const channelBlockFragmentNode = gql`
   fragment ChannelBlockFragment on Channel {
     id
     title(truncate: 80)
@@ -24,5 +24,3 @@ export const channelBlockFragment = gql`
     }
   }
 `;
-
-export default channelBlockFragment;

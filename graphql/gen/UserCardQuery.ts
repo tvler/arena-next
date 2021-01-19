@@ -4,10 +4,10 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: UserCard
+// GraphQL query operation: UserCardQuery
 // ====================================================
 
-export interface UserCard_user {
+export interface UserCardQuery_user {
   __typename: "User";
   id: number | null;
   name: string | null;
@@ -16,11 +16,11 @@ export interface UserCard_user {
   avatar: string | null;
 }
 
-export interface UserCard {
-  user: UserCard_user | null;  // A single user
+export interface UserCardQuery {
+  user: UserCardQuery_user | null;  // A single user
 }
 
-export interface UserCardVariables {
+export interface UserCardQueryVariables {
   id: string;
 }
 

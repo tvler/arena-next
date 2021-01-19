@@ -1,7 +1,7 @@
 import { gql } from "@apollo/client";
 
-const userSsr = gql`
-  query UserSsr($id: ID!) {
+export const userSsrQueryNode = gql`
+  query UserSsrQuery($id: ID!) {
     identity(id: $id) {
       identifiable {
         ... on User {
@@ -40,5 +40,3 @@ const userSsr = gql`
     }
   }
 `;
-
-export default userSsr;

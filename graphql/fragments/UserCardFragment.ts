@@ -1,6 +1,6 @@
 import gql from "graphql-tag";
 
-export const userCardFragment = gql`
+export const userCardFragmentNode = gql`
   fragment UserCardFragment on User {
     id
     name
@@ -9,5 +9,3 @@ export const userCardFragment = gql`
     avatar(size: LARGE)
   }
 `;
-
-export default userCardFragment;

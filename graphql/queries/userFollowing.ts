@@ -1,10 +1,10 @@
 import { gql } from "@apollo/client";
-import userCardFragment from "../fragments/UserCardFragment";
-import channelBlockFragment from "../fragments/ChannelBlockFragment";
-import groupBlockFragment from "../fragments/GroupBlockFragment";
+import { userCardFragmentNode } from "../fragments/UserCardFragment";
+import { channelBlockFragmentNode } from "../fragments/ChannelBlockFragment";
+import { groupBlockFragmentNode } from "../fragments/GroupBlockFragment";
 
-const userFollowing = gql`
-  query UserFollowing($id: ID!, $page: Int!, $per: Int!) {
+export const userFollowingQueryNode = gql`
+  query UserFollowingQuery($id: ID!, $page: Int!, $per: Int!) {
     identity(id: $id) {
       identifiable {
         ... on User {
@@ -24,9 +24,7 @@ const userFollowing = gql`
       }
     }
   }
-  ${userCardFragment},
-  ${channelBlockFragment}
-  ${groupBlockFragment}
+  ${userCardFragmentNode},
+  ${channelBlockFragmentNode}
+  ${groupBlockFragmentNode}
 `;
-
-export default userFollowing;

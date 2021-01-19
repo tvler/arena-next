@@ -1,13 +1,11 @@
 import { gql } from "@apollo/client";
-import channelBlockFragment from "../fragments/ChannelBlockFragment";
+import { channelBlockFragmentNode } from "../fragments/ChannelBlockFragment";
 
-const channelBlock = gql`
-  query ChannelBlock($id: ID!) {
+export const channelBlockQueryNode = gql`
+  query ChannelBlockQuery($id: ID!) {
     channel(id: $id) {
       ...ChannelBlockFragment
     }
   }
-  ${channelBlockFragment}
+  ${channelBlockFragmentNode}
 `;
-
-export default channelBlock;

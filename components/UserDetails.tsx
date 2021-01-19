@@ -1,7 +1,10 @@
 import { useQuery } from "@apollo/client";
-import userSsr from "../graphql/queries/userSsr";
+import { userSsrQueryNode } from "../graphql/queries/userSsr";
 import Link from "next/link";
-import { UserSsr, UserSsrVariables } from "../graphql/gen/UserSsr";
+import {
+  UserSsrQuery,
+  UserSsrQueryVariables,
+} from "../graphql/gen/UserSsrQuery";
 import { useEffect, useRef, useState } from "react";
 import cx from "classnames";
 
@@ -33,10 +36,13 @@ const UserDetails: React.FC<Props> = ({ id }) => {
     }
   }, []);
 
-  const serversideQuery = useQuery<UserSsr, UserSsrVariables>(userSsr, {
-    ssr: true,
-    variables: { id },
-  });
+  const serversideQuery = useQuery<UserSsrQuery, UserSsrQueryVariables>(
+    userSsrQueryNode,
+    {
+      ssr: true,
+      variables: { id },
+    }
+  );
 
   if (serversideQuery.data?.identity?.identifiable?.__typename !== "User") {
     return null;
