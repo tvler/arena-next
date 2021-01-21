@@ -93,7 +93,7 @@ const UserDetails: React.FC<Props> = ({ id }) => {
 
       <button
         className={cx(
-          "text-left text-gray-light animate-ellipses-loader animation-iteration-1",
+          "text-left text-gray-dark animate-ellipses-loader animation-iteration-1",
           !readMore && shouldShowReadMore ? "visible" : "invisible"
         )}
         title="Read more"

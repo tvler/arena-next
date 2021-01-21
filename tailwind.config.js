@@ -11,18 +11,16 @@ module.exports = {
         DEFAULT: "#3B5998",
       },
       purple: {
-        light: "#cfcbd6",
         DEFAULT: "#4b3d67",
       },
       green: {
-        light: "#c1e9bf",
         DEFAULT: "#17ac10",
       },
       "cool-black": "#333",
       gray: {
-        lightest: "#efefef",
-        light: "#828385",
+        light: "#efefef",
         DEFAULT: "#ccc",
+        dark: "#828385",
       },
     },
     fontFamily: {
