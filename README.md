@@ -4,8 +4,12 @@
 
 [arena-next.vercel.app](https://arena-next.vercel.app/)
 
-A new, experimental client for Are.na built with with Next.js, Apollo, and Tailwind. In development.
+A new client for Are.na built with with Next.js, Apollo, and Tailwind. In development.
 
 ## Dev blog
 
 [are.na/tyler-deitz/arena-next-journal](https://www.are.na/tyler-deitz/arena-next-journal)
+
+## Figma
+
+[figma.com/file/D2mcAVoemWmuqk5ohxsvOz/arena-next](https://www.figma.com/file/D2mcAVoemWmuqk5ohxsvOz/arena-next)

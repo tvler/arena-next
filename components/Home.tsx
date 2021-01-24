@@ -15,7 +15,9 @@ const Home: React.FC = () => {
         </Link>
 
         <span className="text-xl mt-7">Meta</span>
+
         <a href="https://github.com/tvler/arena-next">GitHub repo</a>
+
         <div>
           <a href="https://www.are.na/tyler-deitz/arena-next-journal">
             Project updates
@@ -26,6 +28,10 @@ const Home: React.FC = () => {
           </a>
           )
         </div>
+
+        <a href="https://www.figma.com/file/D2mcAVoemWmuqk5ohxsvOz/arena-next">
+          Figma
+        </a>
       </div>
     </div>
   );
