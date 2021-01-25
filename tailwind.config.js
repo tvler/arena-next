@@ -6,21 +6,22 @@ module.exports = {
     colors: {
       white: "#fff",
       blue: {
-        lightest: "#f9fbff",
+        lightest: "#F9FBFF",
         light: "#E2ECFF",
         DEFAULT: "#3B5998",
       },
       purple: {
-        DEFAULT: "#4b3d67",
+        DEFAULT: "#573B8E",
       },
       green: {
-        DEFAULT: "#17ac10",
+        DEFAULT: "#17AC10",
       },
       "cool-black": "#333",
       gray: {
-        light: "#efefef",
-        DEFAULT: "#ccc",
-        dark: "#828385",
+        light: "#EFEFEF",
+        DEFAULT: "#DFDFDF",
+        dark: "#919295",
+        darkest: "#535355",
       },
     },
     fontFamily: {
