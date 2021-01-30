@@ -1,0 +1,251 @@
+query ChannelPage($id: ID!) {
+  channel(id: $id) {
+    ...ChannelMetadata
+    ...ChannelPageMetaTags
+    ...ChannelEmptyMessage
+    ...ChannelContentsFilter
+    __typename
+  }
+}
+
+fragment ChannelMetadata on Channel {
+  ...ChannelBreadcrumb
+  ...ChannelMetadataActions
+  ...ChannelMetadataInfo
+  ...CollaboratorsList
+  ...ChannelMetadataConnections
+  ...ChannelShareButton
+  __typename
+}
+
+fragment ChannelBreadcrumb on Channel {
+  __typename
+  id
+  title
+  truncatedTitle: title(truncate: 35)
+  href
+  visibility
+  owner {
+    __typename
+    ... on User {
+      id
+      name
+      href
+      ...LoadingBreadcrumbUser
+      __typename
+    }
+    ... on Group {
+      id
+      name
+      href
+      ...LoadingBreadcrumbGroup
+      __typename
+    }
+  }
+  counts {
+    collaborators
+    __typename
+  }
+  ...LoadingBreadcrumbChannel
+}
+
+fragment LoadingBreadcrumbUser on User {
+  __typename
+  id
+  label: name
+}
+
+fragment LoadingBreadcrumbGroup on Group {
+  __typename
+  id
+  label: name
+}
+
+fragment ChannelMetadataActions on Channel {
+  __typename
+  id
+  can {
+    follow
+    update
+    destroy
+    mute
+    __typename
+  }
+  ...MuteChannelButton
+}
+
+fragment MuteChannelButton on Channel {
+  __typename
+  id
+  is_muted
+}
+
+fragment ChannelMetadataInfo on Channel {
+  __typename
+  id
+  href
+  visibility
+  info: description(format: HTML)
+  counts {
+    followers
+    __typename
+  }
+  can {
+    share
+    __typename
+  }
+  user {
+    __typename
+    id
+    href
+    name
+  }
+}
+
+fragment CollaboratorsList on Channel {
+  __typename
+  id
+  can {
+    manage_collaborators
+    __typename
+  }
+  collaborators: members {
+    ...CollaboratorLink
+    __typename
+  }
+}
+
+fragment CollaboratorLink on Member {
+  __typename
+  ... on User {
+    id
+    name
+    href
+    __typename
+  }
+  ... on Group {
+    id
+    name
+    href
+    description(format: MARKDOWN)
+    user {
+      id
+      name
+      href
+      __typename
+    }
+    users {
+      id
+      name
+      href
+      __typename
+    }
+    can {
+      manage
+      manage_users
+      __typename
+    }
+    visibility
+    __typename
+  }
+  ...LoadingBreadcrumbGroup
+  ...LoadingBreadcrumbUser
+}
+
+fragment ChannelMetadataConnections on Channel {
+  __typename
+  id
+  can {
+    connect
+    __typename
+  }
+  connected_to_channels {
+    __typename
+    id
+    label: title
+    href
+    ...LoadingBreadcrumbChannel
+  }
+}
+
+fragment LoadingBreadcrumbChannel on Channel {
+  __typename
+  id
+  label: title
+  owner {
+    ... on User {
+      __typename
+      id
+      name
+    }
+    ... on Group {
+      __typename
+      id
+      name
+    }
+    __typename
+  }
+}
+
+fragment ChannelShareButton on Channel {
+  __typename
+  id
+  visibility
+  share {
+    url
+    twitter_url
+    facebook_url
+    __typename
+  }
+}
+
+fragment ChannelPageMetaTags on Channel {
+  __typename
+  id
+  meta_title: title
+  meta_description: description(format: MARKDOWN)
+  canonical: href(absolute: true)
+  is_nsfw
+  image_url(size: DISPLAY)
+}
+
+fragment ChannelEmptyMessage on Channel {
+  __typename
+  id
+  counts {
+    contents
+    __typename
+  }
+  can {
+    add_to
+    add_to_as_premium
+    __typename
+  }
+  owner {
+    __typename
+    ... on User {
+      id
+      name
+      href
+      __typename
+    }
+    ... on Group {
+      id
+      name
+      href
+      __typename
+    }
+  }
+}
+
+fragment ChannelContentsFilter on Channel {
+  __typename
+  id
+  title
+  counts {
+    contents
+    blocks
+    channels
+    __typename
+  }
+}

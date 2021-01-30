@@ -1,0 +1,182 @@
+query ChannelPage($id: ID!) {
+  channel(id: $id) {
+    id
+    meta_title: title
+    meta_description: description(format: MARKDOWN)
+    canonical: href(absolute: true)
+    is_nsfw
+    image_url(size: DISPLAY)
+    title
+    visibility
+    counts {
+      contents
+      blocks
+      channels
+    }
+    can {
+      add_to
+      add_to_as_premium
+    }
+    owner {
+      ... on User {
+        id
+        name
+        href
+      }
+      ... on Group {
+        id
+        name
+        href
+      }
+    }
+    
+    ...ChannelMetadata
+  }
+}
+
+fragment ChannelMetadata on Channel {
+  ...ChannelBreadcrumb
+  ...ChannelMetadataActions
+  ...ChannelMetadataInfo
+  ...CollaboratorsList
+  ...ChannelMetadataConnections
+}
+
+fragment ChannelBreadcrumb on Channel {
+  id
+  title
+  truncatedTitle: title(truncate: 35)
+  href
+  visibility
+  owner {
+    ... on User {
+      id
+      name
+      href
+      ...LoadingBreadcrumbUser
+    }
+    ... on Group {
+      id
+      name
+      href
+      ...LoadingBreadcrumbGroup
+    }
+  }
+  counts {
+    collaborators
+  }
+  ...LoadingBreadcrumbChannel
+}
+
+fragment LoadingBreadcrumbUser on User {
+  id
+  label: name
+}
+
+fragment LoadingBreadcrumbGroup on Group {
+  id
+  label: name
+}
+
+fragment ChannelMetadataActions on Channel {
+  id
+  can {
+    follow
+    update
+    destroy
+    mute
+  }
+  ...MuteChannelButton
+}
+
+fragment MuteChannelButton on Channel {
+  id
+  is_muted
+}
+
+fragment ChannelMetadataInfo on Channel {
+  id
+  href
+  visibility
+  info: description(format: HTML)
+  counts {
+    followers
+  }
+  can {
+    share
+  }
+  user {
+    id
+    href
+    name
+  }
+}
+
+fragment CollaboratorsList on Channel {
+  id
+  can {
+    manage_collaborators
+  }
+  collaborators: members {
+    ...CollaboratorLink
+  }
+}
+
+fragment CollaboratorLink on Member {
+  ... on User {
+    id
+    name
+    href
+  }
+  ... on Group {
+    id
+    name
+    href
+    description(format: MARKDOWN)
+    user {
+      id
+      name
+      href
+    }
+    users {
+      id
+      name
+      href
+    }
+    can {
+      manage
+      manage_users
+    }
+    visibility
+  }
+  ...LoadingBreadcrumbGroup
+  ...LoadingBreadcrumbUser
+}
+
+fragment ChannelMetadataConnections on Channel {
+  id
+  can {
+    connect
+  }
+  connected_to_channels {
+    id
+    label: title
+    href
+    ...LoadingBreadcrumbChannel
+  }
+}
+
+fragment LoadingBreadcrumbChannel on Channel {
+  id
+  label: title
+  owner {
+    ... on User {
+      id
+      name
+    }
+    ... on Group {
+      id
+      name
+    }
+  }
+}

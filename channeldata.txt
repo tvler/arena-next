@@ -1,0 +1,323 @@
+query ChannelContentsWithData($id: ID!) {
+  channel(id: $id) {
+    __typename
+    id
+    ...ChannelContents
+  }
+}
+
+fragment ChannelContents on Channel {
+  __typename
+  id
+  skeleton {
+    id
+    type
+    __typename
+  }
+  can {
+    add_to
+    reorder_connections: update
+    __typename
+  }
+  initial_contents: blokks(page: 1, per: 10, sort_by: POSITION, direction: DESC) {
+    __typename
+    ...ChannelContentsConnectable
+  }
+  ...AddBlock
+  ...ConnectableContextMenuChannel
+}
+
+fragment AddBlock on Channel {
+  can {
+    add_to
+    add_to_as_premium
+    __typename
+  }
+  visibility
+  __typename
+}
+
+fragment ConnectableContextMenuChannel on Channel {
+  __typename
+  id
+  can {
+    remove_connections: update
+    reorder_connections: update
+    __typename
+  }
+}
+
+fragment ChannelContentsConnectable on Konnectable {
+  ...KonnectableCell
+  ...ConnectableContextMenuConnectable
+  __typename
+}
+
+fragment KonnectableCell on Konnectable {
+  __typename
+  ... on Model {
+    id
+    __typename
+  }
+  ... on ConnectableInterface {
+    href
+    __typename
+  }
+  ... on Block {
+    counts {
+      comments
+      __typename
+    }
+    __typename
+  }
+  ...KonnectableDisplay
+  ...KonnectableMetadata
+  ...KonnectableBlockOverlay
+  ...LoadingBreadcrumbChannel
+}
+
+fragment KonnectableDisplay on Konnectable {
+  __typename
+  ... on Model {
+    id
+    __typename
+  }
+  ...KonnectableChannel
+  ...KonnectableText
+  ...KonnectableImage
+  ...KonnectableLink
+  ...KonnectableEmbed
+  ...KonnectableAttachment
+  ...KonnectableMetadata
+}
+
+fragment KonnectableChannel on Channel {
+  id
+  href
+  truncatedTitle: title(truncate: 80)
+  visibility
+  updated_at(relative: true)
+  counts {
+    __typename
+    contents
+  }
+  owner {
+    __typename
+    ... on Group {
+      id
+      name
+      visibility
+      __typename
+    }
+    ... on User {
+      id
+      name
+      __typename
+    }
+  }
+  ...KonnectableChannelOverlay
+  ...LoadingBreadcrumbChannel
+  __typename
+}
+
+fragment KonnectableChannelOverlay on Channel {
+  id
+  visibility
+  counts {
+    __typename
+    contents
+  }
+  __typename
+}
+
+fragment LoadingBreadcrumbChannel on Channel {
+  __typename
+  id
+  label: title
+  owner {
+    ... on User {
+      __typename
+      id
+      name
+    }
+    ... on Group {
+      __typename
+      id
+      name
+    }
+    __typename
+  }
+}
+
+fragment KonnectableText on Text {
+  id
+  title
+  href
+  content(format: HTML)
+  __typename
+}
+
+fragment KonnectableImage on Image {
+  id
+  title
+  href
+  src: image_url(size: DISPLAY)
+  src_1x: resized_image_url(width: 315, height: 315, quality: 85, fallback_format: PNG)
+  src_2x: resized_image_url(width: 630, height: 630, fallback_format: PNG)
+  src_3x: resized_image_url(width: 945, height: 945, fallback_format: PNG)
+  original_dimensions {
+    width
+    height
+    __typename
+  }
+  __typename
+}
+
+fragment KonnectableLink on Link {
+  href
+  title
+  src: image_url(size: DISPLAY)
+  src_1x: resized_image_url(width: 415, height: 415, quality: 90, fallback_format: PNG)
+  src_2x: resized_image_url(width: 630, height: 630, fallback_format: PNG)
+  src_3x: resized_image_url(width: 945, height: 945, fallback_format: PNG)
+  external_url: source_url
+  __typename
+}
+
+fragment KonnectableEmbed on Embed {
+  id
+  title
+  href
+  src: image_url(size: DISPLAY)
+  src_1x: resized_image_url(width: 315, height: 315, quality: 85)
+  src_2x: resized_image_url(width: 630, height: 630)
+  src_3x: resized_image_url(width: 945, height: 945)
+  __typename
+}
+
+fragment KonnectableAttachment on Attachment {
+  id
+  title
+  href
+  src: image_url(size: DISPLAY)
+  src_1x: resized_image_url(width: 415, height: 415, quality: 90, fallback_format: PNG)
+  src_2x: resized_image_url(width: 630, height: 630, fallback_format: PNG)
+  src_3x: resized_image_url(width: 945, height: 945, fallback_format: PNG)
+  file_extension
+  __typename
+}
+
+fragment KonnectableMetadata on Konnectable {
+  ... on Model {
+    updated_at(relative: true)
+    __typename
+  }
+  ... on ConnectableInterface {
+    title
+    user {
+      id
+      name
+      __typename
+    }
+    connection {
+      created_at(relative: true)
+      user {
+        id
+        name
+        __typename
+      }
+      __typename
+    }
+    ... on Attachment {
+      file_extension
+      __typename
+    }
+    __typename
+  }
+  __typename
+}
+
+fragment KonnectableBlockOverlay on Konnectable {
+  __typename
+  ... on Model {
+    id
+    __typename
+  }
+  ... on ConnectableInterface {
+    source {
+      url
+      __typename
+    }
+    __typename
+  }
+}
+
+fragment ConnectableContextMenuConnectable on Konnectable {
+  __typename
+  ... on Model {
+    id
+    __typename
+  }
+  ... on Block {
+    can {
+      mute
+      remove: manage
+      __typename
+    }
+    __typename
+  }
+  ... on ConnectableInterface {
+    href
+    connection {
+      can {
+        destroy
+        __typename
+      }
+      __typename
+    }
+    __typename
+  }
+  ... on Channel {
+    can {
+      mute
+      __typename
+    }
+    __typename
+  }
+  ... on Text {
+    source {
+      url
+      __typename
+    }
+    __typename
+  }
+  ... on Image {
+    source {
+      url
+      __typename
+    }
+    find_original_url
+    __typename
+  }
+  ... on Embed {
+    source {
+      url
+      __typename
+    }
+    __typename
+  }
+  ... on Link {
+    source {
+      url
+      __typename
+    }
+    __typename
+  }
+  ... on Attachment {
+    source {
+      url
+      __typename
+    }
+    __typename
+  }
+}
