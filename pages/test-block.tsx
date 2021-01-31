@@ -8,7 +8,9 @@ const Page: NextPage = () => {
 
       <div
         className="relative bg-white overflow-hidden border-t border-b border-gray"
-        style={{ minHeight: 100, maxHeight: "min(800px, calc(100vh - 14rem))" }}
+        style={{
+          maxHeight: "max(600px, calc(100vh - 18rem))",
+        }}
       >
         <div className=" aspect-w-1 aspect-h-1"></div>
 
