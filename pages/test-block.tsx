@@ -30,9 +30,14 @@ const Page: NextPage = () => {
           Added 8 months ago by <a>Tyler Deitz</a>
         </span>
         <span>&nbsp;</span>
-        <button className="pl-3 pr-3 pt-1 pb-1 rounded-md text-blue bg-blue-light text-base">
-          Connect
-        </button>
+        <div className="flex flex-row space-x-3">
+          <button className="pl-3 pr-3 pt-1 pb-1 rounded-md text-blue bg-blue-light text-base">
+            Connect
+          </button>
+          <button className="pl-3 pr-3 pt-1 pb-1 rounded-md text-base bg-gray-light text-gray-darkest">
+            Mute
+          </button>
+        </div>
       </div>
     </div>
   );
