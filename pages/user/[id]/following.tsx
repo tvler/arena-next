@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import UserFollowingPage from "../../../components/UserFollowingPage";
+import { UserFollowingPage } from "../../../components/UserFollowingPage";
 
 const Page: NextPage = () => {
   const router = useRouter();

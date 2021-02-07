@@ -1,6 +1,6 @@
 import { useQuery, useApolloClient } from "@apollo/client";
 import { useCallback, useEffect, useRef } from "react";
-import IntersectionObserverBox from "./IntersectionObserverBox";
+import { IntersectionObserverBox } from "./IntersectionObserverBox";
 import {
   UserSsrQuery,
   UserSsrQueryVariables,
@@ -12,7 +12,7 @@ import {
   UserFollowersQueryVariables,
 } from "../graphql/gen/UserFollowersQuery";
 import { UserFollowersQuery_identity_identifiable_User } from "../graphql/gen/UserFollowersQuery";
-import Block, { BlockProps, BlockVariant } from "./Block";
+import { Block, BlockProps, BlockVariant } from "./Block";
 
 const pageCount = 12;
 
@@ -20,7 +20,7 @@ const getPageNumberFromCellIndex = (cellIndex: number): number => {
   return Math.floor(cellIndex / pageCount) + 1;
 };
 
-const UserFollowersGrid: React.FC<{ id: string }> = ({ id }) => {
+export const UserFollowersGrid: React.FC<{ id: string }> = ({ id }) => {
   const queriedPagesRef = useRef<Set<number>>(new Set());
 
   const serversideQuery = useQuery<UserSsrQuery, UserSsrQueryVariables>(
@@ -127,5 +127,3 @@ const UserFollowersGrid: React.FC<{ id: string }> = ({ id }) => {
     </div>
   );
 };
-
-export default UserFollowersGrid;

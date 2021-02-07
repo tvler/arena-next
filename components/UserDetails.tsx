@@ -15,7 +15,7 @@ type Props = {
 const lineHeight = 1.8;
 const numberOfLines = 2;
 
-const UserDetails: React.FC<Props> = ({ id }) => {
+export const UserDetails: React.FC<Props> = ({ id }) => {
   const bigRef = useRef<HTMLDivElement>(null);
   const smallRef = useRef<HTMLDivElement>(null);
   const [shouldShowReadMore, setShouldShowReadMore] = useState(false);
@@ -110,5 +110,3 @@ const UserDetails: React.FC<Props> = ({ id }) => {
     </div>
   );
 };
-
-export default UserDetails;

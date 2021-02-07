@@ -22,7 +22,7 @@ const loadingTaxonomy: Taxonomy = [
 
 const spacer = <>&nbsp;/&nbsp;</>;
 
-const Header: React.FC<HeaderProps> = ({
+export const Header: React.FC<HeaderProps> = ({
   taxonomy: possibleTaxonomy,
   loading,
 }) => {
@@ -75,5 +75,3 @@ const Header: React.FC<HeaderProps> = ({
     </div>
   );
 };
-
-export default Header;

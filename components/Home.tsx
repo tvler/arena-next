@@ -1,7 +1,7 @@
-import Header from "./Header";
+import { Header } from "./Header";
 import Link from "next/link";
 
-const Home: React.FC = () => {
+export const Home: React.FC = () => {
   return (
     <div className="flex flex-col pb-4">
       <Header taxonomy={["Explore"]} />
@@ -36,5 +36,3 @@ const Home: React.FC = () => {
     </div>
   );
 };
-
-export default Home;

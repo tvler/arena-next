@@ -54,7 +54,7 @@ type IntersectionObserverBoxProps<
   skip?: boolean;
 };
 
-function IntersectionObserverBox<
+export function IntersectionObserverBox<
   RefType extends HTMLElement,
   IDType,
   ComponentProps
@@ -85,5 +85,3 @@ function IntersectionObserverBox<
 
   return <Component {...componentProps} ref={componentRef} />;
 }
-
-export default IntersectionObserverBox;

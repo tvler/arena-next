@@ -4,16 +4,16 @@ import {
   UserSsrQueryVariables,
 } from "../graphql/gen/UserSsrQuery";
 import { userSsrQueryNode } from "../graphql/queries/userSsr";
-import Header from "./Header";
+import { Header } from "./Header";
 import { Spacer } from "./Spacer";
-import UserDetails from "./UserDetails";
-import UserFollowersGrid from "./UserFollowersGrid";
+import { UserDetails } from "./UserDetails";
+import { UserFollowersGrid } from "./UserFollowersGrid";
 
 type Props = {
   slug: string;
 };
 
-const UserFollowersPage: React.FC<Props> = ({ slug }) => {
+export const UserFollowersPage: React.FC<Props> = ({ slug }) => {
   /*
    * Queries
    */
@@ -67,5 +67,3 @@ const UserFollowersPage: React.FC<Props> = ({ slug }) => {
     </div>
   );
 };
-
-export default UserFollowersPage;

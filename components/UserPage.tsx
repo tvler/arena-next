@@ -4,14 +4,14 @@ import {
   UserSsrQueryVariables,
 } from "../graphql/gen/UserSsrQuery";
 import { userSsrQueryNode } from "../graphql/queries/userSsr";
-import Header from "./Header";
-import UserDetails from "./UserDetails";
+import { Header } from "./Header";
+import { UserDetails } from "./UserDetails";
 
 type Props = {
   slug: string;
 };
 
-const UserPage: React.FC<Props> = ({ slug }) => {
+export const UserPage: React.FC<Props> = ({ slug }) => {
   /*
    * Queries
    */
@@ -56,5 +56,3 @@ const UserPage: React.FC<Props> = ({ slug }) => {
     </div>
   );
 };
-
-export default UserPage;

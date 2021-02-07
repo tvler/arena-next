@@ -166,31 +166,31 @@ const NullBlock: React.FC = memo(() => {
  * The final block component
  */
 
-const Block = forwardRef<HTMLDivElement, BlockProps>((props, ref) => {
-  let variantContent: React.ReactNode = null;
-  switch (props.variant) {
-    case BlockVariant.user:
-      variantContent = <UserBlock id={props.id} />;
-      break;
-    case BlockVariant.chanel:
-      variantContent = <ChannelBlockVariant id={props.id} />;
-      break;
-    case BlockVariant.group:
-      variantContent = <GroupBlock />;
-      break;
-    default:
-      variantContent = <NullBlock />;
-      break;
-  }
+export const Block = memo(
+  forwardRef<HTMLDivElement, BlockProps>((props, ref) => {
+    let variantContent: React.ReactNode = null;
+    switch (props.variant) {
+      case BlockVariant.user:
+        variantContent = <UserBlock id={props.id} />;
+        break;
+      case BlockVariant.chanel:
+        variantContent = <ChannelBlockVariant id={props.id} />;
+        break;
+      case BlockVariant.group:
+        variantContent = <GroupBlock />;
+        break;
+      default:
+        variantContent = <NullBlock />;
+        break;
+    }
 
-  return (
-    <div
-      ref={ref}
-      className="flex contain-strict rounded-sm border-gray bg-white border"
-    >
-      {variantContent}
-    </div>
-  );
-});
-
-export default memo(Block);
+    return (
+      <div
+        ref={ref}
+        className="flex contain-strict rounded-sm border-gray bg-white border"
+      >
+        {variantContent}
+      </div>
+    );
+  })
+);
