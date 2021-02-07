@@ -55,7 +55,7 @@ const UserDetails: React.FC<Props> = ({ id }) => {
   return (
     <div
       style={{ lineHeight }}
-      className="flex pl-4 pr-4 text-sm mt-0 flex-col max-w-md break-word relative items-start"
+      className="flex pl-4 pr-4 text-sm flex-col max-w-md break-word relative items-start"
     >
       <div className="flex flex-row space-x-3">
         {shouldShowFollowers && (

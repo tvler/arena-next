@@ -5,6 +5,7 @@ import {
 } from "../graphql/gen/UserSsrQuery";
 import { userSsrQueryNode } from "../graphql/queries/userSsr";
 import Header from "./Header";
+import { Spacer } from "./Spacer";
 import UserDetails from "./UserDetails";
 import UserFollowersGrid from "./UserFollowersGrid";
 
@@ -59,6 +60,8 @@ const UserFollowersPage: React.FC<Props> = ({ slug }) => {
       />
 
       <UserDetails id={slug} />
+
+      <Spacer size="8" />
 
       <UserFollowersGrid id={slug} />
     </div>

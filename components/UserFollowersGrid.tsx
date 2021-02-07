@@ -99,7 +99,7 @@ const UserFollowersGrid: React.FC<{ id: string }> = ({ id }) => {
   }
 
   return (
-    <div className="mt-8 pl-4 pr-4 grid grid-cols-auto-fit-block auto-rows-block gap-4">
+    <div className="pl-4 pr-4 grid grid-cols-auto-fit-block auto-rows-block gap-4">
       {Array.from({ length: followsCount }, (_, i) => {
         let followerId: null | number = null;
         if (followers) {
