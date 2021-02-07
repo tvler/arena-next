@@ -3,7 +3,7 @@ import { Header } from "../components/Header";
 export const TestBlockPage: React.FC = () => {
   return (
     <div className="flex flex-col">
-      <Header taxonomy={["Block"]} />
+      <Header taxonomy={["Image"]} />
 
       <div
         className="relative bg-white overflow-hidden border-t border-b border-gray"

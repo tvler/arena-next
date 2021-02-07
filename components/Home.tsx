@@ -14,6 +14,11 @@ export const Home: React.FC = () => {
           <a>/user/are-na</a>
         </Link>
 
+        <span className="text-xl mt-7">Test block page</span>
+        <Link href="/test-block">
+          <a>/test-block</a>
+        </Link>
+
         <span className="text-xl mt-7">Meta</span>
 
         <a href="https://github.com/tvler/arena-next">GitHub repo</a>
