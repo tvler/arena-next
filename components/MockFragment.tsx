@@ -1,5 +1,5 @@
 import { useApolloClient, Cache } from "@apollo/client";
-import { ReactNode, useEffect } from "react";
+import { useEffect } from "react";
 
 export const MockFragment: React.FC<{
   children: JSX.Element;
