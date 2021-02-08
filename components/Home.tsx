@@ -14,9 +14,12 @@ export const Home: React.FC = () => {
           <a>/user/are-na</a>
         </Link>
 
-        <span className="text-xl mt-7">Test block page</span>
+        <span className="text-xl mt-7">Test pages</span>
         <Link href="/test-block">
           <a>/test-block</a>
+        </Link>
+        <Link href="/test-blocks">
+          <a>/test-blocks</a>
         </Link>
 
         <span className="text-xl mt-7">Meta</span>
