@@ -1,7 +1,7 @@
 import gql from "graphql-tag";
 
-export const userCardFragmentNode = gql`
-  fragment UserCardFragment on User {
+export const userBlockFragmentNode = gql`
+  fragment UserBlockFragment on User {
     id
     name
     slug

@@ -2,10 +2,10 @@ import Link from "next/link";
 import { forwardRef, memo } from "react";
 import { useQuery } from "@apollo/client";
 import {
-  UserCardQuery,
-  UserCardQueryVariables,
-} from "../graphql/gen/UserCardQuery";
-import { userCardQueryNode } from "../graphql/queries/userCard";
+  UserBlockQuery,
+  UserBlockQueryVariables,
+} from "../graphql/gen/UserBlockQuery";
+import { userBlockQueryNode } from "../graphql/queries/userBlock";
 import {
   ChannelBlockQuery,
   ChannelBlockQueryVariables,
@@ -41,8 +41,8 @@ export type BlockProps =
  */
 
 const UserBlock: React.FC<{ id: number }> = memo(({ id }) => {
-  const userCardQuery = useQuery<UserCardQuery, UserCardQueryVariables>(
-    userCardQueryNode,
+  const userBlockQuery = useQuery<UserBlockQuery, UserBlockQueryVariables>(
+    userBlockQueryNode,
     {
       variables: {
         id: `${id}`,
@@ -52,7 +52,7 @@ const UserBlock: React.FC<{ id: number }> = memo(({ id }) => {
     }
   );
 
-  const user = userCardQuery.data?.user;
+  const user = userBlockQuery.data?.user;
   if (!(user && user.slug)) {
     return null;
   }

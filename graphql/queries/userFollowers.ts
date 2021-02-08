@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { userCardFragmentNode } from "../fragments/UserCardFragment";
+import { userBlockFragmentNode } from "../fragments/UserBlockFragment";
 
 export const userFollowersQueryNode = gql`
   query UserFollowersQuery($id: ID!, $page: Int!, $per: Int!) {
@@ -8,11 +8,11 @@ export const userFollowersQueryNode = gql`
         ... on User {
           id
           followers(page: $page, per: $per) {
-            ...UserCardFragment
+            ...UserBlockFragment
           }
         }
       }
     }
   }
-  ${userCardFragmentNode}
+  ${userBlockFragmentNode}
 `;

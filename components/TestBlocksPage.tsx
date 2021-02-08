@@ -1,15 +1,15 @@
 import { Cache } from "@apollo/client";
 import { Block, BlockVariant } from "./Block";
-import { userCardFragmentNode } from "../graphql/fragments/UserCardFragment";
-import { UserCardFragment } from "../graphql/gen/UserCardFragment";
+import { userBlockFragmentNode } from "../graphql/fragments/UserBlockFragment";
+import { UserBlockFragment } from "../graphql/gen/UserBlockFragment";
 import { MockFragment } from "./MockFragment";
 import { ChannelBlockFragment } from "../graphql/gen/ChannelBlockFragment";
 import { channelBlockFragmentNode } from "../graphql/fragments/ChannelBlockFragment";
 import { GroupBlockFragment } from "../graphql/gen/GroupBlockFragment";
 import { groupBlockFragmentNode } from "../graphql/fragments/GroupBlockFragment";
 
-const userFragment: Cache.WriteFragmentOptions<UserCardFragment, null> = {
-  fragment: userCardFragmentNode,
+const userFragment: Cache.WriteFragmentOptions<UserBlockFragment, null> = {
+  fragment: userBlockFragmentNode,
   data: {
     __typename: "User",
     id: 123,

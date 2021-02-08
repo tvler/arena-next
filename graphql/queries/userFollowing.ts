@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { userCardFragmentNode } from "../fragments/UserCardFragment";
+import { userBlockFragmentNode } from "../fragments/UserBlockFragment";
 import { channelBlockFragmentNode } from "../fragments/ChannelBlockFragment";
 import { groupBlockFragmentNode } from "../fragments/GroupBlockFragment";
 
@@ -11,7 +11,7 @@ export const userFollowingQueryNode = gql`
           id
           following(page: $page, per: $per) {
             ... on User {
-              ...UserCardFragment
+              ...UserBlockFragment
             }
             ... on Channel {
               ...ChannelBlockFragment
@@ -24,7 +24,7 @@ export const userFollowingQueryNode = gql`
       }
     }
   }
-  ${userCardFragmentNode},
+  ${userBlockFragmentNode},
   ${channelBlockFragmentNode}
   ${groupBlockFragmentNode}
 `;

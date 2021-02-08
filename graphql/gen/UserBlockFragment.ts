@@ -4,24 +4,16 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: UserCardQuery
+// GraphQL fragment: UserBlockFragment
 // ====================================================
 
-export interface UserCardQuery_user {
+export interface UserBlockFragment {
   __typename: "User";
   id: number | null;
   name: string | null;
   slug: string | null;
   initials: string | null;
   avatar: string | null;
-}
-
-export interface UserCardQuery {
-  user: UserCardQuery_user | null;  // A single user
-}
-
-export interface UserCardQueryVariables {
-  id: string;
 }
 
 /* tslint:disable */
