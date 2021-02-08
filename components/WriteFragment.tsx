@@ -3,21 +3,23 @@ import { useEffect } from "react";
 
 /*
  * WriteFragment: A declarative way to write fragments to Apollo cache
- * as React components. When the fragment props change, the cache is
+ * using React components. When the fragment props change, the cache is
  * updated. When then component unmounts, the fragment is deleted.
  *
- * This is essentially a reactive version of Apollo's cache.writeFragment
+ * This is essentially a reactive version of the cache.writeFragment
  * method, using the same exact arguments and types.
  *
+ * writeFragment API: apollographql.com/docs/react/api/cache/InMemoryCache/#writefragment
+ *
  * Ex:
- *   const fragment = gql`fragment UserBlockFragment on User { id name }`;
+ *   const fragment = gql`fragment UserFragment on User { id name }`;
  *   const data = {
  *     __typename: "User",
  *     id: 123,
  *     name: "Tyler Deitz",
  *   };
  *
- *   // Then, somewhere in your render block
+ *   // Then, somewhere in your JSX
  *
  *   <WriteFragment fragment={fragment} data={data} />
  */
