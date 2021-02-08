@@ -115,7 +115,7 @@ export const UserFollowingGrid: React.FC<{ id: string }> = ({ id }) => {
             case "Channel":
               blockProps = {
                 id: followingItem.id,
-                variant: BlockVariant.chanel,
+                variant: BlockVariant.channel,
               };
               break;
             case "Group":

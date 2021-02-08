@@ -18,7 +18,7 @@ import { channelBlockQueryNode } from "../graphql/queries/channelBlock";
 
 export enum BlockVariant {
   user,
-  chanel,
+  channel,
   group,
 }
 
@@ -173,7 +173,7 @@ export const Block = memo(
       case BlockVariant.user:
         variantContent = <UserBlock id={props.id} />;
         break;
-      case BlockVariant.chanel:
+      case BlockVariant.channel:
         variantContent = <ChannelBlockVariant id={props.id} />;
         break;
       case BlockVariant.group:

@@ -2,9 +2,8 @@ import { useApolloClient, Cache } from "@apollo/client";
 import { useEffect } from "react";
 
 export const MockFragment: React.FC<{
-  children: JSX.Element;
   fragment: Cache.WriteFragmentOptions<any, any>;
-}> = ({ children, fragment }) => {
+}> = ({ fragment }) => {
   const { cache } = useApolloClient();
 
   useEffect(() => {
@@ -19,5 +18,5 @@ export const MockFragment: React.FC<{
     };
   }, [cache, fragment]);
 
-  return children;
+  return null;
 };
