@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { userBlockFragmentNode } from "../fragments/UserBlockFragment";
+import { userBlockFragmentNode } from "../fragments/userBlock";
 
 export const userBlockQueryNode = gql`
   query UserBlockQuery($id: ID!) {

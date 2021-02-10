@@ -1,11 +1,11 @@
 import { Block, BlockVariant } from "./Block";
-import { userBlockFragmentNode } from "../graphql/fragments/UserBlockFragment";
+import { userBlockFragmentNode } from "../graphql/fragments/userBlock";
 import { UserBlockFragment } from "../graphql/gen/UserBlockFragment";
 import { WriteFragment } from "./WriteFragment";
 import { ChannelBlockFragment } from "../graphql/gen/ChannelBlockFragment";
-import { channelBlockFragmentNode } from "../graphql/fragments/ChannelBlockFragment";
+import { channelBlockFragmentNode } from "../graphql/fragments/channelBlock";
 import { GroupBlockFragment } from "../graphql/gen/GroupBlockFragment";
-import { groupBlockFragmentNode } from "../graphql/fragments/GroupBlockFragment";
+import { groupBlockFragmentNode } from "../graphql/fragments/groupBlock";
 import { Header } from "./Header";
 
 const userBlockFragment: UserBlockFragment = {

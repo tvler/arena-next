@@ -1,5 +1,5 @@
 import { gql } from "@apollo/client";
-import { userBlockFragmentNode } from "../fragments/UserBlockFragment";
+import { userBlockFragmentNode } from "../fragments/userBlock";
 
 export const userFollowersQueryNode = gql`
   query UserFollowersQuery($id: ID!, $page: Int!, $per: Int!) {
