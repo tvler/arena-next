@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import { gql } from "@apollo/client";
 
 export const channelBlockFragmentNode = gql`
   fragment ChannelBlockFragment on Channel {
