@@ -6,6 +6,7 @@ import {
   InMemoryCache,
   NormalizedCacheObject,
 } from "@apollo/client";
+import possibleTypes from "./possible-types.json";
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | undefined;
 
@@ -98,6 +99,7 @@ function createApolloClient(): ApolloClient<NormalizedCacheObject> {
       },
     }),
     cache: new InMemoryCache({
+      possibleTypes: possibleTypes,
       typePolicies: {
         Query: {
           fields: {
