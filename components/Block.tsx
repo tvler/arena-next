@@ -11,6 +11,11 @@ import {
   ChannelBlockQueryVariables,
 } from "../graphql/gen/ChannelBlockQuery";
 import { channelBlockQueryNode } from "../graphql/queries/channelBlock";
+import {
+  TextBlockQuery,
+  TextBlockQueryVariables,
+} from "../graphql/gen/TextBlockQuery";
+import { textBlockQueryNode } from "../graphql/queries/textBlock";
 
 /*
  * Types of blocks that can be rendered
@@ -20,6 +25,7 @@ export enum BlockVariant {
   user,
   channel,
   group,
+  text,
 }
 
 /*
@@ -163,6 +169,35 @@ const NullBlock: React.FC = memo(() => {
 });
 
 /*
+ * Variant: Text
+ */
+
+const TextBlock: React.FC<{ id: number }> = memo(({ id }) => {
+  const textBlockQuery = useQuery<TextBlockQuery, TextBlockQueryVariables>(
+    textBlockQueryNode,
+    {
+      variables: {
+        id: `${id}`,
+      },
+      ssr: false,
+      fetchPolicy: "cache-only",
+    }
+  );
+
+  const block = textBlockQuery?.data?.blokk;
+
+  if (block?.__typename !== "Text") {
+    return null;
+  }
+
+  return (
+    <div className="flex items-center justify-center flex-1">
+      <span dangerouslySetInnerHTML={{ __html: block.content || "" }} />
+    </div>
+  );
+});
+
+/*
  * The final block component
  */
 
@@ -179,6 +214,9 @@ export const Block = memo(
       case BlockVariant.group:
         variantContent = <GroupBlock />;
         break;
+      case BlockVariant.text:
+        variantContent = <TextBlock id={props.id} />;
+        break;
       default:
         variantContent = <NullBlock />;
         break;
@@ -187,7 +225,7 @@ export const Block = memo(
     return (
       <div
         ref={ref}
-        className="flex contain-strict rounded-sm border-gray bg-white border"
+        className="flex contain-strict rounded-sm border-gray bg-white border overflow-hidden"
       >
         {variantContent}
       </div>
