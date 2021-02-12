@@ -1,8 +1,8 @@
-import { gql } from "@apollo/client";
+import { gql, TypedDocumentNode } from "@apollo/client";
 import { textBlockFragmentNode } from "../fragments/textBlock";
 
-export const textBlockQueryNode = gql`
-  query TextBlockQuery($id: ID!, $typename: String!) {
+export const connectableBlockQueryNode: TypedDocumentNode = gql`
+  query ConnectableBlockQuery($id: ID!, $typename: String!) {
     blokk(id: $id) {
       ...TextBlockFragment
     }

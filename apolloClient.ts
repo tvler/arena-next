@@ -5,7 +5,6 @@ import {
   FieldReadFunction,
   InMemoryCache,
   NormalizedCacheObject,
-  Reference,
 } from "@apollo/client";
 import possibleTypes from "./possible-types.json";
 
@@ -104,9 +103,7 @@ function createApolloClient(): ApolloClient<NormalizedCacheObject> {
       typePolicies: {
         Query: {
           fields: {
-            clientMetadata() {
-              return null;
-            },
+            clientMetadata: () => null,
             user: mapQueryToCache("User"),
             channel: mapQueryToCache("Channel"),
             blokk: mapQueryToCache("Konnectable"),
