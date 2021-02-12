@@ -5,6 +5,7 @@ import {
   FieldReadFunction,
   InMemoryCache,
   NormalizedCacheObject,
+  Reference,
 } from "@apollo/client";
 import possibleTypes from "./possible-types.json";
 
@@ -72,7 +73,7 @@ const paginationPolicy: FieldPolicy = {
 };
 
 const mapQueryToCache = (typeName: string): FieldReadFunction => {
-  return (existing, { args, toReference }) => {
+  return (existing, { args, toReference, canRead }) => {
     if (existing) {
       return existing;
     }
@@ -81,10 +82,35 @@ const mapQueryToCache = (typeName: string): FieldReadFunction => {
       return undefined;
     }
 
-    return toReference({
-      __typename: typeName,
-      id: args.id,
-    });
+    const getLeafReference = (
+      currentTypeName: string
+    ): Reference | undefined => {
+      const refString = toReference({
+        __typename: currentTypeName,
+        id: args.id,
+      });
+
+      if (canRead(refString)) {
+        return refString;
+      }
+
+      if (!(currentTypeName in possibleTypes)) {
+        return undefined;
+      }
+
+      for (const subType of possibleTypes[
+        currentTypeName as keyof typeof possibleTypes
+      ]) {
+        const subTypeReference = getLeafReference(subType);
+        if (subTypeReference !== undefined) {
+          return subTypeReference;
+        }
+      }
+    };
+
+    const refString = getLeafReference(typeName);
+
+    return refString;
   };
 };
 
@@ -105,6 +131,7 @@ function createApolloClient(): ApolloClient<NormalizedCacheObject> {
           fields: {
             user: mapQueryToCache("User"),
             channel: mapQueryToCache("Channel"),
+            blokk: mapQueryToCache("Konnectable"),
           },
         },
         User: {

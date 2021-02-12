@@ -67,7 +67,7 @@ const UserBlock: React.FC<{ id: number }> = memo(({ id }) => {
     <Link href={`/user/${user.slug}`}>
       <a className="flex-1 flex flex-col items-center no-underline">
         <div className="flex-1 flex items-center text-center">
-          <span>{user.name}</span>
+          <span className="text-gray-darkest">{user.name}</span>
         </div>
 
         <div className="h-1/2 w-1/2 relative flex flex-col items-center justify-center bg-gray-light">
@@ -153,7 +153,7 @@ const ChannelBlockVariant: React.FC<{ id: number }> = memo(({ id }) => {
 const GroupBlock: React.FC = memo(() => {
   return (
     <div className="flex items-center justify-center flex-1">
-      <span className="transform -rotate-45">
+      <span className="transform -rotate-45 text-gray-darkest">
         Groups not implemented yet!!!
       </span>
     </div>
@@ -191,7 +191,7 @@ const TextBlock: React.FC<{ id: number }> = memo(({ id }) => {
   }
 
   return (
-    <div className="flex items-center justify-center flex-1">
+    <div className="flex-1 p-4 text-sm text-gray-darkest">
       <span dangerouslySetInnerHTML={{ __html: block.content || "" }} />
     </div>
   );

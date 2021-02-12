@@ -7,6 +7,8 @@ import { channelBlockFragmentNode } from "../graphql/fragments/channelBlock";
 import { GroupBlockFragment } from "../graphql/gen/GroupBlockFragment";
 import { groupBlockFragmentNode } from "../graphql/fragments/groupBlock";
 import { Header } from "./Header";
+import { TextBlockFragment } from "../graphql/gen/TextBlockFragment";
+import { textBlockFragmentNode } from "../graphql/fragments/textBlock";
 
 const userBlockFragment: UserBlockFragment = {
   __typename: "User",
@@ -63,6 +65,12 @@ const groupFragment: GroupBlockFragment = {
   visibility: "public",
 };
 
+const textFragment: TextBlockFragment = {
+  __typename: "Text",
+  id: 10651025,
+  content: "Text content",
+};
+
 export const TestBlocksPage: React.FC = () => {
   return (
     <>
@@ -83,6 +91,8 @@ export const TestBlocksPage: React.FC = () => {
 
       <WriteFragment fragment={groupBlockFragmentNode} data={groupFragment} />
 
+      <WriteFragment fragment={textBlockFragmentNode} data={textFragment} />
+
       <Header taxonomy={["Test Blocks"]} />
 
       <div className="grid grid-cols-auto-fit-block auto-rows-block gap-4 p-4">
@@ -90,6 +100,7 @@ export const TestBlocksPage: React.FC = () => {
         <Block id={123} variant={BlockVariant.channel} />
         <Block id={1234} variant={BlockVariant.channel} />
         <Block id={123} variant={BlockVariant.group} />
+        <Block id={10651025} variant={BlockVariant.text} />
       </div>
     </>
   );
