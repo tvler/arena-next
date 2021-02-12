@@ -129,6 +129,9 @@ function createApolloClient(): ApolloClient<NormalizedCacheObject> {
       typePolicies: {
         Query: {
           fields: {
+            clientMetadata() {
+              return null;
+            },
             user: mapQueryToCache("User"),
             channel: mapQueryToCache("Channel"),
             blokk: mapQueryToCache("Konnectable"),

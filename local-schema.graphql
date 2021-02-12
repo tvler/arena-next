@@ -1,0 +1,3 @@
+extend type Query {
+  clientMetadata(metadata: String!): String
+}

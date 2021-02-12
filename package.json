@@ -8,7 +8,7 @@
     "start": "next start",
     "download-schema": "bash download-schema.sh",
     "generate-possible-types": "node generate-possible-types.js",
-    "generate-types": "apollo-codegen generate graphql/**/*.ts --schema schema.json --target typescript --output graphql/gen --addTypename"
+    "generate-types": "npx apollo codegen:generate --localSchemaFile=schema.json,local-schema.graphql --target=typescript --includes=graphql/**/*.ts --addTypename --outputFlat graphql/gen"
   },
   "dependencies": {
     "@apollo/client": "^3.3.7",

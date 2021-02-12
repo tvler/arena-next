@@ -1,6 +1,6 @@
-
-
 /* tslint:disable */
+/* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -21,19 +21,10 @@ export type TextBlockQuery_blokk = TextBlockQuery_blokk_Channel | TextBlockQuery
 
 export interface TextBlockQuery {
   blokk: TextBlockQuery_blokk | null;
+  clientMetadata: string | null;
 }
 
 export interface TextBlockQueryVariables {
   id: string;
+  type: string;
 }
-
-/* tslint:disable */
-// This file was automatically generated and should not be edited.
-
-//==============================================================
-// START Enums and Input Objects
-//==============================================================
-
-//==============================================================
-// END Enums and Input Objects
-//==============================================================

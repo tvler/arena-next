@@ -1,6 +1,6 @@
-
-
 /* tslint:disable */
+/* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -17,20 +17,12 @@ export interface UserBlockQuery_user {
 }
 
 export interface UserBlockQuery {
-  user: UserBlockQuery_user | null;  // A single user
+  /**
+   * A single user
+   */
+  user: UserBlockQuery_user | null;
 }
 
 export interface UserBlockQueryVariables {
   id: string;
 }
-
-/* tslint:disable */
-// This file was automatically generated and should not be edited.
-
-//==============================================================
-// START Enums and Input Objects
-//==============================================================
-
-//==============================================================
-// END Enums and Input Objects
-//==============================================================

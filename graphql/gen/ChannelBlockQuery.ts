@@ -1,6 +1,6 @@
-
-
 /* tslint:disable */
+/* eslint-disable */
+// @generated
 // This file was automatically generated and should not be edited.
 
 // ====================================================
@@ -40,20 +40,12 @@ export interface ChannelBlockQuery_channel {
 }
 
 export interface ChannelBlockQuery {
-  channel: ChannelBlockQuery_channel | null;  // A single channel
+  /**
+   * A single channel
+   */
+  channel: ChannelBlockQuery_channel | null;
 }
 
 export interface ChannelBlockQueryVariables {
   id: string;
 }
-
-/* tslint:disable */
-// This file was automatically generated and should not be edited.
-
-//==============================================================
-// START Enums and Input Objects
-//==============================================================
-
-//==============================================================
-// END Enums and Input Objects
-//==============================================================
