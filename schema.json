@@ -316,7 +316,7 @@
                     "name": "Int",
                     "ofType": null
                   },
-                  "defaultValue": "340"
+                  "defaultValue": "42"
                 },
                 {
                   "name": "block_filter",
@@ -653,7 +653,7 @@
                     "name": "Int",
                     "ofType": null
                   },
-                  "defaultValue": "340"
+                  "defaultValue": "42"
                 },
                 {
                   "name": "q",
@@ -783,7 +783,7 @@
                     "name": "Int",
                     "ofType": null
                   },
-                  "defaultValue": "340"
+                  "defaultValue": "42"
                 },
                 {
                   "name": "q",
@@ -2480,7 +2480,7 @@
                     "name": "Int",
                     "ofType": null
                   },
-                  "defaultValue": "340"
+                  "defaultValue": "42"
                 },
                 {
                   "name": "q",
@@ -2969,7 +2969,7 @@
                     "name": "Int",
                     "ofType": null
                   },
-                  "defaultValue": "340"
+                  "defaultValue": "42"
                 },
                 {
                   "name": "q",
@@ -3326,7 +3326,7 @@
                     "name": "Int",
                     "ofType": null
                   },
-                  "defaultValue": "340"
+                  "defaultValue": "42"
                 },
                 {
                   "name": "q",
@@ -3709,7 +3709,7 @@
                     "name": "Int",
                     "ofType": null
                   },
-                  "defaultValue": "340"
+                  "defaultValue": "42"
                 },
                 {
                   "name": "q",
@@ -12577,6 +12577,12 @@
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
+            },
+            {
+              "name": "PLUS_YEARLY",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
             }
           ],
           "possibleTypes": null
@@ -14322,7 +14328,7 @@
                     "name": "Int",
                     "ofType": null
                   },
-                  "defaultValue": "340"
+                  "defaultValue": "42"
                 },
                 {
                   "name": "q",
@@ -14762,7 +14768,7 @@
                     "name": "Int",
                     "ofType": null
                   },
-                  "defaultValue": "340"
+                  "defaultValue": "42"
                 },
                 {
                   "name": "q",
@@ -15291,7 +15297,7 @@
                     "name": "Int",
                     "ofType": null
                   },
-                  "defaultValue": "340"
+                  "defaultValue": "42"
                 },
                 {
                   "name": "q",
@@ -15939,7 +15945,7 @@
                     "name": "Int",
                     "ofType": null
                   },
-                  "defaultValue": "340"
+                  "defaultValue": "42"
                 },
                 {
                   "name": "q",
@@ -16892,6 +16898,18 @@
           "description": "Your account customer data",
           "fields": [
             {
+              "name": "can_select_lifetime",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "created_at",
               "description": null,
               "args": [
@@ -17362,7 +17380,7 @@
               "deprecationReason": null
             },
             {
-              "name": "RESIDENCY_REMINDER",
+              "name": "PREMIUM_PLUS",
               "description": null,
               "isDeprecated": false,
               "deprecationReason": null
@@ -18815,6 +18833,33 @@
               "deprecationReason": null
             },
             {
+              "name": "downgrade_to_lifetime",
+              "description": null,
+              "args": [
+                {
+                  "name": "input",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "DowngradeToLifetimeInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "DowngradeToLifetimePayload",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "export_channel",
               "description": null,
               "args": [
@@ -19538,6 +19583,33 @@
               "type": {
                 "kind": "OBJECT",
                 "name": "SubscribeToPremiumForUsersPayload",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "subscribe_to_premium_with_optional_token",
+              "description": null,
+              "args": [
+                {
+                  "name": "input",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "SubscribeToPremiumWithOptionalTokenInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "SubscribeToPremiumWithOptionalTokenPayload",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -21583,6 +21655,106 @@
         },
         {
           "kind": "OBJECT",
+          "name": "SubscribeToPremiumWithOptionalTokenPayload",
+          "description": "Autogenerated return type of SubscribeToPremiumWithOptionalToken",
+          "fields": [
+            {
+              "name": "clientMutationId",
+              "description": "A unique identifier for the client performing the mutation.",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "me",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Me",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "SubscribeToPremiumWithOptionalTokenInput",
+          "description": "Autogenerated input type of SubscribeToPremiumWithOptionalToken",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "clientMutationId",
+              "description": "A unique identifier for the client performing the mutation.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "token",
+              "description": "Tokenized card from Stripe",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "plan_id",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "ENUM",
+                  "name": "SupportedPlanEnum",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "coupon_code",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "subscription_source",
+              "description": null,
+              "type": {
+                "kind": "ENUM",
+                "name": "SubscriptionSourceEnum",
+                "ofType": null
+              },
+              "defaultValue": "WEB"
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
           "name": "SubscribeToPremiumForUsersPayload",
           "description": "Autogenerated return type of SubscribeToPremiumForUsers",
           "fields": [
@@ -21943,6 +22115,62 @@
                   "name": "String",
                   "ofType": null
                 }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "DowngradeToLifetimePayload",
+          "description": "Autogenerated return type of DowngradeToLifetime",
+          "fields": [
+            {
+              "name": "clientMutationId",
+              "description": "A unique identifier for the client performing the mutation.",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "me",
+              "description": null,
+              "args": [],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Me",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "DowngradeToLifetimeInput",
+          "description": "Autogenerated input type of DowngradeToLifetime",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "clientMutationId",
+              "description": "A unique identifier for the client performing the mutation.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
               },
               "defaultValue": null
             }
