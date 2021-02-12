@@ -26,5 +26,5 @@ export interface TextBlockQuery {
 
 export interface TextBlockQueryVariables {
   id: string;
-  type: string;
+  typename: string;
 }

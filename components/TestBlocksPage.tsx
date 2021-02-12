@@ -12,7 +12,7 @@ import { textBlockFragmentNode } from "../graphql/fragments/textBlock";
 
 const userBlockFragment: UserBlockFragment = {
   __typename: "User",
-  id: 0,
+  id: 1,
   name: "Tyler Deitz",
   slug: "are-na",
   initials: "TD",
@@ -59,7 +59,7 @@ const publicChannelFragment: ChannelBlockFragment = {
 
 const groupFragment: GroupBlockFragment = {
   __typename: "Group",
-  id: 3,
+  id: 1,
   name: "",
   href: "",
   visibility: "public",
@@ -67,13 +67,13 @@ const groupFragment: GroupBlockFragment = {
 
 const shortTextFragment: TextBlockFragment = {
   __typename: "Text",
-  id: 4,
+  id: 1,
   content: "<p>Text content</p>",
 };
 
 const longTextFragment: TextBlockFragment = {
   __typename: "Text",
-  id: 5,
+  id: 2,
   content:
     '<p>More groundwork on blocks. Trying to get myself into a space where I can start building out new block variants without having to worry about networking or how the block will be rendered.</p>\n\n<p>This led me to build out a new &quot;blocks&quot; component library where I&#39;ll be rendering every block variant as they&#39;re built: <a href="https://arena-next.vercel.app/test-blocks" target="_blank" rel="nofollow noopener">arena-next.vercel.app/test-blocks</a>.</p>\n\n<p>To help build that page I made a new component called WriteFragment (<a href="https://gist.github.com/tvler/0a158e651dc88ec43094584b72789b70" target="_blank" rel="nofollow noopener">gist</a>): A declarative way to write fragments to Apollo cache using React components. The cool thing about that is you can navigate to the test-blocks page, have dummy-data written to the cache, and when you navigate away, the WriteFragment components will unmount and the dummy-data gets deleted.</p>',
 };
@@ -108,12 +108,12 @@ export const TestBlocksPage: React.FC = () => {
       <Header taxonomy={["Test Blocks"]} />
 
       <div className="grid grid-cols-auto-fit-block auto-rows-block gap-4 p-4">
-        <Block id={0} variant={BlockVariant.user} />
+        <Block id={1} variant={BlockVariant.user} />
         <Block id={1} variant={BlockVariant.channel} />
         <Block id={2} variant={BlockVariant.channel} />
-        <Block id={3} variant={BlockVariant.group} />
-        <Block id={4} variant={BlockVariant.text} />
-        <Block id={5} variant={BlockVariant.text} />
+        <Block id={1} variant={BlockVariant.group} />
+        <Block id={1} variant={BlockVariant.text} />
+        <Block id={2} variant={BlockVariant.text} />
       </div>
     </>
   );

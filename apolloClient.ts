@@ -72,8 +72,8 @@ const paginationPolicy: FieldPolicy = {
   },
 };
 
-const mapQueryToCache = (typeName: string): FieldReadFunction => {
-  return (existing, { args, toReference, canRead }) => {
+const mapQueryToCache = (typename: string): FieldReadFunction => {
+  return (existing, { args, toReference, variables }) => {
     if (existing) {
       return existing;
     }
@@ -82,35 +82,10 @@ const mapQueryToCache = (typeName: string): FieldReadFunction => {
       return undefined;
     }
 
-    const getLeafReference = (
-      currentTypeName: string
-    ): Reference | undefined => {
-      const refString = toReference({
-        __typename: currentTypeName,
-        id: args.id,
-      });
-
-      if (canRead(refString)) {
-        return refString;
-      }
-
-      if (!(currentTypeName in possibleTypes)) {
-        return undefined;
-      }
-
-      for (const subType of possibleTypes[
-        currentTypeName as keyof typeof possibleTypes
-      ]) {
-        const subTypeReference = getLeafReference(subType);
-        if (subTypeReference !== undefined) {
-          return subTypeReference;
-        }
-      }
-    };
-
-    const refString = getLeafReference(typeName);
-
-    return refString;
+    return toReference({
+      __typename: variables?.typename ?? typename,
+      id: args.id,
+    });
   };
 };
 

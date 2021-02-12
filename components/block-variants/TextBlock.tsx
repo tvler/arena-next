@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { memo } from "react";
+import { TextBlockFragment } from "../../graphql/gen/TextBlockFragment";
 import {
   TextBlockQuery,
   TextBlockQueryVariables,
@@ -7,11 +8,13 @@ import {
 import { textBlockQueryNode } from "../../graphql/queries/textBlock";
 
 export const TextBlock: React.FC<{ id: number }> = memo(({ id }) => {
+  const typename: TextBlockFragment["__typename"] = "Text";
   const textBlockQuery = useQuery<TextBlockQuery, TextBlockQueryVariables>(
     textBlockQueryNode,
     {
       variables: {
         id: `${id}`,
+        typename,
       },
       ssr: false,
       fetchPolicy: "cache-only",
