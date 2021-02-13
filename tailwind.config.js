@@ -1,4 +1,9 @@
 /* eslint-disable no-undef */
+const grayLight = "#EFEFEF";
+const grayDefault = "#DFDFDF";
+const grayDark = "#919295";
+const grayDarkest = "#535355";
+
 module.exports = {
   purge: ["./pages/**/*.tsx", "./components/**/*.tsx"],
   darkMode: false, // or 'media' or 'class'
@@ -18,10 +23,20 @@ module.exports = {
       },
       "cool-black": "#333",
       gray: {
-        light: "#EFEFEF",
-        DEFAULT: "#DFDFDF",
-        dark: "#919295",
-        darkest: "#535355",
+        light: grayLight,
+        DEFAULT: grayDefault,
+        dark: grayDark,
+        darkest: grayDarkest,
+        // Prose hacks
+        100: grayLight,
+        200: grayLight,
+        300: grayDefault,
+        400: grayDefault,
+        500: grayDark,
+        600: grayDark,
+        700: grayDarkest,
+        800: grayDarkest,
+        900: grayDarkest,
       },
     },
     fontFamily: {
@@ -71,10 +86,34 @@ module.exports = {
       spacing: {
         block: "var(--block-size)",
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            h1: {
+              fontWeight: null,
+            },
+            h2: {
+              fontWeight: null,
+            },
+            h3: {
+              fontWeight: null,
+            },
+            h4: {
+              fontWeight: null,
+            },
+            a: {
+              fontWeight: null,
+            },
+          },
+        },
+      },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [require("@tailwindcss/aspect-ratio")],
+  plugins: [
+    require("@tailwindcss/aspect-ratio"),
+    require("@tailwindcss/typography"),
+  ],
 };

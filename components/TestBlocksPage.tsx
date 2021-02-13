@@ -75,7 +75,7 @@ const longTextFragment: TextBlockFragment = {
   __typename: "Text",
   id: 2,
   content:
-    '<p>More groundwork on blocks. Trying to get myself into a space where I can start building out new block variants without having to worry about networking or how the block will be rendered.</p>\n\n<p>This led me to build out a new &quot;blocks&quot; component library where I&#39;ll be rendering every block variant as they&#39;re built: <a href="https://arena-next.vercel.app/test-blocks" target="_blank" rel="nofollow noopener">arena-next.vercel.app/test-blocks</a>.</p>\n\n<p>To help build that page I made a new component called WriteFragment (<a href="https://gist.github.com/tvler/0a158e651dc88ec43094584b72789b70" target="_blank" rel="nofollow noopener">gist</a>): A declarative way to write fragments to Apollo cache using React components. The cool thing about that is you can navigate to the test-blocks page, have dummy-data written to the cache, and when you navigate away, the WriteFragment components will unmount and the dummy-data gets deleted.</p>',
+    "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a tempus velit. Donec rhoncus mi quis quam bibendum, non volutpat augue accumsan.</p><p>Pellentesque ut nulla neque. Nunc pharetra porttitor risus, nec volutpat sapien blandit tempor.</p>",
 };
 
 export const TestBlocksPage: React.FC = () => {

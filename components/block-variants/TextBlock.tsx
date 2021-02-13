@@ -29,7 +29,7 @@ export const TextBlock: React.FC<{ id: number }> = memo(({ id }) => {
 
   return (
     <div
-      className="flex-1 p-4 text-sm text-gray-darkest"
+      className="flex-1 p-4 prose prose-sm"
       dangerouslySetInnerHTML={{ __html: block.content || "" }}
     ></div>
   );
