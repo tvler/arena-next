@@ -41,3 +41,6 @@ yarn-error.log*
 
 # bash script with key in it
 download-schema.sh
+
+# Temp until globalTypes is actually populated
+graphql/gen/globalTypes.ts
