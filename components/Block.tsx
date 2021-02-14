@@ -6,6 +6,7 @@ import { NullBlock } from "./block-variants/NullBlock";
 import { TextBlock } from "./block-variants/TextBlock";
 import { ImageBlock } from "./block-variants/ImageBlock";
 import cx from "classnames";
+import { LinkBlock } from "./block-variants/LinkBlock";
 
 /*
  * Types of blocks that can be rendered
@@ -17,6 +18,7 @@ export enum BlockVariant {
   group,
   text,
   image,
+  link,
 }
 
 /*
@@ -60,6 +62,9 @@ export const Block = memo(
       case BlockVariant.image:
         variantContent = <ImageBlock id={props.id} />;
         break;
+      case BlockVariant.link:
+        variantContent = <LinkBlock id={props.id} />;
+        break;
       default:
         variantContent = <NullBlock />;
         break;
@@ -86,6 +91,7 @@ export const Block = memo(
     let backgroundClass = "";
     switch (props.variant) {
       case BlockVariant.image:
+        backgroundClass = "";
         break;
       default:
         backgroundClass = "bg-white";

@@ -11,6 +11,8 @@ import { TextBlockFragment } from "../graphql/gen/TextBlockFragment";
 import { textBlockFragmentNode } from "../graphql/fragments/textBlock";
 import { ImageBlockFragment } from "../graphql/gen/ImageBlockFragment";
 import { imageBlockFragmentNode } from "../graphql/fragments/imageBlock";
+import { LinkBlockFragment } from "../graphql/gen/LinkBlockFragment";
+import { linkBlockFragmentNode } from "../graphql/fragments/linkBlock";
 
 const userBlockFragment: UserBlockFragment = {
   __typename: "User",
@@ -98,6 +100,12 @@ const landscapeImageFragment: ImageBlockFragment = {
   image_url: "/landscape.png",
 };
 
+const linkFragment: LinkBlockFragment = {
+  __typename: "Link",
+  id: 1,
+  image_url: "/link.webp",
+};
+
 export const TestBlocksPage: React.FC = () => {
   return (
     <>
@@ -140,6 +148,8 @@ export const TestBlocksPage: React.FC = () => {
         data={landscapeImageFragment}
       />
 
+      <WriteFragment fragment={linkBlockFragmentNode} data={linkFragment} />
+
       <Header taxonomy={["Test Blocks"]} />
 
       <div className="grid grid-cols-auto-fit-block auto-rows-block gap-4 p-4 pt-0">
@@ -152,6 +162,7 @@ export const TestBlocksPage: React.FC = () => {
         <Block id={1} variant={BlockVariant.image} />
         <Block id={2} variant={BlockVariant.image} />
         <Block id={3} variant={BlockVariant.image} />
+        <Block id={1} variant={BlockVariant.link} />
       </div>
     </>
   );
