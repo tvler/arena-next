@@ -8,7 +8,7 @@
 // ====================================================
 
 export interface ConnectableBlockQuery_blokk_Channel {
-  __typename: "Channel" | "Image" | "Link" | "Embed" | "Attachment" | "PendingBlock";
+  __typename: "Channel" | "Link" | "Embed" | "Attachment" | "PendingBlock";
 }
 
 export interface ConnectableBlockQuery_blokk_Text {
@@ -17,7 +17,13 @@ export interface ConnectableBlockQuery_blokk_Text {
   content: string | null;
 }
 
-export type ConnectableBlockQuery_blokk = ConnectableBlockQuery_blokk_Channel | ConnectableBlockQuery_blokk_Text;
+export interface ConnectableBlockQuery_blokk_Image {
+  __typename: "Image";
+  id: number | null;
+  image_url: string | null;
+}
+
+export type ConnectableBlockQuery_blokk = ConnectableBlockQuery_blokk_Channel | ConnectableBlockQuery_blokk_Text | ConnectableBlockQuery_blokk_Image;
 
 export interface ConnectableBlockQuery {
   blokk: ConnectableBlockQuery_blokk | null;
