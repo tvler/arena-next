@@ -9,12 +9,14 @@ import { groupBlockFragmentNode } from "../graphql/fragments/groupBlock";
 import { Header } from "./Header";
 import { TextBlockFragment } from "../graphql/gen/TextBlockFragment";
 import { textBlockFragmentNode } from "../graphql/fragments/textBlock";
+import { ImageBlockFragment } from "../graphql/gen/ImageBlockFragment";
+import { imageBlockFragmentNode } from "../graphql/fragments/imageBlock";
 
 const userBlockFragment: UserBlockFragment = {
   __typename: "User",
   id: 1,
   name: "Tyler Deitz",
-  slug: "are-na",
+  slug: "tyler-deitz",
   initials: "TD",
   avatar: null,
 };
@@ -78,6 +80,24 @@ const longTextFragment: TextBlockFragment = {
     "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a tempus velit. Donec rhoncus mi quis quam bibendum, non volutpat augue accumsan.</p><p>Pellentesque ut nulla neque. Nunc pharetra porttitor risus, nec volutpat sapien blandit tempor.</p>",
 };
 
+const squareImageFragment: ImageBlockFragment = {
+  __typename: "Image",
+  id: 1,
+  image_url: "/square.png",
+};
+
+const portaitImageFragment: ImageBlockFragment = {
+  __typename: "Image",
+  id: 2,
+  image_url: "/portrait.png",
+};
+
+const landscapeImageFragment: ImageBlockFragment = {
+  __typename: "Image",
+  id: 3,
+  image_url: "/landscape.png",
+};
+
 export const TestBlocksPage: React.FC = () => {
   return (
     <>
@@ -105,6 +125,21 @@ export const TestBlocksPage: React.FC = () => {
 
       <WriteFragment fragment={textBlockFragmentNode} data={longTextFragment} />
 
+      <WriteFragment
+        fragment={imageBlockFragmentNode}
+        data={squareImageFragment}
+      />
+
+      <WriteFragment
+        fragment={imageBlockFragmentNode}
+        data={portaitImageFragment}
+      />
+
+      <WriteFragment
+        fragment={imageBlockFragmentNode}
+        data={landscapeImageFragment}
+      />
+
       <Header taxonomy={["Test Blocks"]} />
 
       <div className="grid grid-cols-auto-fit-block auto-rows-block gap-4 p-4 pt-0">
@@ -114,6 +149,9 @@ export const TestBlocksPage: React.FC = () => {
         <Block id={1} variant={BlockVariant.group} />
         <Block id={1} variant={BlockVariant.text} />
         <Block id={2} variant={BlockVariant.text} />
+        <Block id={1} variant={BlockVariant.image} />
+        <Block id={2} variant={BlockVariant.image} />
+        <Block id={3} variant={BlockVariant.image} />
       </div>
     </>
   );
