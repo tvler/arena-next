@@ -13,6 +13,8 @@ import { ImageBlockFragment } from "../graphql/gen/ImageBlockFragment";
 import { imageBlockFragmentNode } from "../graphql/fragments/imageBlock";
 import { LinkBlockFragment } from "../graphql/gen/LinkBlockFragment";
 import { linkBlockFragmentNode } from "../graphql/fragments/linkBlock";
+import { EmbedBlockFragment } from "../graphql/gen/EmbedBlockFragment";
+import { embedBlockFragmentNode } from "../graphql/fragments/embedBlock";
 
 const userBlockFragment: UserBlockFragment = {
   __typename: "User",
@@ -106,6 +108,12 @@ const linkFragment: LinkBlockFragment = {
   image_url: "/link.webp",
 };
 
+const embedFragment: EmbedBlockFragment = {
+  __typename: "Embed",
+  id: 1,
+  image_url: "/embed.webp",
+};
+
 export const TestBlocksPage: React.FC = () => {
   return (
     <>
@@ -148,6 +156,8 @@ export const TestBlocksPage: React.FC = () => {
         data={landscapeImageFragment}
       />
 
+      <WriteFragment fragment={embedBlockFragmentNode} data={embedFragment} />
+
       <WriteFragment fragment={linkBlockFragmentNode} data={linkFragment} />
 
       <Header taxonomy={["Test Blocks"]} />
@@ -163,6 +173,7 @@ export const TestBlocksPage: React.FC = () => {
         <Block id={2} variant={BlockVariant.image} />
         <Block id={3} variant={BlockVariant.image} />
         <Block id={1} variant={BlockVariant.link} />
+        <Block id={1} variant={BlockVariant.embed} />
       </div>
     </>
   );

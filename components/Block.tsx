@@ -7,6 +7,7 @@ import { TextBlock } from "./block-variants/TextBlock";
 import { ImageBlock } from "./block-variants/ImageBlock";
 import cx from "classnames";
 import { LinkBlock } from "./block-variants/LinkBlock";
+import { EmbedBlock } from "./block-variants/EmbedBlock";
 
 /*
  * Types of blocks that can be rendered
@@ -19,6 +20,7 @@ export enum BlockVariant {
   text,
   image,
   link,
+  embed,
 }
 
 /*
@@ -65,6 +67,9 @@ export const Block = memo(
       case BlockVariant.link:
         variantContent = <LinkBlock id={props.id} />;
         break;
+      case BlockVariant.embed:
+        variantContent = <EmbedBlock id={props.id} />;
+        break;
       default:
         variantContent = <NullBlock />;
         break;
@@ -76,6 +81,7 @@ export const Block = memo(
 
     let borderClass = "";
     switch (props.variant) {
+      case BlockVariant.embed:
       case BlockVariant.image:
         borderClass = "border-transparent";
         break;
