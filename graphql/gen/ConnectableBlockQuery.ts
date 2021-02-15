@@ -7,8 +7,8 @@
 // GraphQL query operation: ConnectableBlockQuery
 // ====================================================
 
-export interface ConnectableBlockQuery_blokk_Attachment {
-  __typename: "Attachment" | "PendingBlock";
+export interface ConnectableBlockQuery_blokk_PendingBlock {
+  __typename: "PendingBlock";
 }
 
 export interface ConnectableBlockQuery_blokk_Text {
@@ -67,7 +67,13 @@ export interface ConnectableBlockQuery_blokk_Embed {
   image_url: string | null;
 }
 
-export type ConnectableBlockQuery_blokk = ConnectableBlockQuery_blokk_Attachment | ConnectableBlockQuery_blokk_Text | ConnectableBlockQuery_blokk_Image | ConnectableBlockQuery_blokk_Link | ConnectableBlockQuery_blokk_Channel | ConnectableBlockQuery_blokk_Embed;
+export interface ConnectableBlockQuery_blokk_Attachment {
+  __typename: "Attachment";
+  id: number | null;
+  title: string | null;
+}
+
+export type ConnectableBlockQuery_blokk = ConnectableBlockQuery_blokk_PendingBlock | ConnectableBlockQuery_blokk_Text | ConnectableBlockQuery_blokk_Image | ConnectableBlockQuery_blokk_Link | ConnectableBlockQuery_blokk_Channel | ConnectableBlockQuery_blokk_Embed | ConnectableBlockQuery_blokk_Attachment;
 
 export interface ConnectableBlockQuery {
   blokk: ConnectableBlockQuery_blokk | null;

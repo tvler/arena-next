@@ -1,4 +1,5 @@
 import { gql, TypedDocumentNode } from "@apollo/client";
+import { attachmentBlockFragmentNode } from "../fragments/attachmentBlock";
 import { channelBlockFragmentNode } from "../fragments/channelBlock";
 import { embedBlockFragmentNode } from "../fragments/embedBlock";
 import { imageBlockFragmentNode } from "../fragments/imageBlock";
@@ -13,6 +14,7 @@ export const connectableBlockQueryNode: TypedDocumentNode = gql`
       ...LinkBlockFragment
       ...ChannelBlockFragment
       ...EmbedBlockFragment
+      ...AttachmentBlockFragment
     }
     clientMetadata(metadata: $typename) @client
   }
@@ -20,5 +22,6 @@ export const connectableBlockQueryNode: TypedDocumentNode = gql`
   ${imageBlockFragmentNode},
   ${linkBlockFragmentNode},
   ${channelBlockFragmentNode},
-  ${embedBlockFragmentNode}
+  ${embedBlockFragmentNode},
+  ${attachmentBlockFragmentNode}
 `;
