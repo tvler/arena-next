@@ -14,27 +14,6 @@ export const userSsrQueryNode = gql`
             followers
             following
           }
-          channels(page: 1, per: 5, sort_by: UPDATED_AT) {
-            id
-            href
-            truncatedTitle: title(truncate: 80)
-            visibility
-            updated_at(relative: true)
-            counts {
-              contents
-            }
-            owner {
-              ... on Group {
-                id
-                name
-                visibility
-              }
-              ... on User {
-                id
-                name
-              }
-            }
-          }
         }
       }
     }
