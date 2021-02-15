@@ -30,7 +30,7 @@ export const UserFollowingGrid: React.FC<{ id: string }> = ({ id }) => {
       variables: { id },
     }
   );
-  const user = serversideQuery.data?.identity?.identifiable;
+  const user = serversideQuery.data?.user;
 
   const { fetchMore, data } = useQuery<
     UserFollowingQuery,

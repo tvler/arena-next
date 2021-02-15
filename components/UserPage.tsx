@@ -37,20 +37,15 @@ export const UserPage: React.FC<Props> = ({ slug }) => {
     );
   }
 
-  //  Not a user
-  if (serversideQuery.data?.identity?.identifiable?.__typename !== "User") {
-    return null;
-  }
-
   /*
    * Default
    */
 
-  const user = serversideQuery.data.identity.identifiable;
+  const user = serversideQuery.data?.user;
 
   return (
     <div className="flex flex-col pb-4">
-      <Header taxonomy={[user.name ?? "user"]} />
+      <Header taxonomy={[user?.name ?? "user"]} />
 
       <UserDetails id={slug} />
     </div>

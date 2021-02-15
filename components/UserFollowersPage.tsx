@@ -40,15 +40,14 @@ export const UserFollowersPage: React.FC<Props> = ({ slug }) => {
   }
 
   //  Not a user
-  if (serversideQuery.data?.identity?.identifiable?.__typename !== "User") {
+  const user = serversideQuery.data?.user;
+  if (!user) {
     return null;
   }
 
   /*
    * Default
    */
-
-  const user = serversideQuery.data.identity.identifiable;
 
   return (
     <div className="flex flex-col pb-4">

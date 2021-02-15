@@ -44,11 +44,12 @@ export const UserDetails: React.FC<Props> = ({ id }) => {
     }
   );
 
-  if (serversideQuery.data?.identity?.identifiable?.__typename !== "User") {
+  const user = serversideQuery.data?.user;
+
+  if (!user) {
     return null;
   }
 
-  const user = serversideQuery.data.identity.identifiable;
   const shouldShowFollowing = !!user.counts?.following;
   const shouldShowFollowers = !!user.counts?.followers;
 
