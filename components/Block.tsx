@@ -8,6 +8,7 @@ import { ImageBlock } from "./block-variants/ImageBlock";
 import cx from "classnames";
 import { LinkBlock } from "./block-variants/LinkBlock";
 import { EmbedBlock } from "./block-variants/EmbedBlock";
+import { AttachmentBlock } from "./block-variants/AttachmentBlock";
 
 /*
  * Types of blocks that can be rendered
@@ -21,6 +22,7 @@ export enum BlockVariant {
   image,
   link,
   embed,
+  attachment,
 }
 
 /*
@@ -69,6 +71,9 @@ export const Block = memo(
         break;
       case BlockVariant.embed:
         variantContent = <EmbedBlock id={props.id} />;
+        break;
+      case BlockVariant.attachment:
+        variantContent = <AttachmentBlock id={props.id} />;
         break;
       default:
         variantContent = <NullBlock />;

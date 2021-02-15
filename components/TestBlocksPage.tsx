@@ -15,6 +15,8 @@ import { LinkBlockFragment } from "../graphql/gen/LinkBlockFragment";
 import { linkBlockFragmentNode } from "../graphql/fragments/linkBlock";
 import { EmbedBlockFragment } from "../graphql/gen/EmbedBlockFragment";
 import { embedBlockFragmentNode } from "../graphql/fragments/embedBlock";
+import { AttachmentBlockFragment } from "../graphql/gen/AttachmentBlockFragment";
+import { attachmentBlockFragmentNode } from "../graphql/fragments/attachmentBlock";
 
 const userBlockFragment: UserBlockFragment = {
   __typename: "User",
@@ -120,6 +122,12 @@ const embedFragment: EmbedBlockFragment = {
   image_url: "/embed.webp",
 };
 
+const attachmentFragment: AttachmentBlockFragment = {
+  __typename: "Attachment",
+  id: 1,
+  title: "filename.mov",
+};
+
 export const TestBlocksPage: React.FC = () => {
   return (
     <>
@@ -171,6 +179,11 @@ export const TestBlocksPage: React.FC = () => {
 
       <WriteFragment fragment={linkBlockFragmentNode} data={linkFragment} />
 
+      <WriteFragment
+        fragment={attachmentBlockFragmentNode}
+        data={attachmentFragment}
+      />
+
       <Header taxonomy={["Test Blocks"]} />
 
       <div className="grid grid-cols-auto-fit-block auto-rows-block gap-4 p-4 pt-0">
@@ -186,6 +199,7 @@ export const TestBlocksPage: React.FC = () => {
         <Block id={4} variant={BlockVariant.image} />
         <Block id={1} variant={BlockVariant.link} />
         <Block id={1} variant={BlockVariant.embed} />
+        <Block id={1} variant={BlockVariant.attachment} />
       </div>
     </>
   );
