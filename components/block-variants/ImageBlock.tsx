@@ -33,7 +33,7 @@ export const ImageBlock: React.FC<{ id: number }> = memo(({ id }) => {
         loading="lazy"
         alt=""
         src={block.image_url}
-        className="absolute top-0 left-0 w-full h-full object-contain"
+        className="absolute top-0 left-0 w-full h-full object-scale-down"
       />
     </div>
   ) : null;

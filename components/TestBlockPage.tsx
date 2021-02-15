@@ -15,7 +15,7 @@ export const TestBlockPage: React.FC = () => {
 
         <img
           src="/blockexample.png"
-          className="object-contain absolute top-0 left-0 w-full h-full"
+          className="object-scale-down absolute top-0 left-0 w-full h-full"
         />
       </div>
 

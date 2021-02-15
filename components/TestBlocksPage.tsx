@@ -102,6 +102,12 @@ const landscapeImageFragment: ImageBlockFragment = {
   image_url: "/landscape.png",
 };
 
+const smallImageFragment: ImageBlockFragment = {
+  __typename: "Image",
+  id: 4,
+  image_url: "/small.jpg",
+};
+
 const linkFragment: LinkBlockFragment = {
   __typename: "Link",
   id: 1,
@@ -156,6 +162,11 @@ export const TestBlocksPage: React.FC = () => {
         data={landscapeImageFragment}
       />
 
+      <WriteFragment
+        fragment={imageBlockFragmentNode}
+        data={smallImageFragment}
+      />
+
       <WriteFragment fragment={embedBlockFragmentNode} data={embedFragment} />
 
       <WriteFragment fragment={linkBlockFragmentNode} data={linkFragment} />
@@ -172,6 +183,7 @@ export const TestBlocksPage: React.FC = () => {
         <Block id={1} variant={BlockVariant.image} />
         <Block id={2} variant={BlockVariant.image} />
         <Block id={3} variant={BlockVariant.image} />
+        <Block id={4} variant={BlockVariant.image} />
         <Block id={1} variant={BlockVariant.link} />
         <Block id={1} variant={BlockVariant.embed} />
       </div>

@@ -37,7 +37,7 @@ export const UserBlock: React.FC<{ id: number }> = memo(({ id }) => {
           {user.avatar && (
             <img
               loading="lazy"
-              className="absolute top-0 left-0 w-full h-full object-contain"
+              className="absolute top-0 left-0 w-full h-full object-scale-down"
               src={user.avatar}
               alt={`${user.name ?? "User"}'s profile picture`}
             />

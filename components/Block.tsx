@@ -97,6 +97,7 @@ export const Block = memo(
     let backgroundClass = "";
     switch (props.variant) {
       case BlockVariant.image:
+      case BlockVariant.embed:
         backgroundClass = "";
         break;
       default:
