@@ -113,13 +113,13 @@ const smallImageFragment: ImageBlockFragment = {
 const linkFragment: LinkBlockFragment = {
   __typename: "Link",
   id: 1,
-  image_url: "/link.webp",
+  image_url: "/link.png",
 };
 
 const embedFragment: EmbedBlockFragment = {
   __typename: "Embed",
   id: 1,
-  image_url: "/embed.webp",
+  image_url: "/embed.png",
 };
 
 const attachmentFragment: AttachmentBlockFragment = {
