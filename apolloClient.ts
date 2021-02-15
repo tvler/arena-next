@@ -115,6 +115,11 @@ function createApolloClient(): ApolloClient<NormalizedCacheObject> {
             following: paginationPolicy,
           },
         },
+        Channel: {
+          fields: {
+            blokks: paginationPolicy,
+          },
+        },
       },
     }),
   });

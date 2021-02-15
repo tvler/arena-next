@@ -24,7 +24,7 @@ export const userFollowingQueryNode = gql`
       }
     }
   }
-  ${userBlockFragmentNode},
+  ${userBlockFragmentNode}
   ${channelBlockFragmentNode}
   ${groupBlockFragmentNode}
 `;
