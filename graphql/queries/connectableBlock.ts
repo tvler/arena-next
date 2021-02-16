@@ -4,6 +4,7 @@ import { channelBlockFragmentNode } from "../fragments/channelBlock";
 import { embedBlockFragmentNode } from "../fragments/embedBlock";
 import { imageBlockFragmentNode } from "../fragments/imageBlock";
 import { linkBlockFragmentNode } from "../fragments/linkBlock";
+import { pendingBlockFragmentNode } from "../fragments/pendingBlock";
 import { textBlockFragmentNode } from "../fragments/textBlock";
 
 export const connectableBlockQueryNode: TypedDocumentNode = gql`
@@ -15,13 +16,15 @@ export const connectableBlockQueryNode: TypedDocumentNode = gql`
       ...ChannelBlockFragment
       ...EmbedBlockFragment
       ...AttachmentBlockFragment
+      ...PendingBlockFragment
     }
     clientMetadata(metadata: $typename) @client
   }
-  ${textBlockFragmentNode},
-  ${imageBlockFragmentNode},
-  ${linkBlockFragmentNode},
-  ${channelBlockFragmentNode},
-  ${embedBlockFragmentNode},
+  ${textBlockFragmentNode}
+  ${imageBlockFragmentNode}
+  ${linkBlockFragmentNode}
+  ${channelBlockFragmentNode}
+  ${embedBlockFragmentNode}
   ${attachmentBlockFragmentNode}
+  ${pendingBlockFragmentNode}
 `;

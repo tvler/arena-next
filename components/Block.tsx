@@ -86,10 +86,6 @@ export const Block = memo(
 
     let borderClass = "";
     switch (props.variant) {
-      case BlockVariant.embed:
-      case BlockVariant.image:
-        borderClass = "border-transparent";
-        break;
       default:
         borderClass = "border-gray";
         break;

@@ -7,10 +7,6 @@
 // GraphQL query operation: ChannelContentQuery
 // ====================================================
 
-export interface ChannelContentQuery_channel_blokks_PendingBlock {
-  __typename: "PendingBlock";
-}
-
 export interface ChannelContentQuery_channel_blokks_Text {
   __typename: "Text";
   id: number | null;
@@ -73,7 +69,12 @@ export interface ChannelContentQuery_channel_blokks_Attachment {
   title: string | null;
 }
 
-export type ChannelContentQuery_channel_blokks = ChannelContentQuery_channel_blokks_PendingBlock | ChannelContentQuery_channel_blokks_Text | ChannelContentQuery_channel_blokks_Image | ChannelContentQuery_channel_blokks_Link | ChannelContentQuery_channel_blokks_Channel | ChannelContentQuery_channel_blokks_Embed | ChannelContentQuery_channel_blokks_Attachment;
+export interface ChannelContentQuery_channel_blokks_PendingBlock {
+  __typename: "PendingBlock";
+  id: number | null;
+}
+
+export type ChannelContentQuery_channel_blokks = ChannelContentQuery_channel_blokks_Text | ChannelContentQuery_channel_blokks_Image | ChannelContentQuery_channel_blokks_Link | ChannelContentQuery_channel_blokks_Channel | ChannelContentQuery_channel_blokks_Embed | ChannelContentQuery_channel_blokks_Attachment | ChannelContentQuery_channel_blokks_PendingBlock;
 
 export interface ChannelContentQuery_channel {
   __typename: "Channel";
