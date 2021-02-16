@@ -99,6 +99,18 @@ export const ChannelContentGrid: React.FC<{ id: string }> = ({ id }) => {
                 variant: BlockVariant.embed,
               };
               break;
+            case "Attachment":
+              blockProps = {
+                id: contentItem.id,
+                variant: BlockVariant.attachment,
+              };
+              break;
+            case "Link":
+              blockProps = {
+                id: contentItem.id,
+                variant: BlockVariant.link,
+              };
+              break;
           }
         }
 
