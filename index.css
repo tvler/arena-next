@@ -8,7 +8,7 @@
 
 @layer base {
   :root {
-    --block-size: 15rem;
+    --block-size: 15.5rem;
 
     @apply bg-blue-lightest text-cool-black;
 

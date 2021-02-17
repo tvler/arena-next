@@ -5,7 +5,6 @@ import { GroupBlock } from "./block-variants/GroupBlock";
 import { NullBlock } from "./block-variants/NullBlock";
 import { TextBlock } from "./block-variants/TextBlock";
 import { ImageBlock } from "./block-variants/ImageBlock";
-import cx from "classnames";
 import { LinkBlock } from "./block-variants/LinkBlock";
 import { EmbedBlock } from "./block-variants/EmbedBlock";
 import { AttachmentBlock } from "./block-variants/AttachmentBlock";
@@ -80,36 +79,10 @@ export const Block = memo(
         break;
     }
 
-    /*
-     * Variant border style
-     */
-
-    let borderClass = "";
-    switch (props.variant) {
-      default:
-        borderClass = "border-gray";
-        break;
-    }
-
-    /*
-     * Variant background style
-     */
-
-    let backgroundClass = "";
-    switch (props.variant) {
-      default:
-        backgroundClass = "bg-transparent";
-        break;
-    }
-
     return (
       <div
         ref={ref}
-        className={cx(
-          "flex contain-strict rounded-sm border overflow-hidden",
-          borderClass,
-          backgroundClass
-        )}
+        className="flex contain-strict rounded-sm border overflow-hidden border-gray"
       >
         {variantContent}
       </div>
