@@ -11,31 +11,30 @@
     "generate-types": "npx apollo codegen:generate --localSchemaFile=schema.json,local-schema.graphql --target=typescript --includes=graphql/**/*.ts --addTypename --outputFlat graphql/gen"
   },
   "dependencies": {
-    "@apollo/client": "^3.3.7",
+    "@apollo/client": "^3.3.11",
     "@tailwindcss/aspect-ratio": "^0.2.0",
     "@tailwindcss/typography": "^0.4.0",
-    "autoprefixer": "^10.2.1",
+    "autoprefixer": "^10.2.4",
     "classnames": "^2.2.6",
-    "graphql": "^15.4.0",
-    "next": "10.0.5",
-    "postcss": "^8.2.4",
+    "graphql": "^15.5.0",
+    "next": "10.0.7",
+    "postcss": "^8.2.6",
     "react": "17.0.1",
     "react-dom": "17.0.1",
-    "tailwindcss": "^2.0.2"
+    "tailwindcss": "^2.0.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.10",
+    "@babel/core": "^7.12.16",
     "@types/classnames": "^2.2.11",
-    "@types/node": "^14.14.21",
-    "@types/react": "^17.0.0",
-    "@types/resize-observer-browser": "^0.1.5",
-    "@typescript-eslint/eslint-plugin": "^4.13.0",
-    "@typescript-eslint/parser": "^4.13.0",
+    "@types/node": "^14.14.28",
+    "@types/react": "^17.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.15.1",
+    "@typescript-eslint/parser": "^4.15.1",
     "babel-plugin-inline-react-svg": "^1.1.2",
-    "eslint": "^7.17.0",
+    "eslint": "^7.20.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react": "^7.22.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "typescript": "^4.1.3"
+    "typescript": "^4.1.5"
   }
 }
