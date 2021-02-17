@@ -11,7 +11,7 @@ export const TestBlockPage: React.FC = () => {
           maxHeight: "max(600px, calc(100vh - 18rem))",
         }}
       >
-        <div className=" aspect-w-1 aspect-h-1"></div>
+        <div className="aspect-w-1 aspect-h-1"></div>
 
         <img
           src="/blockexample.png"
