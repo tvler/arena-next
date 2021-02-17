@@ -6,7 +6,6 @@ import {
 import { channelSsrQueryNode } from "../graphql/queries/channelSsr";
 import { ChannelContentGrid } from "./ChannelContentGrid";
 import { Header } from "./Header";
-import { Spacer } from "./Spacer";
 
 export const ChannelPage: React.FC<{ slug: string }> = ({ slug }) => {
   /*
@@ -42,8 +41,6 @@ export const ChannelPage: React.FC<{ slug: string }> = ({ slug }) => {
   return (
     <div className="flex flex-col pb-4">
       <Header taxonomy={[channel?.title ?? "channel"]} />
-
-      <Spacer size="8" />
 
       <ChannelContentGrid id={slug} />
     </div>

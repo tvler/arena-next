@@ -105,6 +105,29 @@ module.exports = {
             a: {
               fontWeight: null,
             },
+            "blockquote > :first-child": {
+              marginTop: "0",
+            },
+            "blockquote > :last-child": {
+              marginBottom: "0",
+            },
+          },
+        },
+        xs: {
+          css: {
+            fontSize: "0.75rem",
+            h1: {
+              fontSize: "1.5em",
+            },
+            h2: {
+              fontSize: "1.4em",
+            },
+            h3: {
+              fontSize: "1.3em",
+            },
+            h4: {
+              fontSize: "1.2em",
+            },
           },
         },
       },

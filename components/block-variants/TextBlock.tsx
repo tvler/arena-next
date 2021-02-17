@@ -29,7 +29,7 @@ export const TextBlock: React.FC<{ id: number }> = memo(({ id }) => {
 
   return (
     <div
-      className="flex-1 p-4 prose prose-sm break-word"
+      className="flex-1 p-4 break-word prose prose-xs w-full"
       dangerouslySetInnerHTML={{ __html: block.content || "" }}
     ></div>
   );
