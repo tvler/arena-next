@@ -34,14 +34,17 @@ export const Header: React.FC<HeaderProps> = ({
   }
 
   return (
-    <div className="p-4 flex flex-row">
+    <div
+      className="p-4 flex flex-row font-serif italic text-xl"
+      style={{ lineHeight: "1.7rem" }}
+    >
       <Link href="/">
         <a className="no-underline">
           <Logo className="w-6 h-6" fill="currentColor"></Logo>
         </a>
       </Link>
       {taxonomy ? (
-        <div className="flex flex-row flex-wrap font-serif italic text-xl">
+        <div className="flex flex-row flex-wrap">
           {taxonomy.map((el) => {
             const key: string =
               typeof el === "string" ? el : "key" in el ? el.key : el.display;
@@ -70,7 +73,7 @@ export const Header: React.FC<HeaderProps> = ({
           })}
         </div>
       ) : (
-        <span className="font-serif italic text-xl">&nbsp;</span>
+        <span>&nbsp;</span>
       )}
     </div>
   );
