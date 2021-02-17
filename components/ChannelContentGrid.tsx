@@ -61,7 +61,7 @@ export const ChannelContentGrid: React.FC<{ id: string }> = ({ id }) => {
         }
       }
     },
-    []
+    [fetchMore]
   );
   const channel = channelSsr.data?.channel;
   const contentCount: number = channel?.counts?.contents ?? 0;
