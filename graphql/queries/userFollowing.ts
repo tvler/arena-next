@@ -5,21 +5,17 @@ import { groupBlockFragmentNode } from "../fragments/groupBlock";
 
 export const userFollowingQueryNode = gql`
   query UserFollowingQuery($id: ID!, $page: Int!, $per: Int!) {
-    identity(id: $id) {
-      identifiable {
+    user(id: $id) {
+      id
+      following(page: $page, per: $per) {
         ... on User {
-          id
-          following(page: $page, per: $per) {
-            ... on User {
-              ...UserBlockFragment
-            }
-            ... on Channel {
-              ...ChannelBlockFragment
-            }
-            ... on Group {
-              ...GroupBlockFragment
-            }
-          }
+          ...UserBlockFragment
+        }
+        ... on Channel {
+          ...ChannelBlockFragment
+        }
+        ... on Group {
+          ...GroupBlockFragment
         }
       }
     }

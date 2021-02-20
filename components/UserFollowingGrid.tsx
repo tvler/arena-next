@@ -1,5 +1,5 @@
-import { useApolloClient, useQuery } from "@apollo/client";
-import { useCallback, useEffect, useRef } from "react";
+import { useQuery } from "@apollo/client";
+import { useCallback, useRef } from "react";
 import { IntersectionObserverBox } from "./IntersectionObserverBox";
 import {
   UserSsrQuery,
@@ -10,7 +10,6 @@ import { Block, BlockProps, BlockVariant } from "./Block";
 import {
   UserFollowingQuery,
   UserFollowingQueryVariables,
-  UserFollowingQuery_identity_identifiable_User,
 } from "../graphql/gen/UserFollowingQuery";
 import { userFollowingQueryNode } from "../graphql/queries/userFollowing";
 
@@ -68,35 +67,12 @@ export const UserFollowingGrid: React.FC<{ id: string }> = ({ id }) => {
     [fetchMore]
   );
 
-  const client = useApolloClient();
-
-  useEffect(() => {
-    return () => {
-      if (user?.__typename === "User") {
-        const normalizedIdentity = client.cache.identify({ ...user });
-        if (normalizedIdentity) {
-          queriedPagesRef.current = new Set();
-
-          client.cache.evict({
-            id: normalizedIdentity,
-            fieldName: "following",
-          });
-
-          client.cache.gc();
-        }
-      }
-    };
-  }, [client, user]);
-
   if (user?.__typename !== "User") {
     return null;
   }
 
   const followingCount: number = user.counts?.following ?? 0;
-  let following: UserFollowingQuery_identity_identifiable_User["following"] = null;
-  if (data?.identity?.identifiable.__typename === "User") {
-    following = data?.identity?.identifiable.following;
-  }
+  const following = data?.user?.following;
 
   return (
     <div className="pl-4 pr-4 grid grid-cols-auto-fit-block auto-rows-block gap-4">
@@ -134,7 +110,7 @@ export const UserFollowingGrid: React.FC<{ id: string }> = ({ id }) => {
             componentProps={blockProps}
             callback={intersectionObserverCallback}
             id={i}
-            skip={!!followingItem}
+            skip={followingItem !== null && followingItem !== undefined}
           />
         );
       })}

@@ -29,6 +29,8 @@ export const ChannelContentGrid: React.FC<{ id: string }> = ({ id }) => {
       variables: { id: id },
     }
   );
+  const channel = channelSsr.data?.channel;
+
   const { fetchMore, data } = useQuery<
     ChannelContentQuery,
     ChannelContentQueryVariables
@@ -40,6 +42,7 @@ export const ChannelContentGrid: React.FC<{ id: string }> = ({ id }) => {
       per: pageCount,
     },
   });
+
   const intersectionObserverCallback = useCallback<
     (cellID: number) => (entries: IntersectionObserverEntry[]) => void
   >(
@@ -63,7 +66,6 @@ export const ChannelContentGrid: React.FC<{ id: string }> = ({ id }) => {
     },
     [fetchMore]
   );
-  const channel = channelSsr.data?.channel;
   const contentCount: number = channel?.counts?.contents ?? 0;
   const content = data?.channel?.blokks;
 

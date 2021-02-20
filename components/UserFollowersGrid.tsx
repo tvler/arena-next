@@ -1,5 +1,5 @@
-import { useQuery, useApolloClient } from "@apollo/client";
-import { useCallback, useEffect, useRef } from "react";
+import { useQuery } from "@apollo/client";
+import { useCallback, useRef } from "react";
 import { IntersectionObserverBox } from "./IntersectionObserverBox";
 import {
   UserSsrQuery,
@@ -11,7 +11,6 @@ import {
   UserFollowersQuery,
   UserFollowersQueryVariables,
 } from "../graphql/gen/UserFollowersQuery";
-import { UserFollowersQuery_identity_identifiable_User } from "../graphql/gen/UserFollowersQuery";
 import { Block, BlockProps, BlockVariant } from "./Block";
 
 const pageCount = 12;
@@ -68,35 +67,12 @@ export const UserFollowersGrid: React.FC<{ id: string }> = ({ id }) => {
     [fetchMore]
   );
 
-  const client = useApolloClient();
-
-  useEffect(() => {
-    return () => {
-      if (user?.__typename === "User") {
-        const normalizedIdentity = client.cache.identify({ ...user });
-        if (normalizedIdentity) {
-          queriedPagesRef.current = new Set();
-
-          client.cache.evict({
-            id: normalizedIdentity,
-            fieldName: "followers",
-          });
-
-          client.cache.gc();
-        }
-      }
-    };
-  }, [client, user]);
-
   if (user?.__typename !== "User") {
     return null;
   }
 
   const followsCount: number = user.counts?.followers ?? 0;
-  let followers: UserFollowersQuery_identity_identifiable_User["followers"] = null;
-  if (data?.identity?.identifiable.__typename === "User") {
-    followers = data?.identity?.identifiable.followers;
-  }
+  const followers = data?.user?.followers;
 
   return (
     <div className="pl-4 pr-4 grid grid-cols-auto-fit-block auto-rows-block gap-4">

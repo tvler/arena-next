@@ -7,11 +7,7 @@
 // GraphQL query operation: UserFollowersQuery
 // ====================================================
 
-export interface UserFollowersQuery_identity_identifiable_Group {
-  __typename: "Group";
-}
-
-export interface UserFollowersQuery_identity_identifiable_User_followers {
+export interface UserFollowersQuery_user_followers {
   __typename: "User";
   id: number | null;
   name: string | null;
@@ -20,21 +16,17 @@ export interface UserFollowersQuery_identity_identifiable_User_followers {
   avatar: string | null;
 }
 
-export interface UserFollowersQuery_identity_identifiable_User {
+export interface UserFollowersQuery_user {
   __typename: "User";
   id: number | null;
-  followers: (UserFollowersQuery_identity_identifiable_User_followers | null)[] | null;
-}
-
-export type UserFollowersQuery_identity_identifiable = UserFollowersQuery_identity_identifiable_Group | UserFollowersQuery_identity_identifiable_User;
-
-export interface UserFollowersQuery_identity {
-  __typename: "Identity";
-  identifiable: UserFollowersQuery_identity_identifiable;
+  followers: (UserFollowersQuery_user_followers | null)[] | null;
 }
 
 export interface UserFollowersQuery {
-  identity: UserFollowersQuery_identity | null;
+  /**
+   * A single user
+   */
+  user: UserFollowersQuery_user | null;
 }
 
 export interface UserFollowersQueryVariables {
