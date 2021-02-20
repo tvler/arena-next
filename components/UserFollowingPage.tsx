@@ -9,7 +9,7 @@ import {
 } from "../graphql/gen/UserSsrQuery";
 import { userFollowingQueryNode } from "../graphql/queries/userFollowing";
 import { userSsrQueryNode } from "../graphql/queries/userSsr";
-import { Grid } from "./Grid";
+import { BlockGrid } from "./BlockGrid";
 import { Header } from "./Header";
 import { Spacer } from "./Spacer";
 import { UserDetails } from "./UserDetails";
@@ -67,7 +67,7 @@ export const UserFollowingPage: React.FC<Props> = ({ slug }) => {
 
       <Spacer size="8" />
 
-      <Grid<UserFollowingQuery, UserFollowingQueryVariables>
+      <BlockGrid<UserFollowingQuery, UserFollowingQueryVariables>
         queryField="user"
         contentField="following"
         queryNode={userFollowingQueryNode}

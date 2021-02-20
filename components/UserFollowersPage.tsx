@@ -7,7 +7,7 @@ import { userSsrQueryNode } from "../graphql/queries/userSsr";
 import { Header } from "./Header";
 import { Spacer } from "./Spacer";
 import { UserDetails } from "./UserDetails";
-import { Grid } from "./Grid";
+import { BlockGrid } from "./BlockGrid";
 import {
   UserFollowersQuery,
   UserFollowersQueryVariables,
@@ -67,7 +67,7 @@ export const UserFollowersPage: React.FC<Props> = ({ slug }) => {
 
       <Spacer size="8" />
 
-      <Grid<UserFollowersQuery, UserFollowersQueryVariables>
+      <BlockGrid<UserFollowersQuery, UserFollowersQueryVariables>
         queryField="user"
         contentField="followers"
         queryNode={userFollowersQueryNode}

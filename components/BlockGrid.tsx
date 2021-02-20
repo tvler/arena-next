@@ -59,7 +59,7 @@ const getPageNumberFromCellIndex = (cellIndex: number): number => {
  * Component
  */
 
-export function Grid<
+export function BlockGrid<
   TData extends {
     [key in QueryField]:
       | null

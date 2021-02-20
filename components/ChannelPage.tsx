@@ -3,7 +3,7 @@ import {
   ChannelContentQuery,
   ChannelContentQueryVariables,
 } from "../graphql/gen/ChannelContentQuery";
-import { Grid } from "./Grid";
+import { BlockGrid } from "./BlockGrid";
 import {
   ChannelSsrQuery,
   ChannelSsrQueryVariables,
@@ -51,7 +51,7 @@ export const ChannelPage: React.FC<{ slug: string }> = ({ slug }) => {
     <div className="flex flex-col pb-4">
       <Header taxonomy={[channel?.title ?? "channel"]} />
 
-      <Grid<ChannelContentQuery, ChannelContentQueryVariables>
+      <BlockGrid<ChannelContentQuery, ChannelContentQueryVariables>
         queryField="channel"
         contentField="blokks"
         queryNode={channelContentQueryNode}
