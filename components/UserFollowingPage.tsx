@@ -1,13 +1,18 @@
 import { useQuery } from "@apollo/client";
 import {
+  UserFollowingQuery,
+  UserFollowingQueryVariables,
+} from "../graphql/gen/UserFollowingQuery";
+import {
   UserSsrQuery,
   UserSsrQueryVariables,
 } from "../graphql/gen/UserSsrQuery";
+import { userFollowingQueryNode } from "../graphql/queries/userFollowing";
 import { userSsrQueryNode } from "../graphql/queries/userSsr";
+import { Grid } from "./Grid";
 import { Header } from "./Header";
 import { Spacer } from "./Spacer";
 import { UserDetails } from "./UserDetails";
-import { UserFollowingGrid } from "./UserFollowingGrid";
 
 type Props = {
   slug: string;
@@ -44,6 +49,9 @@ export const UserFollowingPage: React.FC<Props> = ({ slug }) => {
   if (!user) {
     return null;
   }
+  if (user.id === null) {
+    return null;
+  }
 
   /*
    * Default
@@ -62,7 +70,13 @@ export const UserFollowingPage: React.FC<Props> = ({ slug }) => {
 
       <Spacer size="8" />
 
-      <UserFollowingGrid id={slug} />
+      <Grid<UserFollowingQuery, UserFollowingQueryVariables>
+        queryField="user"
+        contentField="following"
+        queryNode={userFollowingQueryNode}
+        id={user.id}
+        contentCount={user?.counts?.following ?? 0}
+      />
     </div>
   );
 };
