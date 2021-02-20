@@ -7,7 +7,12 @@ import { userSsrQueryNode } from "../graphql/queries/userSsr";
 import { Header } from "./Header";
 import { Spacer } from "./Spacer";
 import { UserDetails } from "./UserDetails";
-import { UserFollowersGrid } from "./UserFollowersGrid";
+import { Grid } from "./Grid";
+import {
+  UserFollowersQuery,
+  UserFollowersQueryVariables,
+} from "../graphql/gen/UserFollowersQuery";
+import { userFollowersQueryNode } from "../graphql/queries/userFollowers";
 
 type Props = {
   slug: string;
@@ -41,7 +46,7 @@ export const UserFollowersPage: React.FC<Props> = ({ slug }) => {
 
   //  Not a user
   const user = serversideQuery.data?.user;
-  if (!user) {
+  if (!user?.id) {
     return null;
   }
 
@@ -62,7 +67,13 @@ export const UserFollowersPage: React.FC<Props> = ({ slug }) => {
 
       <Spacer size="8" />
 
-      <UserFollowersGrid id={slug} />
+      <Grid<UserFollowersQuery, UserFollowersQueryVariables>
+        queryField="user"
+        contentField="followers"
+        queryNode={userFollowersQueryNode}
+        id={user.id}
+        contentCount={user?.counts?.following ?? 0}
+      />
     </div>
   );
 };

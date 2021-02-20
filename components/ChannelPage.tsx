@@ -1,11 +1,16 @@
 import { useQuery } from "@apollo/client";
 import {
+  ChannelContentQuery,
+  ChannelContentQueryVariables,
+} from "../graphql/gen/ChannelContentQuery";
+import { Grid } from "./Grid";
+import {
   ChannelSsrQuery,
   ChannelSsrQueryVariables,
 } from "../graphql/gen/ChannelSsrQuery";
 import { channelSsrQueryNode } from "../graphql/queries/channelSsr";
-import { ChannelContentGrid } from "./ChannelContentGrid";
 import { Header } from "./Header";
+import { channelContentQueryNode } from "../graphql/queries/channelContent";
 
 export const ChannelPage: React.FC<{ slug: string }> = ({ slug }) => {
   /*
@@ -32,17 +37,27 @@ export const ChannelPage: React.FC<{ slug: string }> = ({ slug }) => {
     );
   }
 
+  // Not a channel
+  const channel = channelSsr.data?.channel;
+  if (!channel?.id) {
+    return null;
+  }
+
   /*
    * Default
    */
-
-  const channel = channelSsr.data?.channel;
 
   return (
     <div className="flex flex-col pb-4">
       <Header taxonomy={[channel?.title ?? "channel"]} />
 
-      <ChannelContentGrid id={slug} />
+      <Grid<ChannelContentQuery, ChannelContentQueryVariables>
+        queryField="channel"
+        contentField="blokks"
+        queryNode={channelContentQueryNode}
+        id={channel.id}
+        contentCount={channel.counts?.contents ?? 0}
+      />
     </div>
   );
 };

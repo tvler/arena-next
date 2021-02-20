@@ -43,7 +43,9 @@ export interface ChannelContentQuery_channel_blokks_Channel_owner_User {
   name: string | null;
 }
 
-export type ChannelContentQuery_channel_blokks_Channel_owner = ChannelContentQuery_channel_blokks_Channel_owner_Group | ChannelContentQuery_channel_blokks_Channel_owner_User;
+export type ChannelContentQuery_channel_blokks_Channel_owner =
+  | ChannelContentQuery_channel_blokks_Channel_owner_Group
+  | ChannelContentQuery_channel_blokks_Channel_owner_User;
 
 export interface ChannelContentQuery_channel_blokks_Channel {
   __typename: "Channel";
@@ -74,7 +76,14 @@ export interface ChannelContentQuery_channel_blokks_PendingBlock {
   id: number | null;
 }
 
-export type ChannelContentQuery_channel_blokks = ChannelContentQuery_channel_blokks_Text | ChannelContentQuery_channel_blokks_Image | ChannelContentQuery_channel_blokks_Link | ChannelContentQuery_channel_blokks_Channel | ChannelContentQuery_channel_blokks_Embed | ChannelContentQuery_channel_blokks_Attachment | ChannelContentQuery_channel_blokks_PendingBlock;
+export type ChannelContentQuery_channel_blokks =
+  | ChannelContentQuery_channel_blokks_Text
+  | ChannelContentQuery_channel_blokks_Image
+  | ChannelContentQuery_channel_blokks_Link
+  | ChannelContentQuery_channel_blokks_Channel
+  | ChannelContentQuery_channel_blokks_Embed
+  | ChannelContentQuery_channel_blokks_Attachment
+  | ChannelContentQuery_channel_blokks_PendingBlock;
 
 export interface ChannelContentQuery_channel {
   __typename: "Channel";

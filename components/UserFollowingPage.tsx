@@ -46,10 +46,7 @@ export const UserFollowingPage: React.FC<Props> = ({ slug }) => {
 
   //  Not a user
   const user = serversideQuery.data?.user;
-  if (!user) {
-    return null;
-  }
-  if (user.id === null) {
+  if (!user?.id) {
     return null;
   }
 

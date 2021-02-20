@@ -1,8 +1,13 @@
 import { useQuery } from "@apollo/client";
 import { DocumentNode } from "graphql";
 import { useCallback, useRef } from "react";
+import { AttachmentBlockFragment } from "../graphql/gen/AttachmentBlockFragment";
 import { ChannelBlockFragment } from "../graphql/gen/ChannelBlockFragment";
+import { EmbedBlockFragment } from "../graphql/gen/EmbedBlockFragment";
 import { GroupBlockFragment } from "../graphql/gen/GroupBlockFragment";
+import { ImageBlockFragment } from "../graphql/gen/ImageBlockFragment";
+import { LinkBlockFragment } from "../graphql/gen/LinkBlockFragment";
+import { PendingBlockFragment } from "../graphql/gen/PendingBlockFragment";
 import { TextBlockFragment } from "../graphql/gen/TextBlockFragment";
 import { UserBlockFragment } from "../graphql/gen/UserBlockFragment";
 import { Block, BlockProps, BlockVariant } from "./Block";
@@ -33,7 +38,12 @@ type BlockFragments =
   | UserBlockFragment
   | ChannelBlockFragment
   | GroupBlockFragment
-  | TextBlockFragment;
+  | TextBlockFragment
+  | ImageBlockFragment
+  | EmbedBlockFragment
+  | AttachmentBlockFragment
+  | LinkBlockFragment
+  | PendingBlockFragment;
 
 /*
  * Utils
@@ -118,36 +128,63 @@ export function Grid<
   return (
     <div className="pl-4 pr-4 grid grid-cols-auto-fit-block auto-rows-block gap-4">
       {Array.from({ length: contentCount }, (_, i) => {
-        const followingItem = content && content[i];
+        const contentItem = content && content[i];
         let finalBlockProps: BlockProps;
 
-        if (followingItem && followingItem.id !== null) {
+        if (contentItem && contentItem.id !== null) {
           let blockProps: BlockProps;
 
-          switch (followingItem?.__typename) {
+          switch (contentItem?.__typename) {
             case "User":
               blockProps = {
-                id: followingItem.id,
+                id: contentItem.id,
                 variant: BlockVariant.user,
               };
               break;
             case "Channel":
               blockProps = {
-                id: followingItem.id,
+                id: contentItem.id,
                 variant: BlockVariant.channel,
               };
               break;
             case "Group":
               blockProps = {
-                id: followingItem.id,
+                id: contentItem.id,
                 variant: BlockVariant.group,
               };
               break;
             case "Text":
               blockProps = {
-                id: followingItem.id,
+                id: contentItem.id,
                 variant: BlockVariant.text,
               };
+              break;
+            case "Embed":
+              blockProps = {
+                id: contentItem.id,
+                variant: BlockVariant.embed,
+              };
+              break;
+            case "Attachment":
+              blockProps = {
+                id: contentItem.id,
+                variant: BlockVariant.attachment,
+              };
+              break;
+            case "Link":
+              blockProps = {
+                id: contentItem.id,
+                variant: BlockVariant.link,
+              };
+              break;
+            case "Image":
+              blockProps = {
+                id: contentItem.id,
+                variant: BlockVariant.image,
+              };
+              break;
+            case "PendingBlock":
+              blockProps = {};
               break;
           }
 
@@ -163,7 +200,7 @@ export function Grid<
             componentProps={finalBlockProps}
             callback={intersectionObserverCallback}
             id={i}
-            skip={followingItem !== null && followingItem !== undefined}
+            skip={contentItem !== null && contentItem !== undefined}
           />
         );
       })}
