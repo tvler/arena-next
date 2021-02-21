@@ -48,7 +48,7 @@ export const Block = memo(
      * Variant block component
      */
 
-    let variantContent: React.ReactNode = null;
+    let variantContent: React.ReactElement | null;
     switch (props.variant) {
       case BlockVariant.user:
         variantContent = <UserBlock id={props.id} />;
@@ -74,7 +74,7 @@ export const Block = memo(
       case BlockVariant.attachment:
         variantContent = <AttachmentBlock id={props.id} />;
         break;
-      default:
+      case undefined:
         variantContent = <NullBlock />;
         break;
     }

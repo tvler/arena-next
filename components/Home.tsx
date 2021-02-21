@@ -30,6 +30,10 @@ export const Home: React.FC = () => {
           <a>channel/image-board</a>
         </Link>
 
+        <Link href="/channel/cool-channel-names-channels-i-like">
+          <a>channel/cool-channel-names-channels-i-like</a>
+        </Link>
+
         <span className="text-xl mt-7">Test pages</span>
 
         <Link href="/test-block">

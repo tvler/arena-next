@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useQuery } from "@apollo/client";
 import { memo } from "react";
 import {
@@ -34,27 +35,29 @@ export const ChannelBlock: React.FC<{ id: number }> = memo(({ id }) => {
   }
 
   return (
-    // <Link href={`/user/${user.slug}`}>
-    <a
-      className={
-        "flex-1 flex flex-col items-center no-underline" + " " + channelVariants
-      }
-    >
-      <div className="flex-1"></div>
+    <Link href={`/channel/${channel.slug}`}>
+      <a
+        className={
+          "flex-1 flex flex-col items-center no-underline" +
+          " " +
+          channelVariants
+        }
+      >
+        <div className="flex-1"></div>
 
-      <div className="flex flex-col items-center justify-center text-center pl-4 pr-4">
-        <span className="leading-5">{channel.title}</span>
-        <span className="text-xs mt-1.5">by {channel.owner?.name}</span>
-        <span className="text-xs mt-0.5">
-          {channel.counts?.contents ?? 0}{" "}
-          {channel.counts?.contents === 1 ? "block" : "blocks"}
-          {" • "}
-          {channel.updated_at}
-        </span>
-      </div>
+        <div className="flex flex-col items-center justify-center text-center pl-4 pr-4">
+          <span className="leading-5">{channel.title}</span>
+          <span className="text-xs mt-1.5">by {channel.owner?.name}</span>
+          <span className="text-xs mt-0.5">
+            {channel.counts?.contents ?? 0}{" "}
+            {channel.counts?.contents === 1 ? "block" : "blocks"}
+            {" • "}
+            {channel.updated_at}
+          </span>
+        </div>
 
-      <div className="flex-1"></div>
-    </a>
-    // </Link>
+        <div className="flex-1"></div>
+      </a>
+    </Link>
   );
 });

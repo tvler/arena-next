@@ -6,9 +6,21 @@ export const channelSsrQueryNode = gql`
       id
       title
       description(format: HTML, no_links: false)
+      visibility
       counts {
         followers
         contents
+      }
+      owner {
+        ... on User {
+          id
+          name
+          slug
+        }
+        ... on Group {
+          id
+          name
+        }
       }
     }
   }

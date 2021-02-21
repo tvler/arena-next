@@ -11,6 +11,7 @@ import {
 import { channelSsrQueryNode } from "../graphql/queries/channelSsr";
 import { Header } from "./Header";
 import { channelContentQueryNode } from "../graphql/queries/channelContent";
+import cx from "classnames";
 
 export const ChannelPage: React.FC<{ slug: string }> = ({ slug }) => {
   /*
@@ -49,7 +50,26 @@ export const ChannelPage: React.FC<{ slug: string }> = ({ slug }) => {
 
   return (
     <div className="flex flex-col pb-4">
-      <Header taxonomy={[channel?.title ?? "channel"]} />
+      <Header
+        taxonomy={[
+          {
+            display: channel?.owner?.name ?? "owner",
+            href:
+              channel?.owner?.__typename === "User"
+                ? channel.owner.slug
+                  ? `/user/${channel.owner.slug}`
+                  : undefined
+                : undefined,
+          },
+          {
+            display: channel?.title ?? "channel",
+            color: cx({
+              "text-green": channel?.visibility === "public",
+              "text-purple": channel?.visibility === "closed",
+            }),
+          },
+        ]}
+      />
 
       <BlockGrid<ChannelContentQuery, ChannelContentQueryVariables>
         queryField="channel"

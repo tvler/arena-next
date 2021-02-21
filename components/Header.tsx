@@ -2,10 +2,15 @@ import { Fragment } from "react";
 import Logo from "./icons/logo.svg";
 import Link from "next/link";
 
+type TaxonomyProps = {
+  href?: string;
+  color?: string;
+};
+
 type Taxonomy = ReadonlyArray<
   | string
-  | { key: string; display: JSX.Element; href?: string }
-  | { display: string; href?: string }
+  | ({ key: string; display: JSX.Element } & TaxonomyProps)
+  | ({ display: string; href?: string } & TaxonomyProps)
 >;
 
 type HeaderProps = {
@@ -44,14 +49,20 @@ export const Header: React.FC<HeaderProps> = ({
         </a>
       </Link>
       {taxonomy ? (
-        <div className="flex flex-row flex-wrap">
+        <div>
           {taxonomy.map((el) => {
             const key: string =
               typeof el === "string" ? el : "key" in el ? el.key : el.display;
-            const display: string | JSX.Element =
+            const displayWithoutColor: string | JSX.Element =
               typeof el === "string" ? el : el.display;
             const href: string | null =
               typeof el === "string" ? null : el.href ?? null;
+
+            const display = (
+              <span className={typeof el === "string" ? undefined : el.color}>
+                {displayWithoutColor}
+              </span>
+            );
 
             if (href === null) {
               return (
