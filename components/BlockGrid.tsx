@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { DocumentNode } from "graphql";
-import { useCallback, useRef } from "react";
+import { useCallback, useMemo, useRef } from "react";
 import { AttachmentBlockFragment } from "../graphql/gen/AttachmentBlockFragment";
 import { ChannelBlockFragment } from "../graphql/gen/ChannelBlockFragment";
 import { EmbedBlockFragment } from "../graphql/gen/EmbedBlockFragment";
@@ -122,6 +122,11 @@ export function BlockGrid<
     [fetchMore]
   );
 
+  const intersectionObserverOptions = useMemo<IntersectionObserverInit>(
+    () => ({ rootMargin: "400px" }),
+    []
+  );
+
   const query = data && data[queryField];
   const content = query && query[contentField];
 
@@ -201,6 +206,7 @@ export function BlockGrid<
             callback={intersectionObserverCallback}
             id={i}
             skip={contentItem !== null && contentItem !== undefined}
+            options={intersectionObserverOptions}
           />
         );
       })}

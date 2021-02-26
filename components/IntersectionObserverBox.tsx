@@ -72,7 +72,7 @@ export function IntersectionObserverBox<
     let observer: IntersectionObserver | undefined;
 
     if (!skip && componentRef.current) {
-      observer = new window.IntersectionObserver(callback(id));
+      observer = new window.IntersectionObserver(callback(id), options);
       observer.observe(componentRef.current);
     }
 
