@@ -11,6 +11,8 @@ export interface ChannelSsrQuery_channel_counts {
   __typename: "ChannelCounts";
   followers: number | null;
   contents: number | null;
+  blocks: number | null;
+  channels: number | null;
 }
 
 export interface ChannelSsrQuery_channel_owner_User {

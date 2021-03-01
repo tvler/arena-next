@@ -10,6 +10,8 @@ export const channelSsrQueryNode = gql`
       counts {
         followers
         contents
+        blocks
+        channels
       }
       owner {
         ... on User {

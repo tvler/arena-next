@@ -12,6 +12,8 @@ import { channelSsrQueryNode } from "../graphql/queries/channelSsr";
 import { Header } from "./Header";
 import { channelContentQueryNode } from "../graphql/queries/channelContent";
 import cx from "classnames";
+import { ChannelDetails } from "./ChannelDetails";
+import { Spacer } from "./Spacer";
 
 export const ChannelPage: React.FC<{ slug: string }> = ({ slug }) => {
   /*
@@ -70,6 +72,10 @@ export const ChannelPage: React.FC<{ slug: string }> = ({ slug }) => {
           },
         ]}
       />
+
+      <ChannelDetails id={slug} />
+
+      <Spacer size="8" />
 
       <BlockGrid<ChannelContentQuery, ChannelContentQueryVariables>
         queryField="channel"
