@@ -25,9 +25,7 @@ const loadingTaxonomy: Taxonomy = [
   },
 ];
 
-const Spacer: React.FC<{ nb?: boolean }> = ({ nb }) => (
-  <>{nb ? <>&nbsp;</> : <>&#32;</>}/&nbsp;</>
-);
+const spacer = <>&#32;/&#32;</>;
 
 export const Header: React.FC<HeaderProps> = ({
   taxonomy: possibleTaxonomy,
@@ -41,18 +39,20 @@ export const Header: React.FC<HeaderProps> = ({
   }
 
   return (
-    <div
-      className="p-4 flex flex-row font-serif italic text-xl"
-      style={{ lineHeight: "1.7rem" }}
-    >
+    <div className="p-4 flex flex-row font-serif italic text-xl">
       <Link href="/">
-        <a className="no-underline">
-          <Logo className="w-6 h-6" fill="currentColor"></Logo>
+        <a className="no-underline flex">
+          <Logo
+            style={{ width: "1.43rem" }}
+            className="h-6"
+            fill="currentColor"
+          ></Logo>
+          &nbsp;
         </a>
       </Link>
       {taxonomy ? (
         <div>
-          {taxonomy.map((el, i) => {
+          {taxonomy.map((el) => {
             const key: string =
               typeof el === "string" ? el : "key" in el ? el.key : el.display;
             const displayWithoutColor: string | JSX.Element =
@@ -66,21 +66,16 @@ export const Header: React.FC<HeaderProps> = ({
               </span>
             );
 
-            if (href === null) {
-              return (
-                <Fragment key={key}>
-                  <Spacer nb={i === 0} />
-                  {display}
-                </Fragment>
-              );
-            }
-
             return (
               <Fragment key={key}>
-                <Spacer nb={i === 0} />
-                <Link href={href}>
-                  <a className="no-underline">{display}</a>
-                </Link>
+                {spacer}
+                {href ? (
+                  <Link href={href}>
+                    <a className="no-underline">{display}</a>
+                  </Link>
+                ) : (
+                  display
+                )}
               </Fragment>
             );
           })}
