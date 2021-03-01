@@ -25,7 +25,9 @@ const loadingTaxonomy: Taxonomy = [
   },
 ];
 
-const spacer = <>&nbsp;/&nbsp;</>;
+const Spacer: React.FC<{ nb?: boolean }> = ({ nb }) => (
+  <>{nb ? <>&nbsp;</> : <>&#32;</>}/&nbsp;</>
+);
 
 export const Header: React.FC<HeaderProps> = ({
   taxonomy: possibleTaxonomy,
@@ -50,7 +52,7 @@ export const Header: React.FC<HeaderProps> = ({
       </Link>
       {taxonomy ? (
         <div>
-          {taxonomy.map((el) => {
+          {taxonomy.map((el, i) => {
             const key: string =
               typeof el === "string" ? el : "key" in el ? el.key : el.display;
             const displayWithoutColor: string | JSX.Element =
@@ -67,7 +69,7 @@ export const Header: React.FC<HeaderProps> = ({
             if (href === null) {
               return (
                 <Fragment key={key}>
-                  {spacer}
+                  <Spacer nb={i === 0} />
                   {display}
                 </Fragment>
               );
@@ -75,7 +77,7 @@ export const Header: React.FC<HeaderProps> = ({
 
             return (
               <Fragment key={key}>
-                {spacer}
+                <Spacer nb={i === 0} />
                 <Link href={href}>
                   <a className="no-underline">{display}</a>
                 </Link>
