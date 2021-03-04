@@ -1,13 +1,13 @@
 import { useQuery } from "@apollo/client";
-import { memo } from "react";
 import {
   ConnectableBlockQuery,
   ConnectableBlockQueryVariables,
 } from "../../graphql/gen/ConnectableBlockQuery";
 import { connectableBlockQueryNode } from "../../graphql/queries/connectableBlock";
 import { EmbedBlockFragment } from "../../graphql/gen/EmbedBlockFragment";
+import { BlockVariantComponent } from "./types";
 
-export const EmbedBlock: React.FC<{ id: number }> = memo(({ id }) => {
+export const EmbedBlock: BlockVariantComponent = ({ id, children }) => {
   const typename: EmbedBlockFragment["__typename"] = "Embed";
   const embedBlockQuery = useQuery<
     ConnectableBlockQuery,
@@ -24,17 +24,23 @@ export const EmbedBlock: React.FC<{ id: number }> = memo(({ id }) => {
   const block = embedBlockQuery?.data?.blokk;
 
   if (block?.__typename !== "Embed") {
-    return null;
+    return children({
+      href: null,
+      title: null,
+      content: null,
+    });
   }
 
-  return block.image_url ? (
-    <div className="flex-1 relative">
+  return children({
+    title: "title",
+    href: null,
+    content: block.image_url ? (
       <img
         loading="lazy"
         alt=""
         src={block.image_url}
         className="absolute top-0 left-0 w-full h-full object-scale-down"
       />
-    </div>
-  ) : null;
-});
+    ) : null,
+  });
+};

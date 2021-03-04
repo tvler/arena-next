@@ -1,13 +1,12 @@
-import Link from "next/link";
 import { useQuery } from "@apollo/client";
-import { memo } from "react";
 import {
   ChannelBlockQuery,
   ChannelBlockQueryVariables,
 } from "../../graphql/gen/ChannelBlockQuery";
 import { channelBlockQueryNode } from "../../graphql/queries/channelBlock";
+import { BlockVariantComponent } from "./types";
 
-export const ChannelBlock: React.FC<{ id: number }> = memo(({ id }) => {
+export const ChannelBlock: BlockVariantComponent = ({ id, children }) => {
   const channelBlockQuery = useQuery<
     ChannelBlockQuery,
     ChannelBlockQueryVariables
@@ -21,7 +20,11 @@ export const ChannelBlock: React.FC<{ id: number }> = memo(({ id }) => {
 
   const channel = channelBlockQuery.data?.channel;
   if (!(channel && channel.slug)) {
-    return null;
+    return children({
+      href: null,
+      title: null,
+      content: null,
+    });
   }
 
   let channelVariants = "";
@@ -34,14 +37,12 @@ export const ChannelBlock: React.FC<{ id: number }> = memo(({ id }) => {
       break;
   }
 
-  return (
-    <Link href={`/channel/${channel.slug}`}>
-      <a
-        className={
-          "flex-1 flex flex-col items-center no-underline" +
-          " " +
-          channelVariants
-        }
+  return children({
+    href: `/channel/${channel.slug}`,
+    title: "title",
+    content: (
+      <div
+        className={"flex-1 flex flex-col items-center" + " " + channelVariants}
       >
         <div className="flex-1"></div>
 
@@ -57,7 +58,7 @@ export const ChannelBlock: React.FC<{ id: number }> = memo(({ id }) => {
         </div>
 
         <div className="flex-1"></div>
-      </a>
-    </Link>
-  );
-});
+      </div>
+    ),
+  });
+};

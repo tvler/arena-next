@@ -1,13 +1,13 @@
 import { useQuery } from "@apollo/client";
-import { memo } from "react";
 import {
   ConnectableBlockQuery,
   ConnectableBlockQueryVariables,
 } from "../../graphql/gen/ConnectableBlockQuery";
 import { connectableBlockQueryNode } from "../../graphql/queries/connectableBlock";
 import { LinkBlockFragment } from "../../graphql/gen/LinkBlockFragment";
+import { BlockVariantComponent } from "./types";
 
-export const LinkBlock: React.FC<{ id: number }> = memo(({ id }) => {
+export const LinkBlock: BlockVariantComponent = ({ id, children }) => {
   const typename: LinkBlockFragment["__typename"] = "Link";
   const linkBlockQuery = useQuery<
     ConnectableBlockQuery,
@@ -24,17 +24,23 @@ export const LinkBlock: React.FC<{ id: number }> = memo(({ id }) => {
   const block = linkBlockQuery?.data?.blokk;
 
   if (block?.__typename !== "Link") {
-    return null;
+    return children({
+      href: null,
+      title: null,
+      content: null,
+    });
   }
 
-  return block.image_url ? (
-    <div className="flex-1 relative">
+  return children({
+    title: "title",
+    href: null,
+    content: block.image_url ? (
       <img
         loading="lazy"
         alt=""
         src={block.image_url}
         className="absolute top-0 left-0 w-full h-full object-scale-down"
       />
-    </div>
-  ) : null;
-});
+    ) : null,
+  });
+};

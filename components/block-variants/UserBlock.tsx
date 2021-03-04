@@ -1,13 +1,12 @@
-import Link from "next/link";
 import { useQuery } from "@apollo/client";
-import { memo } from "react";
 import {
   UserBlockQuery,
   UserBlockQueryVariables,
 } from "../../graphql/gen/UserBlockQuery";
 import { userBlockQueryNode } from "../../graphql/queries/userBlock";
+import { BlockVariantComponent } from "./types";
 
-export const UserBlock: React.FC<{ id: number }> = memo(({ id }) => {
+export const UserBlock: BlockVariantComponent = ({ id, children }) => {
   const userBlockQuery = useQuery<UserBlockQuery, UserBlockQueryVariables>(
     userBlockQueryNode,
     {
@@ -21,12 +20,18 @@ export const UserBlock: React.FC<{ id: number }> = memo(({ id }) => {
 
   const user = userBlockQuery.data?.user;
   if (!(user && user.slug)) {
-    return null;
+    return children({
+      href: null,
+      title: null,
+      content: null,
+    });
   }
 
-  return (
-    <Link href={`/user/${user.slug}`}>
-      <a className="flex-1 flex flex-col items-center no-underline">
+  return children({
+    href: `/user/${user.slug}`,
+    title: "title",
+    content: (
+      <div className="flex-1 flex flex-col items-center no-underline">
         <div className="flex-1 flex items-center text-center">
           <span className="text-gray-darkest">{user.name}</span>
         </div>
@@ -45,7 +50,7 @@ export const UserBlock: React.FC<{ id: number }> = memo(({ id }) => {
         </div>
 
         <div className="flex-1"></div>
-      </a>
-    </Link>
-  );
-});
+      </div>
+    ),
+  });
+};
