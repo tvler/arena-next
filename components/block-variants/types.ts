@@ -6,11 +6,16 @@ export type BlockVariantComponentRenderProps = {
   href: string | null;
 };
 
+export interface BlockVariantComponentChildrenReturn
+  extends React.ReactElement {
+  __isBlockVariantComponentChildrenReturn: true;
+}
+
 export type BlockVariantComponentChildren = (
   renderProps: BlockVariantComponentRenderProps
-) => React.ReactElement;
+) => BlockVariantComponentChildrenReturn;
 
 export type BlockVariantComponent = (props: {
   id: number;
   children: BlockVariantComponentChildren;
-}) => React.ReactElement;
+}) => BlockVariantComponentChildrenReturn;

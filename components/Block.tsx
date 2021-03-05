@@ -11,6 +11,7 @@ import { AttachmentBlock } from "./block-variants/AttachmentBlock";
 import {
   BlockVariantComponent,
   BlockVariantComponentChildren,
+  BlockVariantComponentChildrenReturn,
 } from "./block-variants/types";
 
 /*
@@ -81,11 +82,12 @@ const BlockContainer = forwardRef<HTMLDivElement, BlockContainerProps>(
 export const Block = memo(
   forwardRef<HTMLDivElement, BlockProps>((props, ref) => {
     const renderProp = useCallback<BlockVariantComponentChildren>(
-      ({ content, title, href }) => (
-        <BlockContainer ref={ref} title={title} href={href}>
-          {content}
-        </BlockContainer>
-      ),
+      ({ content, title, href }) =>
+        (
+          <BlockContainer ref={ref} title={title} href={href}>
+            {content}
+          </BlockContainer>
+        ) as BlockVariantComponentChildrenReturn,
       [ref]
     );
 
