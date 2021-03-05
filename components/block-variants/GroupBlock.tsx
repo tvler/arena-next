@@ -2,7 +2,6 @@ import { BlockVariantComponent } from "./types";
 
 export const GroupBlock: BlockVariantComponent = ({ children }) => {
   return children({
-    href: null,
     title: "group",
     content: (
       <div className="flex items-center justify-center flex-1">

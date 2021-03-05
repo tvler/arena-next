@@ -24,11 +24,7 @@ export const EmbedBlock: BlockVariantComponent = ({ id, children }) => {
   const block = embedBlockQuery?.data?.blokk;
 
   if (block?.__typename !== "Embed") {
-    return children({
-      href: null,
-      title: null,
-      content: null,
-    });
+    return children();
   }
 
   return children({

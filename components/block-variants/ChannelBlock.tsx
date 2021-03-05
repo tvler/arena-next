@@ -20,11 +20,7 @@ export const ChannelBlock: BlockVariantComponent = ({ id, children }) => {
 
   const channel = channelBlockQuery.data?.channel;
   if (!(channel && channel.slug)) {
-    return children({
-      href: null,
-      title: null,
-      content: null,
-    });
+    return children();
   }
 
   let channelVariants = "";

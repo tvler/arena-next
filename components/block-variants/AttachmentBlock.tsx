@@ -24,11 +24,7 @@ export const AttachmentBlock: BlockVariantComponent = ({ id, children }) => {
   const block = attachmentBlockQuery?.data?.blokk;
 
   if (block?.__typename !== "Attachment") {
-    return children({
-      href: null,
-      title: null,
-      content: null,
-    });
+    return children();
   }
 
   return children({

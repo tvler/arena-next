@@ -26,11 +26,7 @@ export const ImageBlock: BlockVariantComponent = ({ id, children }) => {
   console.log(imageBlockQuery);
 
   if (block?.__typename !== "Image") {
-    return children({
-      href: null,
-      title: null,
-      content: null,
-    });
+    return children();
   }
 
   return children({

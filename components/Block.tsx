@@ -48,8 +48,8 @@ export type BlockProps =
  */
 
 type BlockContainerProps = {
-  title: string | null;
-  href: string | null;
+  title?: string | null;
+  href?: string | null;
   children?: React.ReactElement | null;
 };
 
@@ -82,7 +82,7 @@ const BlockContainer = forwardRef<HTMLDivElement, BlockContainerProps>(
 export const Block = memo(
   forwardRef<HTMLDivElement, BlockProps>((props, ref) => {
     const renderProp = useCallback<BlockVariantComponentChildren>(
-      ({ content, title, href }) =>
+      ({ content, title, href } = {}) =>
         (
           <BlockContainer ref={ref} title={title} href={href}>
             {content}

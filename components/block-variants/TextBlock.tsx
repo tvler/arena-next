@@ -24,11 +24,7 @@ export const TextBlock: BlockVariantComponent = ({ id, children }) => {
   const block = textBlockQuery?.data?.blokk;
 
   if (block?.__typename !== "Text") {
-    return children({
-      href: null,
-      title: null,
-      content: null,
-    });
+    return children();
   }
 
   return children({

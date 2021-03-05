@@ -20,11 +20,7 @@ export const UserBlock: BlockVariantComponent = ({ id, children }) => {
 
   const user = userBlockQuery.data?.user;
   if (!(user && user.slug)) {
-    return children({
-      href: null,
-      title: null,
-      content: null,
-    });
+    return children();
   }
 
   return children({

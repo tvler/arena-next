@@ -24,11 +24,7 @@ export const LinkBlock: BlockVariantComponent = ({ id, children }) => {
   const block = linkBlockQuery?.data?.blokk;
 
   if (block?.__typename !== "Link") {
-    return children({
-      href: null,
-      title: null,
-      content: null,
-    });
+    return children();
   }
 
   return children({

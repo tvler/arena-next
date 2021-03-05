@@ -1,9 +1,9 @@
 import { React } from "@ungap/global-this";
 
 export type BlockVariantComponentRenderProps = {
-  content: React.ReactElement | null;
-  title: string | null;
-  href: string | null;
+  content?: React.ReactElement | null;
+  title?: string | null;
+  href?: string | null;
 };
 
 export interface BlockVariantComponentChildrenReturn
@@ -12,7 +12,7 @@ export interface BlockVariantComponentChildrenReturn
 }
 
 export type BlockVariantComponentChildren = (
-  renderProps: BlockVariantComponentRenderProps
+  renderProps?: BlockVariantComponentRenderProps
 ) => BlockVariantComponentChildrenReturn;
 
 export type BlockVariantComponent = (props: {
