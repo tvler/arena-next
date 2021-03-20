@@ -37,10 +37,12 @@ export type BlockProps =
   | {
       id: number;
       variant: BlockVariant;
+      showTitle?: boolean;
     }
   | {
       id?: undefined;
       variant?: undefined;
+      showTitle?: undefined;
     };
 
 /*
@@ -56,7 +58,7 @@ type BlockContainerProps = {
 const BlockContainer = forwardRef<HTMLDivElement, BlockContainerProps>(
   ({ href, title, children }, ref) => {
     const blockClassName =
-      "flex flex-none rounded-sm border overflow-hidden border-gray no-underline h-full relative";
+      "flex flex-none no-underline relative aspect-h-1 aspect-w-1";
 
     const block = href ? (
       <Link href={href}>
@@ -66,10 +68,19 @@ const BlockContainer = forwardRef<HTMLDivElement, BlockContainerProps>(
       <div className={blockClassName}>{children}</div>
     );
 
+    const titleElement =
+      typeof title === "string" ? (
+        <div className="text-center text-xs text-gray-darkest flex-1 flex items-center justify-center">
+          <span>{title}</span>
+        </div>
+      ) : null;
+
     return (
       <div className="flex flex-col" ref={ref}>
-        {block}
-        {/* {title} */}
+        <div className="border border-gray rounded-sm overflow-hidden flex-none">
+          {block}
+        </div>
+        {titleElement}
       </div>
     );
   }
@@ -84,11 +95,15 @@ export const Block = memo(
     const renderProp = useCallback<BlockVariantComponentChildren>(
       ({ content, title, href } = {}) =>
         (
-          <BlockContainer ref={ref} title={title} href={href}>
+          <BlockContainer
+            ref={ref}
+            title={props.showTitle ? title : null}
+            href={href}
+          >
             {content}
           </BlockContainer>
         ) as BlockVariantComponentChildrenReturn,
-      [ref]
+      [props.showTitle, ref]
     );
 
     /*

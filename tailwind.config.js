@@ -83,6 +83,8 @@ module.exports = {
       },
       gridAutoRows: {
         block: "var(--block-size)",
+        "block-with-title":
+          "calc(var(--block-size) + var(--block-title-height))",
       },
       spacing: {
         block: "var(--block-size)",

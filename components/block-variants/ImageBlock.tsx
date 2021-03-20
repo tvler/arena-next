@@ -23,8 +23,6 @@ export const ImageBlock: BlockVariantComponent = ({ id, children }) => {
 
   const block = imageBlockQuery?.data?.blokk;
 
-  console.log(imageBlockQuery);
-
   if (block?.__typename !== "Image") {
     return children();
   }

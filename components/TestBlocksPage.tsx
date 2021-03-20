@@ -188,19 +188,19 @@ export const TestBlocksPage: React.FC = () => {
 
       <div className="grid grid-cols-auto-fit-block auto-rows-block gap-4 p-4 pt-0">
         <Block />
-        <Block id={1} variant={BlockVariant.user} />
-        <Block id={1} variant={BlockVariant.channel} />
-        <Block id={2} variant={BlockVariant.channel} />
-        <Block id={1} variant={BlockVariant.group} />
-        <Block id={1} variant={BlockVariant.text} />
-        <Block id={2} variant={BlockVariant.text} />
-        <Block id={1} variant={BlockVariant.image} />
-        <Block id={2} variant={BlockVariant.image} />
-        <Block id={3} variant={BlockVariant.image} />
-        <Block id={4} variant={BlockVariant.image} />
-        <Block id={1} variant={BlockVariant.link} />
-        <Block id={1} variant={BlockVariant.embed} />
-        <Block id={1} variant={BlockVariant.attachment} />
+        <Block id={1} showTitle variant={BlockVariant.user} />
+        <Block id={1} showTitle variant={BlockVariant.channel} />
+        <Block id={2} showTitle variant={BlockVariant.channel} />
+        <Block id={1} showTitle variant={BlockVariant.group} />
+        <Block id={1} showTitle variant={BlockVariant.text} />
+        <Block id={2} showTitle variant={BlockVariant.text} />
+        <Block id={1} showTitle variant={BlockVariant.image} />
+        <Block id={2} showTitle variant={BlockVariant.image} />
+        <Block id={3} showTitle variant={BlockVariant.image} />
+        <Block id={4} showTitle variant={BlockVariant.image} />
+        <Block id={1} showTitle variant={BlockVariant.link} />
+        <Block id={1} showTitle variant={BlockVariant.embed} />
+        <Block id={1} showTitle variant={BlockVariant.attachment} />
       </div>
     </>
   );
