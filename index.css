@@ -8,14 +8,14 @@
 
 @layer base {
   :root {
-    --block-size: 15.5rem;
-    --block-title-height: 1.65rem;
+    --block-size: 16.5rem;
+    --block-title-height: 1.8rem;
 
     @apply bg-blue-lightest text-cool-black;
 
     cursor: default;
     -webkit-font-smoothing: antialiased;
-    font-size: 19px;
+    font-size: 18px;
   }
 
   a {

@@ -194,7 +194,7 @@ export const TestBlocksPage: React.FC = () => {
 
       <Header taxonomy={["Test Blocks"]} />
 
-      <div className="grid grid-cols-auto-fit-block auto-rows-block-with-title gap-4 p-4 pt-0">
+      <div className="grid grid-cols-auto-fit-block auto-rows-block-with-title gap-x-4 gap-y-8 p-4 pt-0 single-column:justify-center">
         <Block />
         <Block id={1} showTitle variant={BlockVariant.user} />
         <Block id={1} showTitle variant={BlockVariant.channel} />

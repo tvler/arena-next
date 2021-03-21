@@ -45,6 +45,12 @@ module.exports = {
       serif: "Palatino, serif",
     },
     extend: {
+      screens: {
+        /*
+         * The exact pixel value that the grid becomes single column.... very hacky unfortunately
+         */
+        "single-column": { max: `${648 / 16}em` },
+      },
       fontSize: {
         xxs: "0.64rem",
       },
