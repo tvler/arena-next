@@ -83,6 +83,7 @@ export const ChannelPage: React.FC<{ slug: string }> = ({ slug }) => {
         queryNode={channelContentQueryNode}
         id={channel.id}
         contentCount={channel.counts?.contents ?? 0}
+        showTitles
       />
     </div>
   );

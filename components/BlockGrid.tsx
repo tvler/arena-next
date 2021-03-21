@@ -1,6 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { DocumentNode } from "graphql";
 import { useCallback, useMemo, useRef } from "react";
+import cx from "classnames";
 import { AttachmentBlockFragment } from "../graphql/gen/AttachmentBlockFragment";
 import { ChannelBlockFragment } from "../graphql/gen/ChannelBlockFragment";
 import { EmbedBlockFragment } from "../graphql/gen/EmbedBlockFragment";
@@ -80,12 +81,14 @@ export function BlockGrid<
   queryNode,
   id,
   queryField,
+  showTitles,
 }: {
   queryField: QueryField;
   contentField: ContentField;
   contentCount: number;
   queryNode: DocumentNode;
   id: number;
+  showTitles?: boolean;
 }): React.ReactElement {
   const queriedPagesRef = useRef<Set<number>>(new Set());
 
@@ -131,7 +134,12 @@ export function BlockGrid<
   const content = query && query[contentField];
 
   return (
-    <div className="pl-4 pr-4 grid grid-cols-auto-fit-block auto-rows-block gap-4">
+    <div
+      className={cx(
+        "pl-4 pr-4 grid grid-cols-auto-fit-block gap-4",
+        showTitles ? "auto-rows-block-with-title" : "auto-rows-block"
+      )}
+    >
       {Array.from({ length: contentCount }, (_, i) => {
         const contentItem = content && content[i];
         let finalBlockProps: BlockProps;
@@ -191,6 +199,10 @@ export function BlockGrid<
             case "PendingBlock":
               blockProps = {};
               break;
+          }
+
+          if (showTitles) {
+            blockProps.showTitle = true;
           }
 
           finalBlockProps = blockProps;

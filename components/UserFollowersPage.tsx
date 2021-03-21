@@ -72,7 +72,7 @@ export const UserFollowersPage: React.FC<Props> = ({ slug }) => {
         contentField="followers"
         queryNode={userFollowersQueryNode}
         id={user.id}
-        contentCount={user?.counts?.following ?? 0}
+        contentCount={user?.counts?.followers ?? 0}
       />
     </div>
   );

@@ -45,6 +45,9 @@ module.exports = {
       serif: "Palatino, serif",
     },
     extend: {
+      fontSize: {
+        xxs: "0.64rem",
+      },
       keyframes: {
         "ellipses-loader": {
           "0%": {
