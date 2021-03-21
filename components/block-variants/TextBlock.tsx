@@ -28,7 +28,7 @@ export const TextBlock: BlockVariantComponent = ({ id, children }) => {
   }
 
   return children({
-    title: "title",
+    title: block.title,
     href: null,
     content: (
       <div

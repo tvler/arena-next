@@ -11,4 +11,5 @@ export interface EmbedBlockFragment {
   __typename: "Embed";
   id: number | null;
   image_url: string | null;
+  title: string | null;
 }

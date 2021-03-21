@@ -28,7 +28,7 @@ export const ImageBlock: BlockVariantComponent = ({ id, children }) => {
   }
 
   return children({
-    title: "title",
+    title: block.title,
     href: "",
     content: block.image_url ? (
       <img

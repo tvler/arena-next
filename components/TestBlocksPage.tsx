@@ -77,6 +77,7 @@ const shortTextFragment: TextBlockFragment = {
   __typename: "Text",
   id: 1,
   content: "<p>Text content</p>",
+  title: "Short text",
 };
 
 const longTextFragment: TextBlockFragment = {
@@ -84,42 +85,49 @@ const longTextFragment: TextBlockFragment = {
   id: 2,
   content:
     "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse a tempus velit. Donec rhoncus mi quis quam bibendum, non volutpat augue accumsan.</p><p>Pellentesque ut nulla neque. Nunc pharetra porttitor risus, nec volutpat sapien blandit tempor.</p>",
+  title: "Long text",
 };
 
 const squareImageFragment: ImageBlockFragment = {
   __typename: "Image",
   id: 1,
   image_url: "/square.png",
+  title: "mydog1.jpg",
 };
 
 const portaitImageFragment: ImageBlockFragment = {
   __typename: "Image",
   id: 2,
   image_url: "/portrait.png",
+  title: "mydog2.jpg",
 };
 
 const landscapeImageFragment: ImageBlockFragment = {
   __typename: "Image",
   id: 3,
   image_url: "/landscape.png",
+  title: "screen-shot-2021-01-31-at-2.22.00-pm.png",
 };
 
 const smallImageFragment: ImageBlockFragment = {
   __typename: "Image",
   id: 4,
   image_url: "/small.jpg",
+  title: "Smol image",
 };
 
 const linkFragment: LinkBlockFragment = {
   __typename: "Link",
   id: 1,
   image_url: "/link.png",
+  title: "Webpage",
 };
 
 const embedFragment: EmbedBlockFragment = {
   __typename: "Embed",
   id: 1,
   image_url: "/embed.png",
+  title: "Embed title",
 };
 
 const attachmentFragment: AttachmentBlockFragment = {
@@ -186,7 +194,7 @@ export const TestBlocksPage: React.FC = () => {
 
       <Header taxonomy={["Test Blocks"]} />
 
-      <div className="grid grid-cols-auto-fit-block auto-rows-block gap-4 p-4 pt-0">
+      <div className="grid grid-cols-auto-fit-block auto-rows-block-with-title gap-4 p-4 pt-0">
         <Block />
         <Block id={1} showTitle variant={BlockVariant.user} />
         <Block id={1} showTitle variant={BlockVariant.channel} />

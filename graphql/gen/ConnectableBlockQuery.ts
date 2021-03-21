@@ -11,18 +11,21 @@ export interface ConnectableBlockQuery_blokk_Text {
   __typename: "Text";
   id: number | null;
   content: string | null;
+  title: string | null;
 }
 
 export interface ConnectableBlockQuery_blokk_Image {
   __typename: "Image";
   id: number | null;
   image_url: string | null;
+  title: string | null;
 }
 
 export interface ConnectableBlockQuery_blokk_Link {
   __typename: "Link";
   id: number | null;
   image_url: string | null;
+  title: string | null;
 }
 
 export interface ConnectableBlockQuery_blokk_Channel_counts {
@@ -61,6 +64,7 @@ export interface ConnectableBlockQuery_blokk_Embed {
   __typename: "Embed";
   id: number | null;
   image_url: string | null;
+  title: string | null;
 }
 
 export interface ConnectableBlockQuery_blokk_Attachment {

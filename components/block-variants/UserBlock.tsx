@@ -23,13 +23,14 @@ export const UserBlock: BlockVariantComponent = ({ id, children }) => {
     return children();
   }
 
+  const name = user.name ?? "User";
+
   return children({
     href: `/user/${user.slug}`,
-    title: "title",
     content: (
       <div className="flex-1 flex flex-col items-center no-underline">
         <div className="flex-1 flex items-center text-center">
-          <span className="text-gray-darkest">{user.name}</span>
+          <span className="text-gray-darkest">{name}</span>
         </div>
 
         <div className="h-1/2 w-1/2 relative flex flex-col items-center justify-center bg-gray-light">
@@ -40,7 +41,7 @@ export const UserBlock: BlockVariantComponent = ({ id, children }) => {
               loading="lazy"
               className="absolute top-0 left-0 w-full h-full object-scale-down"
               src={user.avatar}
-              alt={`${user.name ?? "User"}'s profile picture`}
+              alt={`${name}'s profile picture`}
             />
           )}
         </div>

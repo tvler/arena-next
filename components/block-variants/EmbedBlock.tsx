@@ -28,7 +28,7 @@ export const EmbedBlock: BlockVariantComponent = ({ id, children }) => {
   }
 
   return children({
-    title: "title",
+    title: block.title,
     href: null,
     content: block.image_url ? (
       <img

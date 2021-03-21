@@ -4,5 +4,6 @@ export const linkBlockFragmentNode = gql`
   fragment LinkBlockFragment on Link {
     id
     image_url(size: DISPLAY)
+    title
   }
 `;

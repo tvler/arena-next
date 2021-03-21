@@ -27,12 +27,14 @@ export const AttachmentBlock: BlockVariantComponent = ({ id, children }) => {
     return children();
   }
 
+  const title = block?.title || "file";
+
   return children({
-    title: "title",
+    title: title,
     href: null,
     content: (
       <div className="flex-1 p-4 flex text-center justify-center items-center bg-gray-light">
-        <span className="text-gray-darkest">{block?.title || "file"}</span>
+        <span className="text-gray-darkest">{title}</span>
       </div>
     ),
   });

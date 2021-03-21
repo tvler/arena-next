@@ -11,4 +11,5 @@ export interface TextBlockFragment {
   __typename: "Text";
   id: number | null;
   content: string | null;
+  title: string | null;
 }

@@ -11,18 +11,21 @@ export interface ChannelContentQuery_channel_blokks_Text {
   __typename: "Text";
   id: number | null;
   content: string | null;
+  title: string | null;
 }
 
 export interface ChannelContentQuery_channel_blokks_Image {
   __typename: "Image";
   id: number | null;
   image_url: string | null;
+  title: string | null;
 }
 
 export interface ChannelContentQuery_channel_blokks_Link {
   __typename: "Link";
   id: number | null;
   image_url: string | null;
+  title: string | null;
 }
 
 export interface ChannelContentQuery_channel_blokks_Channel_counts {
@@ -61,6 +64,7 @@ export interface ChannelContentQuery_channel_blokks_Embed {
   __typename: "Embed";
   id: number | null;
   image_url: string | null;
+  title: string | null;
 }
 
 export interface ChannelContentQuery_channel_blokks_Attachment {

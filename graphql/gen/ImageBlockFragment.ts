@@ -11,4 +11,5 @@ export interface ImageBlockFragment {
   __typename: "Image";
   id: number | null;
   image_url: string | null;
+  title: string | null;
 }

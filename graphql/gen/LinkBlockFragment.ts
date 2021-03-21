@@ -11,4 +11,5 @@ export interface LinkBlockFragment {
   __typename: "Link";
   id: number | null;
   image_url: string | null;
+  title: string | null;
 }

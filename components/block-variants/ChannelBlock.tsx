@@ -35,7 +35,6 @@ export const ChannelBlock: BlockVariantComponent = ({ id, children }) => {
 
   return children({
     href: `/channel/${channel.slug}`,
-    title: "title",
     content: (
       <div
         className={"flex-1 flex flex-col items-center" + " " + channelVariants}
