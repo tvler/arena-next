@@ -71,7 +71,9 @@ const BlockContainer = forwardRef<HTMLDivElement, BlockContainerProps>(
     const titleElement =
       typeof title === "string" ? (
         <div className="text-center text-xxs text-gray-darkest flex-1 flex items-center justify-center">
-          <span>{title}</span>
+          <span className="whitespace-nowrap overflow-hidden overflow-ellipsis">
+            {title}
+          </span>
         </div>
       ) : null;
 

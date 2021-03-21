@@ -134,12 +134,7 @@ export function BlockGrid<
   const content = query && query[contentField];
 
   return (
-    <div
-      className={cx(
-        "pl-4 pr-4 grid grid-cols-auto-fit-block gap-4",
-        showTitles ? "auto-rows-block-with-title" : "auto-rows-block"
-      )}
-    >
+    <div className="pl-4 pr-4 grid grid-cols-auto-fit-block gap-x-4 gap-y-8 auto-rows-block-with-title">
       {Array.from({ length: contentCount }, (_, i) => {
         const contentItem = content && content[i];
         let finalBlockProps: BlockProps;
